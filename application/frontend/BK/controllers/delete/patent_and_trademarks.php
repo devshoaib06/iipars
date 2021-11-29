@@ -1,0 +1,22 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+class patent_and_trademarks extends CI_Controller 
+{	
+	 
+	public function __construct()
+    {
+          parent::__construct();
+           $this->load->database();
+
+	}
+
+	public function index()
+	{
+		$data['patent_and_trademarks']=$this->common_model->common($table_name = 'tbl_page_manage', $field = array(), $where = array('routes_id'=>24), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
+	    $this->load->view('common/header');
+		$this->load->view('patent_and_trademarks',$data);
+		$this->load->view('common/footer');
+
+	}
+
+}
+?>

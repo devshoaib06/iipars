@@ -1,0 +1,144 @@
+@extends('frontend.layout.layout_master')
+@include('frontend.structure.page_meta')
+
+
+@section('page_content')
+
+@include('frontend.includes.home_banner')
+
+<section class="iconsection">
+    <div class="container">
+        <div class="col-sm-4">
+            <div class="iconinner">
+                <img src="{{ asset('public/frontend/images/courses_icon.png') }}" class="lefticon"  alt=""/>
+                <span>10,000 Online Courses</span>
+                Explore a variety of fresh topics
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="iconinner">
+                <img src="{{ asset('public/frontend/images/instruction.png') }}" class="lefticon"  alt=""/>
+                <span>Expert Instruction</span>
+                Find the right instructor for you
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="iconinner">
+                <img src="{{ asset('public/frontend/images/access.png') }}" class="lefticon"  alt=""/>
+                <span>Lifetime Access</span>
+                Learn on your schedule
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="bodycont">
+
+        <section class="contribute">
+        <div class="container">
+           <h1>{!! $cms->heading !!}</h1>
+                    
+                    {!! $cms->description !!}   
+        </div>
+        </section>
+
+    
+    
+   
+    
+    <!--section id="demos" class="outerslider">
+              <div class="owl-carousel3">
+                <div class="item">
+                
+               <div class="videobox">
+               
+            
+            
+            
+               </div>
+                
+                </div> 
+    
+    
+              </div>
+              
+        </section-->
+    
+    
+    
+    <!--/div-->
+    <!--/section-->
+        
+    
+    
+    <!--section class="contribute">
+        <div class="container">
+            <div class="innerbox">
+                <div class="box border">
+                    <div class="boxinner">
+                        <h3>Become a Contributor</h3>
+                        <p>Cras volutpat tristique risus nec consectetur. Morbi posuere faucibus orci at pulvinar. Nam tempor velit vitae eros hendrerit accumsan. Sed at nisi nulla. Nulla tincidunt mauris nec egestas convallis.</p>
+                        <a href="#" class="login">Join as Contributor</a>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="boxinner1">
+                        <h3>Become a Reseller</h3>
+                        <p>Cras volutpat tristique risus nec consectetur. Morbi posuere faucibus orci at pulvinar. Nam tempor velit vitae eros hendrerit accumsan. Sed at nisi nulla. Nulla tincidunt mauris nec egestas convallis.</p>
+                        <a href="#" class="login">Sign up as Reseller</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section-->
+
+
+</section>
+
+{{--
+<section class="container minarel_secc">
+    <h2 class="text-center picheading">@if(isset($allData)){{ $allData->mineral_heading }}@endif</h2>
+    <div class="row">
+        @if( isset($minerals) && !empty($minerals) )
+            @php $x = 1; @endphp
+            @foreach( $minerals as $v )
+            <div class="col-sm-3">
+                <a href="{{ $v->view_link }}">
+                    <div class="metalbox">
+                        @if( isset($v->imageInfo) && !empty($v->imageInfo) )
+                        <img src="{{ asset('public/uploads/files/media_images/'. $v->imageInfo->image) }}"> 
+                        @endif
+                        <div class="overlay">{{ $v->name }}</div>
+                    </div>
+                </a>
+            </div>
+                @if($x % 4 == 0)
+                <div class="clearfix"></div>
+                @endif
+                @php $x++; @endphp
+            @endforeach
+        @endif
+    </div>
+</section>
+
+
+@if(isset($logos) && count($logos) > 0 )
+<section class="container text-center home_logos">
+    <ul class="ul_logos">
+        @foreach($logos as $lg)
+        <li>
+            @if($lg->link_file != '')
+                <a  href="{{ $lg->link_file }}">
+                <img src="{{ asset('public/uploads/files/media_images/'. $lg->image) }}" class="li_logo_img" title="{{ $lg->image_title }}" alt="{{ $lg->image_alt }}">
+                </a>
+            @else
+                <img src="{{ asset('public/uploads/files/media_images/'. $lg->image) }}" class="li_logo_img" title="{{ $lg->image_title }}" alt="{{ $lg->image_alt }}">
+            @endif
+        </li>
+        @endforeach
+    </ul>
+</section>
+@endif
+    --}}
+@endsection

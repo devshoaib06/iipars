@@ -1,0 +1,51 @@
+.tdwidth 
+{
+	width: 20%
+}
+.tdwidth1
+{
+	width: 20.5%
+}
+.tdwidth2 
+{
+	width: 20.5%
+}
+
+.tblborder 
+{
+	border: 0px !important;
+}
+
+
+table, tr, td 
+{
+	border: 0px solid red;
+}
+
+tr.noBorder td 
+{
+	border: 0;
+	padding: 2px;
+}
+
+.noBorderT td
+{
+	border: 0;
+	padding: 2px;
+}
+
+.cursor
+{
+	cursor: pointer;
+}
+
+.cursor
+{
+	cursor: pointer;
+}
+
+.chember_geplocation
+{
+	width: 469px;
+}
+

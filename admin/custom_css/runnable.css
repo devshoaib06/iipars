@@ -1,0 +1,16 @@
+.brand_available_check_css
+{
+	background-color: #f5f5f5;
+    border-bottom: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    display: block;
+    left: 70.8%;
+    list-style: outside none none;
+    margin: -23px;
+    overflow: hidden;
+    padding-left: 11px;
+    position: absolute;
+    width: 6.8%;
+    z-index: 168;
+}

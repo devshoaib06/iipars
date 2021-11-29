@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p><?php echo @$manage_home[0]->description; ?></p>
+</body>
+</html>

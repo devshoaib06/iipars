@@ -1,0 +1,384 @@
+<!-- Start main-content -->
+  <div class="main-content">
+    <!-- Section: home -->
+    <section id="home" class="divider">
+		<div class="container">
+			<div class="row">
+		<div class="col-lg-3">
+			<div class="link-sec">
+				<h2>Important Links</h2>
+				<ul>
+					<?php foreach($link as $row) { ?>
+					<li><a href="<?php echo $row->link; ?>" target="_blank"><i class="fa fa-angle-double-right"></i><span class="impor_link_p_cus"><?php echo $row->title;?></span></a></li>
+				<?php } ?>
+					<!-- <li><a href="https://www.dooarsbasket.com/" target="_blank"><i class="fa fa-angle-double-right"></i> Dooarsbasket</a></li>
+					<li><a href="https://www.flipkart.com/" target="_blank"><i class="fa fa-angle-double-right"></i> Flipkart</a></li>
+					<li><a href="https://www.diihm.co.in/" target="_blank"><i class="fa fa-angle-double-right"></i> diihm</a></li>
+					<li><a href="https://www.exprolab.com/" target="_blank"><i class="fa fa-angle-double-right"></i> Exprolab</a></li>
+					<li><a href="https://www.dooarsbasket.com/" target="_blank"><i class="fa fa-angle-double-right"></i> Dooarsbasket</a></li>
+					<li><a href="https://www.flipkart.com/" target="_blank"><i class="fa fa-angle-double-right"></i> Flipkart</a></li>
+					<li><a href="https://www.diihm.co.in/" target="_blank"><i class="fa fa-angle-double-right"></i> diihm</a></li>
+					<li><a href="https://www.exprolab.com/" target="_blank"><i class="fa fa-angle-double-right"></i> Exprolab</a></li>
+					<li><a href="https://www.dooarsbasket.com/" target="_blank"><i class="fa fa-angle-double-right"></i> Dooarsbasket</a></li> -->
+				</ul>
+			</div>
+		</div>
+		<div class="col-lg-6">
+		  <div class="container-fluid p-0">
+
+			<!-- START REVOLUTION SLIDER 5.0.7 -->
+			<div id="rev_slider_home_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="news-gallery34" style="margin:0px auto;background-color:#ffffff;padding:0px;margin-top:0px;margin-bottom:0px;">
+			  <!-- START REVOLUTION SLIDER 5.0.7 fullwidth mode -->
+			  <div id="rev_slider_home" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.0.7">
+				<ul>
+
+					<?php  foreach($slider as $key=>$row) { ?>
+				  <!-- SLIDE 1 -->
+				  <li data-index="rs-<?php echo $key; ?>" data-transition="slidingoverlayhorizontal" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="" data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off" data-title="Make an Impact">
+					<!-- MAIN IMAGE -->
+					<img src="<?php echo base_url();?>assets/upload/slider/<?php echo $row->slider_image;?>" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+					<!-- LAYERS -->
+					<!-- LAYER NR. 1 -->
+					<div class="tp-caption tp-shape tp-shapewrapper tp-resizeme rs-parallaxlevel-0" 
+					  id="slide-1-layer-<?php echo $key; ?>" 
+					  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" 
+					  data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" 
+					  data-width="full"
+					  data-height="full"
+					  data-whitespace="normal"
+					  data-transform_idle="o:1;"
+					  data-transform_in="opacity:0;s:1500;e:Power3.easeInOut;" 
+					  data-transform_out="opacity:0;s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;" 
+					  data-start="1000" 
+					  data-basealign="slide" 
+					  data-responsive_offset="on" 
+					  style="z-index: 5;background-color:rgba(0, 0, 0, 0.35);border-color:rgba(0, 0, 0, 1.00);"> 
+					</div>
+					<!-- LAYER NR. 2 -->
+					<div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0" 
+					  id="slide-1-layer-<?php echo $key; ?>" 
+					  data-x="['left','left','left','left']" data-hoffset="['50','50','50','30']" 
+					  data-y="['top','top','top','top']" data-voffset="['120','100','70','90']" 
+					  data-fontsize="['56','46','40','36']"
+					  data-lineheight="['70','60','50','45']"
+					  data-fontweight="['800','700','700','700']"
+					  data-width="['700','650','600','420']"
+					  data-height="none"
+					  data-whitespace="normal"
+					  data-transform_idle="o:1;"
+					  data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;" 
+					  data-transform_out="auto:auto;s:1000;e:Power3.easeInOut;" 
+					  data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+					  data-mask_out="x:0;y:0;s:inherit;e:inherit;" 
+					  data-start="1000" 
+					  data-splitin="none" 
+					  data-splitout="none" 
+					  data-responsive_offset="on" 
+					  style="z-index: 6; min-width: 600px; max-width: 600px; white-space: normal;"><?php echo $row->first_title;?>
+					</div>
+					<!-- LAYER NR. 3 -->
+					<div class="tp-caption tp-resizeme text-white rs-parallaxlevel-0" 
+					  id="slide-1-layer-<?php echo $key; ?>" 
+					  data-x="['left','left','left','left']" data-hoffset="['50','50','50','30']" 
+					  data-y="['top','top','top','top']" data-voffset="['280','220','180','180']" 
+					  data-fontsize="['18','18','16','13']"
+					  data-lineheight="['30','30','28','25']"
+					  data-fontweight="['600','600','600','600']"
+					  data-width="['700','650','600','420']"
+					  data-height="none"
+					  data-whitespace="nowrap"
+					  data-transform_idle="o:1;"
+					  data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;" 
+					  data-transform_out="auto:auto;s:1000;e:Power3.easeInOut;" 
+					  data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" 
+					  data-mask_out="x:0;y:0;s:inherit;e:inherit;" 
+					  data-start="1000" 
+					  data-splitin="none" 
+					  data-splitout="none" 
+					  data-responsive_offset="on" 
+					  style="z-index: 7; white-space: nowrap;"><?php echo $row->second_title;?>
+					</div>
+					<!-- LAYER NR. 4 -->
+					<!-- <div class="tp-caption rs-parallaxlevel-0" 
+					  id="slide-1-layer-4" 
+					  data-x="['left','left','left','left']" data-hoffset="['53','53','53','30']" 
+					  data-y="['top','top','top','top']" data-voffset="['360','290','260','260']" 
+					  data-height="none"
+					  data-width="['700','650','600','420']"
+					  data-whitespace="nowrap"
+					  data-transform_idle="o:1;"
+					  data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power1.easeInOut;"
+					  data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;" 
+					  data-transform_out="auto:auto;s:1000;e:Power3.easeInOut;" 
+					  data-mask_in="x:0px;y:0px;" 
+					  data-mask_out="x:0;y:0;" 
+					  data-start="1000" 
+					  data-splitin="none" 
+					  data-splitout="none" 
+					  data-responsive_offset="on" 
+					  data-responsive="off"
+					  style="z-index: 8; white-space: nowrap;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"><a href="#" class="btn btn-dark btn-theme-colored2 btn-xl">Read More</a> <a href="#" class="btn btn-dark btn-theme-colored btn-xl">Register Now</a>
+					</div> -->
+				  </li>
+
+<?php } ?>
+
+
+
+
+				  
+
+				  
+				</ul>
+				<div class="tp-bannertimer tp-bottom" style="height: 5px; background-color: rgba(166, 216, 236, 1.00);"></div>
+			  </div>
+			</div>
+
+			
+		  </div>
+	  </div>
+	  <div class="col-lg-3">
+		<div class="news_fes_p_cus">
+			<h2>News Feed</h2>
+
+			<div class="latest_news p_cus_content_scroll">
+                  <marquee direction="up" height="375" scrolldelay="220" onmouseover="this.stop();" onmouseout="this.start();">
+                  	<ul>
+                    <?php foreach($news_feed as $row) { 
+                    	
+
+                    	?>
+                       <li>
+                       <div class="scroll_arrow_all_sec">
+                       <div class="scroll_arrow_gif">
+                       <img src="<?php echo base_url();?>assets/img/arrow.gif">
+                       </div>
+                       <div class="scroll_arrow_content">
+                       <?php 
+                       if($row->image=='')
+                       {
+
+
+                       ?>
+                       <a href="<?php echo $row->description;?>" target="_blank"><?php echo $row->title;?><img src="<?php echo base_url();?>assets/img/new.gif" class="new_gif_class"></a>
+                       <?php } else { ?>
+                      <!--  <img src="<?php echo base_url();?>assets/upload/news_feed/<?php  echo $row->image ?>"> -->
+                      <a download href=" <?php echo base_url();?>assets/upload/news_feed/<?php  echo $row->image?>" target="_blank"><?php echo $row->title;?><img src="<?php echo base_url();?>assets/img/new.gif" class="new_gif_class"></a>
+                       <?php } ?>
+                       </div>
+                       </div>
+                        </li>
+
+                        <?php }?>
+
+
+                       <!--  <li>
+                       <div class="scroll_arrow_all_sec">
+                       <div class="scroll_arrow_gif">
+                       <img src="<?php echo base_url();?>assets/img/arrow.gif">
+                       </div>
+                       <div class="scroll_arrow_content">
+                       <a href="#">Lorem ipsum dolor sit amet.<img src="<?php echo base_url();?>assets/img/new.gif" class="new_gif_class"></a>
+                       </div>
+                       </div>
+                        </li>
+                        <li>
+                       <div class="scroll_arrow_all_sec">
+                       <div class="scroll_arrow_gif">
+                       <img src="<?php echo base_url();?>assets/img/arrow.gif">
+                       </div>
+                       <div class="scroll_arrow_content">
+                       <a href="#">Lorem ipsum dolor sit amet, consectetur.<img src="<?php echo base_url();?>assets/img/new.gif" class="new_gif_class"></a>
+                       </div>
+                       </div>
+                        </li>
+                        <li>
+                       <div class="scroll_arrow_all_sec">
+                       <div class="scroll_arrow_gif">
+                       <img src="<?php echo base_url();?>assets/img/arrow.gif">
+                       </div>
+                       <div class="scroll_arrow_content">
+                       <a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<img src="<?php echo base_url();?>assets/img/new.gif" class="new_gif_class"></a>
+                       </div>
+                       </div>
+                        </li> -->
+                        <!-- <li>
+                       <div class="scroll_arrow_all_sec">
+                       <div class="scroll_arrow_gif">
+                       <img src="<?php echo base_url();?>assets/img/arrow.gif">
+                       </div>
+                       <div class="scroll_arrow_content">
+                       <a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<img src="<?php echo base_url();?>assets/img/new.gif" class="new_gif_class"></a>
+                       </div>
+                       </div>
+                        </li> -->
+                        </ul>
+
+                      
+                      
+
+
+
+              
+
+                    </marquee>
+                   
+                </div>
+			<!-- <ul>
+
+				<?php foreach($news_feed as $row) { ?>
+
+				<li>
+					<a href="#"><div class="lt-nws-img">
+						<img src="<?php echo base_url();?>assets/upload/news_feed/<?php echo $row->image; ?>" alt="">
+					</div>
+					<div class="rt-nws-text">
+						<h4><?php echo $row->title ; ?></h4>
+						<p><?php 
+									$timestamp = strtotime($row->created_date);
+									$newDate = date('d-F-Y', $timestamp);
+
+						echo   $newDate ; ?></p>
+						
+					</div></a>	
+				</li>
+
+			<?php } ?>
+
+			</ul> -->
+		</div>
+	  </div>
+	  </div>
+	  </div>
+    </section>
+
+    <!-- start Section: About -->
+    <section class="abt-sec">
+      <div class="container">
+        <div class="section-title text-center mt-0">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <h2 class="mt-0 line-height-1">Welcome to<span class="text-theme-colored2"> IIPARS</span></h2>
+              <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p> -->
+            </div>
+          </div>
+        </div>
+        <div class="section-content">
+          <div class="row">
+            <div class="col-md-6 mb-sm-30">
+              <div class="box-hover-effect play-button img-bg-col">
+                <div class="effect-wrapper">
+                  <div class="thumb">
+                    <img class="img-fullwidth" src="<?php echo base_url();?>assets/upload/manage_home/<?php echo @$manage_home[0]->image;?>" alt="project">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="thumb-one">
+                <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p> -->
+				<p><?php echo character_limiter(@$manage_home[0]->description,'650');?></p>
+				
+				<!-- <?php echo substr(@$manage_home[0]->description,0,110) . "..."; ?> -->
+                <a class="btn hvr-bounce-to-bottom btn-theme-colored" href="<?php echo base_url();?>about_us">Know More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+	
+	
+
+	
+	<!--start testimonial Section-->
+    <section class="divider parallax layer-overlay overlay-dark-9" data-background-ratio="0.7" data-bg-img="<?php echo base_url();?>assets/images/dwn-bg.jpg">
+      <div class="container">
+        <div class="section-title text-center mt-0">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <h2 class="mt-0 line-height-1 text-white">Download</h2>
+              <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+            </div>
+          </div>
+        </div>
+        <div class="section-content">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="down-btn text-center">
+				<a class="btn btn-colored btn-flat btn-theme-colored2 mt-5 round-btn" href="#"><i class="fa fa-download" aria-hidden="true"></i>E-Prospectus</a>
+			  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+	<!-- start Section: Why Choose Us -->
+    <section class="choose">
+      <div class="container">
+        <div class="section-title text-center mt-0">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <h2 class="mt-0 line-height-1">Why Choose<span class="text-theme-colored2">Us</span></h2>
+              <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p> -->
+            </div>
+          </div>
+        </div>
+        <div class="section-content">
+          <div class="row">
+
+          	<?php foreach($why_choose_us as $row) { ?>
+
+            <div class="col-lg-4 col-md-12">
+              <div class="single-item">
+                        <div class="item-icon">
+                            <img class="img-fluid" src="<?php echo base_url();?>assets/upload/why_choose_us/<?php echo $row->image;?>" alt="icon">
+                        </div>
+                        <div class="item-text">
+                            <h4><a href="#"><?php echo $row->title;?></a></h4>
+                            <p><?php echo $row->description;?></p>
+                            <a class="btn hvr-bounce-to-bottom btn-theme-colored" href="<?php echo base_url();?>about_us">View More</a>
+                        </div>
+                   </div>
+            </div>
+
+        <?php } ?>
+
+			<!-- <div class="col-lg-4 col-md-12">
+              <div class="single-item">
+                        <div class="item-icon">
+                            <img class="img-fluid" src="<?php echo base_url();?>assets/images/subject.png" alt="icon">
+                        </div>
+                        <div class="item-text">
+                            <h4><a href="#">Popular Subjects</a></h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                        </div>
+                   </div>
+            </div> -->
+
+
+			<!-- <div class="col-lg-4 col-md-12">
+              <div class="single-item">
+                        <div class="item-icon">
+                            <img class="img-fluid" src="<?php echo base_url();?>assets/images/cource.png" alt="icon">
+                        </div>
+                        <div class="item-text">
+                            <h4><a href="#">Upcoming Courses</a></h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                        </div>
+                   </div>
+            </div> -->
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+

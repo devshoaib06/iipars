@@ -1,0 +1,160 @@
+@extends('frontend.layout.layout_master')
+@include('frontend.structure.page_meta')
+
+
+@section('page_content')
+
+<section class="innerbanner">
+    <img src="{{ asset('public/frontend/images/shortbanner.jpg') }}" alt="">
+</section>
+<section class="bodycont">
+    <section class="breadcamp">
+        <div class="container">
+            <ul>
+                <li><a href="{{ url('/') }}">Home</a></li>
+                <li>{{ $course_details_page->name }}</li>
+            </ul>
+        </div>
+    </section>
+    <section class="innerpage">
+        <form action="{{route('billing')}}" method="post">
+        <div class="container">
+            <h1>{{ $course_details_page->name }}</h1>
+            
+            <div class="row">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{$course_details_page->product_id}}">
+                    <div class="col-sm-8">
+                        <div class="caption">
+                            <div class="subcource">
+                                <ul>
+                                    <?php 
+                                        $meta_keys=explode(',', $course_details_page->meta_key);
+                                        $meta_keys=array_filter($meta_keys);
+
+                                    ?>
+                                    @foreach($meta_keys as $info)
+                                <a href="{{route('front.corstagList',['slug'=>$info])}}"><li>{{$info}}</li></a>
+                                     @endforeach
+                                 </ul>
+                            </div>
+                        </div>
+                        {{-- <p><i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<strong>5,372,892</strong> students are preparing for Civil Services.</p> --}}
+                    
+                        <div class="outerleftsection">
+                            <h3>What you'll Get</h3>
+                            <div class="highlightsection">
+                                @foreach ($related_materials as $paper=>$materials)
+                                <?php $myFuntion=new \App\library\myFunctions; 
+                                    $paper_name= @$myFuntion->getPaperName($paper);
+                                    // echo "<pre>";
+                                    //     print_r($materials);
+                                    // echo "</pre>";
+                                ?>
+                                <h4>{{$paper_name}}</h4>
+                                    <ul>
+                                        @foreach ($materials as $material)
+                                        <?php 
+                                            $material_name= @$myFuntion->getMaterialName($material);
+                                        ?>
+                                        <li>{{$material_name}}</li>
+                                        @endforeach
+                                        
+                                    </ul>
+                                    
+                                @endforeach
+                                </div>
+                            {!!html_entity_decode($course_details_page->description)!!}
+                        </div>
+                        <div class="outerleftsection">
+                        <h3>Important Dates</h3>
+                        {!!html_entity_decode($course_details_page->important_notice)!!}
+                        </div>
+                    </div>
+                    <div class="col-sm-4"> 
+                        <div class="rightvideo">
+                            <div class="tabdiv">
+                                
+                                <?php 
+                                    $course_image=asset('storage/uploads/courses/No-Image.jpg');
+                                    if($course_details_page->image){
+                                        $course_image=asset('storage/uploads/courses/'.$course_details_page->image);
+                                    }
+                                ?>
+                                        <div class="tabtop">
+                                            <img src="{{$course_image}}" alt="">
+                                        </div>
+                                {{-- <h3><a href="#">Vivamus Convallis Ac Urna Id Sollicitudin.</a></h3> --}}
+                                <div class="rating"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i> 4.7 (7,373)
+                                </div>
+                                <div class="sublist">
+                                    <p><strong>This course includes </strong></p>
+                                    {!!html_entity_decode($course_details_page->short_description)!!}
+                                </div>
+                                <div class="rightprice">
+                                @if( isset($course_details_page->revised_price) )
+                                <span>₹{{ $course_details_page->price }}</span>
+                                @endif
+                                ₹{{ $course_details_page->revised_price!=""?$course_details_page->revised_price:$course_details_page->price }}
+                                </div>
+                                @auth
+                                <input type="submit" class="buynow enrollbtn" value="Enroll Now">
+                                @endauth
+                                @guest            
+                                <a href="#" class="enrollbtn" data-toggle="modal" data-target=".login-modal">Enroll Now</a>
+                               @endguest 
+                                {{-- <a href="{{route('billing',['product_id'=>$course_details_page->product_id])}}" class="buynow">Enroll Now</a> --}}
+                            </div>
+                        </div>
+                    </div>
+               
+            </div>
+            
+            {{-- <div class="combosection">
+                <h2>Combo Product</h2>
+                <ul>
+                <li>
+                    <div class="tabdiv">
+                        <div class="tabtop"><img src="images/tabpic1.jpg" alt=""></div>
+                        <h3><a href="#">Vivamus Convallis Ac Urna Id Sollicitudin.</a></h3>
+                        <div class="rating"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i> 4.7 (7,373)
+                        </div>
+                        <div class="rightprice">
+                        <span>₹749</span> ₹549
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="tabdiv">
+                        <div class="tabtop"><img src="images/tabpic2.jpg" alt=""></div>
+                        <h3><a href="#">Vivamus Convallis Ac Urna Id Sollicitudin.</a></h3>
+                        <div class="rating"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i> 4.7 (7,373)
+                        </div>
+                
+                        <div class="rightprice">
+                        <span>₹749</span> ₹549
+                        </div>
+                    </div>
+                </li>
+                <li>
+                <div class="tabdiv">
+                        <div class="tabtop"><img src="images/tabpic3.jpg" alt=""></div>
+                        <h3><a href="#">Vivamus Convallis Ac Urna Id Sollicitudin.</a></h3>
+                        <div class="rating"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i> 4.7 (7,373)
+                </div>
+                
+                <div class="rightprice">
+                <span>₹749</span> ₹549
+                </div>
+                        </div>
+                </li>
+                </ul>
+                <div class="comboprice">Total:<span class="actual">₹1098</span><span>₹1498</span></div>
+                <input type="submit" class="buynow enrollbtn" value="Enroll Now">
+                
+            </div> --}}
+        </div>
+        </form>
+    </section>
+</section>
+@endsection

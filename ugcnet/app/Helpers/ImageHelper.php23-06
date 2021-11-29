@@ -1,0 +1,36 @@
+<?php
+namespace App\Helpers;
+
+use Illuminate\Support\Facades\Storage;
+
+class ImageHelper
+{
+    public static function savePdfForGallery($image,$diskName)
+    {
+        // extract mime type
+        $fileName=$image->getClientOriginalName();
+        $extension = $image->getClientOriginalExtension();
+        $exists = Storage::disk($diskName)->exists($fileName);
+        if($exists)
+        {
+            $fileName = uniqid().'.'. $extension; // rename file as a unique name
+        }
+        
+        //echo $image->getRealPath();die;
+        Storage::disk($diskName)->put($fileName, file_get_contents($image->getRealPath()));
+        return $fileName;
+    }
+    public static function removePdfMaterial($image,$diskName)
+    {
+        if( Storage::disk($diskName)->exists($image))
+        {
+            Storage::disk($diskName)->delete($image);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+}

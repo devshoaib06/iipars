@@ -1,0 +1,299 @@
+@extends('frontend.layout.layout_master')
+@include('frontend.structure.page_meta')
+
+
+@section('page_content')
+
+@include('frontend.includes.home_banner')
+<?php
+    $myfunction = new App\library\myFunctions();
+?>
+<section class="iconsection">
+    <div class="container">
+        <div class="col-sm-4">
+            <div class="iconinner">
+                <img src="{{ asset('public/frontend/images/courses_icon.png') }}" class="lefticon"  alt=""/>
+                <span>Best Online Courses</span>
+                Explore a variety of fresh topics
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="iconinner">
+                <img src="{{ asset('public/frontend/images/instruction.png') }}" class="lefticon"  alt=""/>
+                <span>Expert Instruction</span>
+                Find the right instructor for you
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="iconinner">
+                <img src="{{ asset('public/frontend/images/access.png') }}" class="lefticon"  alt=""/>
+                <span>Lifetime Access</span>
+                Learn on your schedule
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="bodycont">
+
+@if( isset($home_feature_courses) )
+    @foreach($home_feature_courses as $home_feature_course)
+    <section class="tabcontent">
+        <div class="container">
+            <h1><a href="{{ route('front.corsCont', array('slug' => $home_feature_course->product_id)) }}">{{ $home_feature_course->name }}</a></h1>
+           <!-- <a href="#" class="seeall">See All</a>-->
+            <div class="clearfix"></div>
+            
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="outerleftsection">
+                    <h3>What you'll Get</h3>
+                        {!!html_entity_decode($home_feature_course->short_description)!!}
+                    <div class="price ">
+                        @if($home_feature_course->revised_price!="")
+                        <span>₹ {{ $home_feature_course->price }}</span>
+                        @endif
+                        <sup>₹</sup>{{ $home_feature_course->revised_price!=""?$home_feature_course->revised_price:$home_feature_course->price }}
+                    </div>
+                   
+                    @guest
+                        <a href="" class="buynow" data-toggle="modal" data-target=".login-modal">Enroll Now</a>
+                    @endguest
+                    @auth
+                        <a href="{{route('front.corsCont', array('slug' => $home_feature_course->product_id))}}" class="buynow">Enroll Now</a>
+                    @endauth
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <h3>Important Dates</h3>
+                    {!!html_entity_decode($home_feature_course->important_notice)!!}
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                    <?php
+						$coutse_videos = $myfunction->getCourseVideos($home_feature_course->product_id);
+                        if($coutse_videos)
+                        {
+                            $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'?'https':'http';
+                            foreach($coutse_videos as $cv)
+                            {
+                                $video_embed_link = $myfunction->parseYouTubeUrl($cv->video_url);
+                                
+					?>
+                            <div class="col-sm-12">
+                                <div class="tabdiv">
+                                    <div class="tabtop">
+                                        <iframe width="350" height="223" src="{{$protocol}}://www.youtube.com/embed/<?php echo $video_embed_link;?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <h3><a href="#">{{$cv->title}}</a></h3>
+                                </div>
+                            </div>
+                    <?php
+                            }
+                        }
+                    ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endforeach
+@endif
+    <section class="videosection">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 col-xs-8">
+                    <h2>Some Of Our Videos</h2>
+                   
+                </div>
+                <div class="col-sm-3 col-xs-4">
+                    <a href="#" class="seeall">See All</a>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        
+            <div class="videoinner">
+                <div class="row">
+                    @foreach($home_videos as $video)
+                    <?php
+						$video_embed_link = $myfunction->parseYouTubeUrl($video->video_url);
+					?>
+                    <div class="col-sm-3">
+                       
+                        <div class="tabdiv">
+                            <div class="tabtop">
+                                <iframe width="350" height="233" src="http://www.youtube.com/embed/<?php echo $video_embed_link;?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3>{{$video->title}}</h3>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="getupdate">
+        <div class="container">
+            <form  enctype="multipart/form-data" id="newsletter-form">
+                {{ csrf_field() }}
+                <h3>Get free Updates from Teachinns</h3>
+                <h4>Please enter your email ID and hit the subscribe buttons to receives free updates</h4>
+                <span class="p-relative">  
+                <input type="text" class="subtext" id="email" name="email">
+                <input type="submit" value="Subscribe" class="subbut">
+                </span>
+            </form>
+            <h4 class="notification-msg"></h4>
+
+
+        </div>
+    </section>
+    <section class="testimonials">
+        <div class="container">
+            <h2>Student's Speak</h2>
+            <section id="demos" class="outerslider">
+                <div class="owl-carousel3">
+                    @foreach($home_testimonial_videos as $t_video)
+                    <?php
+                        $video_embed_link = $myfunction->parseYouTubeUrl($video->video_url); 	
+                        $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'?'https':'http';
+                        
+					?>
+                    <div class="item">
+                        <div class="videobox">
+                            <div class="videotop">
+                                <iframe width="416" height="289" src="{{$protocol}}://www.youtube.com/embed/<?php echo $video_embed_link;?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h4>{{$video->student_name}}</h4>
+                            <span>{{$video->student_course}}</span>
+                       </div>
+                    </div>
+                    @endforeach
+                </div>
+            </section>
+        </div>
+    </section>
+        
+    @if( isset($home_testimonial_text) )
+    
+
+    <section class="testimonials">
+        <div class="container">
+
+            <h2>Testimonials</h2>
+
+            <section id="demos" class="outerslider">
+                <div class="owl-carousel2">
+                    @foreach( $home_testimonial_text as $ts_t )
+                    <div class="item">
+
+                        <div class="testibox">
+                            <img src="{{ asset('public/frontend/images/invited.jpg') }}" class="inviterd" alt="" />
+                            <p>{{ $ts_t->testimonial_text }}</p>
+                            <span>{{ $ts_t->student_name }}</span>
+                            <br>
+                            <em>{{ $ts_t->student_course }}</em>
+                        </div>
+
+                    </div>
+                    @endforeach
+                    
+
+                </div>
+
+            </section>
+
+        </div>
+    </section>
+
+    @endif
+    
+    <section class="contribute">
+        <div class="container">
+            <div class="innerbox">
+                <div class="box border">
+                    <div class="boxinner">
+                        <h3>Become a Contributor</h3>
+                        {{-- <p>Cras volutpat tristique risus nec consectetur. Morbi posuere faucibus orci at pulvinar. Nam tempor velit vitae eros hendrerit accumsan. Sed at nisi nulla. Nulla tincidunt mauris nec egestas convallis.</p> --}}
+                        <a href="#" class="login">Join as Contributor</a>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="boxinner1">
+                        <h3>Become a Reseller</h3>
+                        {{-- <p>Cras volutpat tristique risus nec consectetur. Morbi posuere faucibus orci at pulvinar. Nam tempor velit vitae eros hendrerit accumsan. Sed at nisi nulla. Nulla tincidunt mauris nec egestas convallis.</p> --}}
+                        <a href="#" class="login">Sign up as Reseller</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</section>
+@endsection
+
+@push('page_js')
+<script>
+    $("#newsletter-form").validate({
+      errorElement: 'span',
+    //   errorPlacement: function (error, element) {
+       
+    //         error.insertAfter($("#newsletter-form"));
+        
+    //  },
+      rules: {      
+          
+            email:{
+              required: true,
+              email: true,
+              remote: {
+                type: 'post',
+                        url: "{{url(route('newsletter-checkEmailExists'))}}",                                            
+                        data: {
+                              'email': function () { return $('#email').val(); },
+                              "_token": "{{ csrf_token() }}"
+                              }
+              }  
+          },
+      },
+      messages: {        
+        email:{
+              required: 'Email is required.',
+              email: 'Please enter valid email.',
+              remote:'You are already subscribe.'
+          },
+          
+      },
+      submitHandler: function (form) {
+      event.preventDefault();
+      //$(".subbut").prop("disabled", true);
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        let url="{{route('insert-newsletter')}}";
+        let data=$('#newsletter-form').serialize();
+        $.post(url,data,function(response){
+           //$(".subbut").prop("disabled", false);
+         
+          if(response){
+            
+              let noti_text="Thanks for subscription."  
+              $('.notification-msg').text(noti_text);   
+          }else{
+              let noti_text="Some thing went wrong."  
+              $('.notification-msg').text(noti_text);
+          }
+        })          
+      
+      }
+        
+    });
+
+</script>
+    
+@endpush
+

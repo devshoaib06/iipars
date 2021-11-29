@@ -1,0 +1,17 @@
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+</IfModule>
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^iipars.com$
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^www.iipars.com [NC]
+RewriteRule ^(.*)$ http://iipars.com/$1 [L,R=301]
+RewriteCond %{REQUEST_URI} ^/system.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ /index.php?/$1 [L]
+
+
+

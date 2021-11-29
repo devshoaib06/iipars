@@ -1,0 +1,143 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\User;
+use App\Student;
+use App\EmailTemplates;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+//use Illuminate\Foundation\Auth\RegistersUsers;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\RedirectResponse;
+//use App\Http\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Mail;
+use Session;
+use Hash;
+use DB;
+use Storage;
+//use Socialite;
+
+class AuthController extends Controller {
+
+   
+
+     public function forgetPasswordPage() {
+
+        return view('web.auth.forget_password');
+     }
+
+    public function forgetPasswordAction(Request $request) {
+      
+
+        $email = trim($request->input('femail'));
+
+
+        if ($email != "") {
+
+            $arr = User::where('email', '=', $email)->where('user_type_id', '=', '2')->first();
+
+             // $arr = DB::table('users')
+             //        ->join('students as st','st.user_id','users.id')
+             //        ->select('users.id', 'users.email')
+             //        ->where('user_type_id', '=', '2')->first();
+                    //->where($arrSearch);
+
+
+            // $users_1 = DB::table('users')
+            //         ->join('students as st','st.user_id','users.id')
+            //         ->select('users.id', 'st.firstname', 'st.lastname', 'users.email', 'users.is_approved','users.status')
+            //         ->where($arrSearch);
+
+            //echo "<pre>";
+            //print_r($arr);
+            //echo "</pre>";
+             //echo "hi";
+        //die;
+
+            if (!empty($arr)) {
+
+                $user_id = $arr->id;
+                $token = md5(csrf_token() . "-" . uniqid(rand(), true) . "-" . microtime(TRUE) . "-" . $user_id);
+                $url = route('forget_password_action', ['token' => $token]);
+
+                $temp_data = EmailTemplates::where([['mail_id', 'forgot_password']])->get();
+       
+                $template_data = $temp_data[0];
+
+                $content = $template_data->content;
+                $content = str_replace("{{link}}", $url, $content);
+
+                $emailData = array();
+                $emailData['subject'] = trim($template_data->subject);
+                $emailData['body'] = trim($content);
+                $emailData['to_email'] = $email;
+                $emailData['from_email'] = trim(getSettings('from_email'));
+                $emailData['from_name'] = trim(getSettings('from_name'));
+                //echo "<pre>"; print_r($emailData); die;
+
+                $update = User::where('email', '=', $email)->where('user_type_id', '=', '2')->update(['remember_token' => $token]);
+
+                if ($update) {
+
+                    Mail::send('emails.password', ['emailData' => $emailData], function ($message) use ($emailData) {
+
+                        $message->from($emailData['from_email'], $emailData['from_name']);
+
+                        $message->to($emailData['to_email'])->subject($emailData['subject']);
+                        //$message->to('moutusi@karmicksolutions.com')->subject($emailData['subject']);
+                    });
+
+                    return back()->with('msg', 'Password reset link sent to your mail, please check your mail, thankyou.')
+                                    ->with('msg_class', 'alert alert-success');
+                }
+            } else {
+
+                return back()->with('msg', 'Sorry! this email-id not registered.')
+                                ->with('msg_class', 'alert alert-danger');
+            }
+        }
+
+        return back();
+    }
+
+    public function resetPasswordPage($token) {
+
+        //d878ca3a191751a9c831bd6ccd71e75b
+        $arr = User::where('remember_token', '=', $token)->first();
+
+        if (!empty($arr)) {
+
+            return view('web.auth.reset_password', ['token' => $token]);
+        } else {
+
+            return redirect()->route('login_page');
+        }
+    }
+
+    public function resetPasswordAction(Request $request) {
+
+        $this->validate($request, [
+            'password' => 'required',
+            're_password' => 'required',
+        ]);
+
+        $password = md5(trim($request->input('password')));
+        $verify_token = trim($request->input('verify_token'));
+
+        $update = User::where('remember_token', '=', $verify_token)
+                ->update(['password' => $password]);
+
+        if ($update) {
+
+            return redirect()->route('login_page')->with('msg', 'Your password changed successfully, please login. thankyou')
+                            ->with('msg_class', 'alert alert-success');
+        }
+
+        return back();
+    }
+
+}

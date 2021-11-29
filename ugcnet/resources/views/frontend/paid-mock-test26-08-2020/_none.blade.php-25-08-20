@@ -1,0 +1,21 @@
+
+<div class="ans_sect" style="overflow-y: auto; max-height:200px;">
+    
+
+@forelse ($allquestions->questionDetails->questionAnswers as $answer)
+@php
+    $chosen_answer=explode(",",$allquestions->answer);
+@endphp
+    <label class="option"><span>{{$answer->serial_no}}</span>
+    <input type="checkbox" name="answer[]" value="{{$answer->serial_no}}" {{in_array($answer->serial_no,$chosen_answer)?'checked':''}}>{!! $answer->answer !!} 
+    </label>
+   
+@empty
+    <p>No Options</p>
+    
+@endforelse
+</div>
+
+
+
+       

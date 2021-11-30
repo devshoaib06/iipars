@@ -195,6 +195,7 @@ Route::prefix('admin')->group(function () {
 
     //Login
     Route::get('login', 'AdminAuth\AuthController@showLoginForm');
+    Route::post('admin/login', 'AdminAuth\AuthController@adminloginIIPARS');
     Route::post('login', 'AdminAuth\AuthController@login');
     Route::get('logout', 'AdminAuth\AuthController@logout');
 

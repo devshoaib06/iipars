@@ -1,4 +1,5 @@
-<ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px;">
+<ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true"
+    data-slide-speed="200" style="padding-top: 20px;">
     <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
     <li class="sidebar-toggler-wrapper hide">
         <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -7,99 +8,249 @@
     </li>
     <li class="nav-item  start <?php if($menu_parent == 'dashboard'): ?> active open <?php endif; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="icon-home"></i>
+            <i class="fa fa-dashboard"></i>
             <span class="title">Dashboard</span>
             <span class="arrow <?php if($menu_parent == 'dashboard'): ?>  open <?php endif; ?>"></span>
         </a>
+
         <ul class="sub-menu">
             <li class="nav-item start  <?php if($menu_child == 'dashboard'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(url(config("constants.admin_prefix"))); ?>" class="nav-link ">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>" class="nav-link ">
                     <!--<i class="icon-bar-chart"></i>-->
                     <span class="title">Dashboard</span>
                 </a>
-            </li>                    
+            </li>
+        </ul>
+    </li>
+
+
+    <li class="nav-item  <?php if($menu_parent == 'users'): ?>  active open <?php endif; ?>">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-users"></i>
+            <span class="title">Mentor Management</span>
+            <span class="arrow <?php if($menu_parent == 'users'): ?>  open <?php endif; ?>"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/sub_admin_list_manage"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Mentors</span>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+    <li class="nav-item  <?php if($menu_parent == 'users'): ?>  active open <?php endif; ?>">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-th"></i>
+            <span class="title">Master Data</span>
+            <span class="arrow <?php if($menu_parent == 'users'): ?>  open <?php endif; ?>"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Admin_service" class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Providers</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Admin_service/university_view"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Institutes</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Admin_service/kpo_view"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Subjects</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Admin_service/examination_type_view"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Service Type </span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Admin_service/examination_view"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Services </span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_link" class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Important Links </span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_news_feed"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">News Feed </span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_package" class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Package </span>
+                </a>
+            </li>
         </ul>
     </li>
 
     <li class="nav-item  <?php if($menu_parent == 'users'): ?>  active open <?php endif; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="icon-user"></i>
-            <span class="title">Users</span>
+            <i class="fa fa-home"></i>
+            <span class="title">Manage Home</span>
             <span class="arrow <?php if($menu_parent == 'users'): ?>  open <?php endif; ?>"></span>
         </a>
         <ul class="sub-menu">
             <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/students')); ?>" class="nav-link ">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_slider/ceo"
+                    class="nav-link ">
                     <!--<i class="icon-user"></i>-->
-                    <span class="title">Student</span>
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage home page content</span>
                 </a>
             </li>
-            <li class="nav-item  <?php if($menu_child == 'contributors'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(route('contributors')); ?>" class="nav-link ">
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_slider" class="nav-link ">
                     <!--<i class="icon-user"></i>-->
-                    <span class="title">Contributors</span>
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Home Slider</span>
                 </a>
             </li>
-            <li class="nav-item  <?php if($menu_child == 'distributors'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/distributors')); ?>" class="nav-link ">
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_home" class="nav-link ">
                     <!--<i class="icon-user"></i>-->
-                    <span class="title">Resellers</span>
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Our Mission and Vission and Welcome to IIPARS</span>
                 </a>
             </li>
-            <li class="nav-item  <?php if($menu_child == 'mentors'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(route('mentors')); ?>" class="nav-link ">
-                    
-                    <span class="title">Mentors</span>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/why_choose_us" class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Why Choose us</span>
                 </a>
             </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/admin_contact" class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Contact us</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/admin_contact/contact_query"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Contact us Query</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/admin_contact/single_line_header"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Single line Header</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Manage_social_site/site_view"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Social Link</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Manage_social_site/visitor"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Visitor</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Manage_social_site/download"
+                    class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Download</span>
+                </a>
+            </li>
+
         </ul>
     </li>
-    <li class="nav-item  <?php if($menu_parent == 'orders'): ?>  active open <?php endif; ?>">
+
+    <li class="nav-item  <?php if($menu_parent == 'users'): ?>  active open <?php endif; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-book"></i>
-            <span class="title">Orders</span>
-            <span class="arrow <?php if($menu_parent == 'orders'): ?>  open <?php endif; ?>"></span>
+            <i class="fa fa-home"></i>
+            <span class="title">User Management</span>
+            <span class="arrow <?php if($menu_parent == 'users'): ?>  open <?php endif; ?>"></span>
         </a>
         <ul class="sub-menu">
-            <li class="nav-item  <?php if($menu_child == 'order-list'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(route('orderList')); ?>" class="nav-link ">
-                    <span class="title">List</span>
+            <li class="nav-item  <?php if($menu_child == 'students'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_user_student"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage User</span>
                 </a>
             </li>
         </ul>
     </li>
 
+
+
+
     <li class="nav-item  <?php if($menu_parent == 'products'): ?>  active open <?php endif; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="icon-graph"></i>
+            <i class="fa fa-book"></i>
             <span class="title">Courses</span>
             <span class="arrow <?php if($menu_parent == 'products'): ?>  open <?php endif; ?>"></span>
         </a>
         <ul class="sub-menu">
-            
+
             <li class="nav-item  <?php if($menu_child == 'course'): ?>  active open <?php endif; ?>">
                 <a href="<?php echo e(url(route('courses'))); ?>" class="nav-link ">
                     <span class="title">Course</span>
                 </a>
             </li>
-            
+
             <li class="nav-item  <?php if($menu_child == 'list_exam'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/exams')); ?>" class="nav-link ">
+                <a href="<?php echo e(url(config('constants.admin_prefix') . '/exams')); ?>" class="nav-link ">
                     <span class="title">Exams</span>
                 </a>
             </li>
             <li class="nav-item  <?php if($menu_child == 'list_paper'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/papers')); ?>" class="nav-link ">
+                <a href="<?php echo e(url(config('constants.admin_prefix') . '/papers')); ?>" class="nav-link ">
                     <span class="title">Papers</span>
                 </a>
             </li>
             <li class="nav-item  <?php if($menu_child == 'list_subject'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/subjects')); ?>" class="nav-link ">
+                <a href="<?php echo e(url(config('constants.admin_prefix') . '/subjects')); ?>" class="nav-link ">
                     <span class="title">Subjects</span>
                 </a>
             </li>
             <li class="nav-item  <?php if($menu_child == 'list_material'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/materials')); ?>" class="nav-link ">
+                <a href="<?php echo e(url(config('constants.admin_prefix') . '/materials')); ?>" class="nav-link ">
                     <span class="title">Material Type</span>
                 </a>
             </li>
@@ -115,25 +266,7 @@
             </li>
         </ul>
     </li>
-    <li class="nav-item  <?php if($menu_parent == 'article'): ?>  active open <?php endif; ?>">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-file-text"></i>
-            <span class="title">Articles</span>
-            <span class="arrow <?php if($menu_parent == 'article'): ?>  open <?php endif; ?>"></span>
-        </a>
-        <ul class="sub-menu">
-            <li class="nav-item  <?php if($menu_child == 'article-list'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(route('article-list')); ?>" class="nav-link ">
-                    <span class="title">List</span>
-                </a>
-            </li>
-            <li class="nav-item  <?php if($menu_child == 'article-cat-list'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(route('showcategoryList')); ?>" class="nav-link ">
-                    <span class="title">Categories</span>
-                </a>
-            </li>
-        </ul>
-    </li>
+    
     
     <li class="nav-item  <?php if($menu_parent == 'mock-test'): ?>  active open <?php endif; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
@@ -142,209 +275,225 @@
             <span class="arrow <?php if($menu_parent == 'mock-test'): ?>  open <?php endif; ?>"></span>
         </a>
         <ul class="sub-menu">
-            
+           
             <li class="nav-item  <?php if($menu_child == 'examlist'): ?>  active open <?php endif; ?>">
                 <a href="<?php echo e(route('mocktestlist')); ?>" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">List</span>
                 </a>
             </li>
-            
-            
+
+           
             <li class="nav-item  <?php if($menu_child == 'questionslist'): ?>  active open <?php endif; ?>">
                 <a href="<?php echo e(route('showMockQuestionList')); ?>" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Questions</span>
                 </a>
             </li>
             
             <li class="nav-item  <?php if($menu_child == 'mock-template'): ?>  active open <?php endif; ?>">
                 <a href="<?php echo e(route('showMockTemplateList')); ?>" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Test Pattern</span>
                 </a>
             </li>
             
             <li class="nav-item  <?php if($menu_child == 'questions-level'): ?>  active open <?php endif; ?>">
                 <a href="<?php echo e(route('showQuestionLevelList')); ?>" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Level</span>
                 </a>
             </li>
             <li class="nav-item  <?php if($menu_child == 'tab-rule'): ?>  active open <?php endif; ?>">
                 <a href="<?php echo e(route('showMockTabRuleList')); ?>" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Tabulation Rule</span>
                 </a>
             </li>
             <li class="nav-item  <?php if($menu_child == 'tab-rule-detail'): ?>  active open <?php endif; ?>">
                 <a href="<?php echo e(route('showMockTabRuleDetailsList')); ?>" class="nav-link ">
-                    <span class="title">Tabulation Rule  Details</span>
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Tabulation Rule Details</span>
                 </a>
             </li>
             <li class="nav-item  <?php if($menu_child == 'mock-settings'): ?>  active open <?php endif; ?>">
                 <a href="<?php echo e(route('showSettingsForm')); ?>" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Settings</span>
                 </a>
             </li>
         </ul>
     </li>
 
+
+
+
     <li class="nav-item  <?php if($menu_parent == 'videos'): ?>  active open <?php endif; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-video-camera"></i>
-            <span class="title">Videos</span>
+            <i class="fa fa-home"></i>
+            <span class="title">E-Book and Short Notes</span>
             <span class="arrow <?php if($menu_parent == 'videos'): ?>  open <?php endif; ?>"></span>
         </a>
         <ul class="sub-menu">
             <li class="nav-item  <?php if($menu_child == 'list_video'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/videos')); ?>" class="nav-link ">
-                    <span class="title">List</span>
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_ebook" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Invitation For E-Book</span>
                 </a>
             </li>
+            <li class="nav-item  <?php if($menu_child == 'list_video'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_ebook/ebook_list" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Book List</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'list_video'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_ebook/purchase_ebook" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Purchase E-Book</span>
+                </a>
+            </li>
+        
         </ul>
     </li>
 
-    
+   
 
     <li class="nav-item  <?php if($menu_parent == 'payment-request'): ?>  active open <?php endif; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-money"></i>
-            <span class="title">Payment Request</span>
+            <i class="fa fa-home"></i>
+            <span class="title">Research Paper Consultancy</span>
             <span class="arrow <?php if($menu_parent == 'payment-request'): ?>  open <?php endif; ?>"></span>
         </a>
         <ul class="sub-menu">
             <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(route('paymentRequestList')); ?>" class="nav-link ">
-                    <span class="title">List</span>
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_research_guideline" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage General Guideline</span>
                 </a>
             </li>
+            <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_research_guideline/research_paper_consul_form" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Research Paper Consultancy Application</span>
+                </a>
+            </li>
+ 
         </ul>
     </li>
+    <li class="nav-item  <?php if($menu_parent == 'payment-request'): ?>  active open <?php endif; ?>">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-home"></i>
+            <span class="title">Dissertation/Thesis Consultancy</span>
+            <span class="arrow <?php if($menu_parent == 'payment-request'): ?>  open <?php endif; ?>"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_disertation_guideline" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage General Guideline</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_disertation_guideline/thesis_consul_list" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Thesis Consultancy Application</span>
+                </a>
+            </li>
+            
+ 
+        </ul>
+    </li>
+    <li class="nav-item  <?php if($menu_parent == 'payment-request'): ?>  active open <?php endif; ?>">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-home"></i>
+            <span class="title">PHD Thesis to Book Conversion</span>
+            <span class="arrow <?php if($menu_parent == 'payment-request'): ?>  open <?php endif; ?>"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_phd_thesis_guideline" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage General Guideline</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/manage_phd_thesis_guideline/phd_thesis_online_application" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">PHD Thesis Online Application</span>
+                </a>
+            </li>
+ 
+        </ul>
+    </li>
+    <li class="nav-item  <?php if($menu_parent == 'payment-request'): ?>  active open <?php endif; ?>">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-users"></i>
+            <span class="title">Service Data</span>
+            <span class="arrow <?php if($menu_parent == 'payment-request'): ?>  open <?php endif; ?>"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Admin_datalist/form_list" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Service Data List</span>
+                </a>
+            </li>
+            
+ 
+        </ul>
+    </li>
+    <li class="nav-item  <?php if($menu_parent == 'payment-request'): ?>  active open <?php endif; ?>">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-youtube-play"></i>
+            <span class="title">Manage Gallery</span>
+            <span class="arrow <?php if($menu_parent == 'payment-request'): ?>  open <?php endif; ?>"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Manage_video_category" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Gallery Category</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Manage_video_category/video_gallery_view" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Video Gallery</span>
+                </a>
+            </li>
+            <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/Manage_video_category/video_gallery_view" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Image Gallery</span>
+                </a>
+            </li>
+            
+        </ul>
+    </li>
+    <li class="nav-item  <?php if($menu_parent == 'payment-request'): ?>  active open <?php endif; ?>">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-file-text-o"></i>
+            <span class="title">Content management</span>
+            <span class="arrow <?php if($menu_parent == 'payment-request'): ?>  open <?php endif; ?>"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  <?php if($menu_child == 'list-payment-request'): ?>  active open <?php endif; ?>">
+                <a href="<?php echo e(config('path.iipars_admin_base_url')); ?>/index.php/page_list_manage" class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Page</span>
+                </a>
+            </li>
+           
+            
+        </ul>
+    </li>
+
+
 
     
 
-    <li class="nav-item  <?php if($menu_parent == 'newsletter'): ?>  active open <?php endif; ?>">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-file-text"></i>
-            <span class="title">Newsletter</span>
-            <span class="arrow <?php if($menu_parent == 'newsletter'): ?>  open <?php endif; ?>"></span>
-        </a>
-        <ul class="sub-menu">
-            <li class="nav-item  <?php if($menu_child == 'newsletter-list'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(route('newsletter-list')); ?>" class="nav-link ">
-                    <span class="title">List</span>
-                </a>
-            </li>
         </ul>
     </li>
-
-    <li class="nav-item  <?php if($menu_parent == 'contact-us'): ?>  active open <?php endif; ?>">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-phone"></i>
-            <span class="title">Contact Us</span>
-            <span class="arrow <?php if($menu_parent == 'contact-us'): ?>  open <?php endif; ?>"></span>
-        </a>
-        <ul class="sub-menu">
-            <li class="nav-item  <?php if($menu_child == 'contact-us-list'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(route('contact-us')); ?>" class="nav-link ">
-                    <span class="title">List</span>
-                </a>
-            </li>
-        </ul>
-    </li>
-
-    <li class="nav-item  <?php if($menu_parent == 'newsfeed'): ?>  active open <?php endif; ?>">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-newspaper-o"></i>
-            <span class="title">News Feed</span>
-            <span class="arrow <?php if($menu_parent == 'newsfeed'): ?>  open <?php endif; ?>"></span>
-        </a>
-        <ul class="sub-menu">
-            <li class="nav-item  <?php if($menu_child == 'newsfeed-list'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(route('newsfeed')); ?>" class="nav-link ">
-                    <span class="title">List</span>
-                </a>
-            </li>
-        </ul>
-    </li> 
-    <li class="nav-item  <?php if($menu_parent == 'banner-slider'): ?>  active open <?php endif; ?>">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-sliders"></i>
-            <span class="title">Slider Box</span>
-            <span class="arrow <?php if($menu_parent == 'banner-slider'): ?>  open <?php endif; ?>"></span>
-        </a>
-        <ul class="sub-menu">
-            <li class="nav-item  <?php if($menu_child == 'banner-slider-list'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(route('banner-slider')); ?>" class="nav-link ">
-                    <span class="title">List</span>
-                </a>
-            </li>
-        </ul>
-    </li> 
-        
-    <li class="nav-item  <?php if($menu_parent == 'settings'): ?>  active open <?php endif; ?>">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="icon-settings"></i>
-            <span class="title">Settings</span>
-            <span class="selected"></span>
-            <span class="arrow <?php if($menu_parent == 'settings'): ?>  open <?php endif; ?> "></span>
-        </a>
-        <ul class="sub-menu">
-            
-            
-            <li class="nav-item  <?php if($menu_child == 'reseller-commission'): ?>  active open <?php endif; ?> ">
-                <a href="<?php echo e(route('showResellerCommission')); ?>" class="nav-link ">
-                    <!--<i class="icon-user"></i>-->
-                    <span class="title">Reseller commission </span>
-                </a>
-            </li>
-            
-            <li class="nav-item  <?php if($menu_child == 'cms'): ?>  active open <?php endif; ?> ">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/cms')); ?>" class="nav-link ">
-                    <!--<i class="icon-user"></i>-->
-                    <span class="title">CMS</span>
-                </a>
-            </li>
-            
-            <li class="nav-item  <?php if($menu_child == 'list_coupon'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/coupons')); ?>" class="nav-link ">
-                    <span class="title">Coupons</span>
-                </a>
-            </li>
-            <li class="nav-item  <?php if($menu_child == 'list_testimonial'): ?>  active open <?php endif; ?>">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/testimonials')); ?>" class="nav-link ">
-                    <span class="title">Testimonials</span>
-                </a>
-            </li>
-            
-            
-            <li class="nav-item  <?php if($menu_child == 'gnrl'): ?>  active open <?php endif; ?> ">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/setting')); ?>" class="nav-link ">
-                    <!--<i class="icon-user"></i>-->
-                    <span class="title">General Settings</span>
-                </a>
-            </li>
-            <li class="nav-item  <?php if($menu_child == 'pgnrl'): ?>  active open <?php endif; ?> ">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/payment-setting')); ?>" class="nav-link ">
-                    <!--<i class="icon-user"></i>-->
-                    <span class="title">Payment Gateway Settings</span>
-                </a>
-            </li>
-            <li class="nav-item  <?php if($menu_child == 'eml_tmpl'): ?>  active open <?php endif; ?> ">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/email-template')); ?>" class="nav-link ">
-                    <!--<i class="icon-user"></i>-->
-                    <span class="title">Email Templates</span>
-                </a>
-            </li>
-            <li class="nav-item  <?php if($menu_child == 'banner_tmpl'): ?>  active open <?php endif; ?> ">
-                <a href="<?php echo e(url(config("constants.admin_prefix").'/banner')); ?>" class="nav-link ">
-                    <!--<i class="icon-user"></i>-->
-                    <span class="title">Notice</span>
-                </a>
-            </li>
-            <li class="nav-item  <?php if($menu_child == 'floater-sign'): ?>  active open <?php endif; ?> ">
-                <a href="<?php echo e(route('showFloaterSignUp')); ?>" class="nav-link ">
-                    <!--<i class="icon-user"></i>-->
-                    <span class="title">Floater Sign Up</span>
-                </a>
-            </li>
-            
-        </ul>
-    </li>
-</ul><?php /**PATH /var/www/html/iipars/ugcnet/resources/views/admin/partials/sidebarMenu.blade.php ENDPATH**/ ?>
+</ul>
+<?php /**PATH /var/www/html/iipars/ugcnet/resources/views/admin/partials/sidebarMenu.blade.php ENDPATH**/ ?>

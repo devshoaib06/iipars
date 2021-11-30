@@ -1,7 +1,7 @@
 <?php
 return [
 
-'site_name' => 'Teachinns',
+'site_name' => 'iipars.com',
 'admin_prefix' => "admin",
 'item_per_page' => 3,  
 'proposal_connect' => 1, 
@@ -85,6 +85,8 @@ return [
 'paypal_release' => 'http://www.karmickdev.com/workdeliver/ipn-release-escrow',    
 
 's3_folder' => 'test/',
+
+
       
 ];
 ?>

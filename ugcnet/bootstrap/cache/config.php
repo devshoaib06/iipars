@@ -123,6 +123,11 @@
         'provider' => 'users',
         'hash' => false,
       ),
+      'sanctum' => 
+      array (
+        'driver' => 'sanctum',
+        'provider' => NULL,
+      ),
     ),
     'providers' => 
     array (
@@ -256,7 +261,7 @@
   ),
   'constants' => 
   array (
-    'site_name' => 'Teachinns',
+    'site_name' => 'iipars.com',
     'admin_prefix' => 'admin',
     'item_per_page' => 3,
     'proposal_connect' => 1,
@@ -603,9 +608,9 @@
     'absolute_path' => '',
     'frontend_path' => '/iipars/ugcnet/public/frontend/',
     'assets_path' => '/iipars/ugcnet/public',
-    'main_site_path' => '/',
+    'main_site_path' => '/iipars/ugcnet/',
     'user_image' => '/iipars/ugcnet/public/uploads/user_image/',
-    'material_image' => 'storage/uploads/materials/',
+    'material_image' => '/iipars/ugcnet/storage/uploads/materials/',
     'partner_image' => '/iipars/ugcnet/public/uploads/partner_image/',
     'portfolio_image' => '/iipars/ugcnet/public/uploads/portfolio_image/',
     'hotel_image' => '/iipars/ugcnet/public/uploads/hotel_image/',
@@ -627,7 +632,9 @@
     'id_proof' => '/iipars/ugcnet/public/uploads/id_proof/',
     'police_report' => '/iipars/ugcnet/public/uploads/police_report/',
     'address_proof' => '/iipars/ugcnet/public/uploads/address_proof/',
-    'course_image' => 'storage/uploads/courses/',
+    'course_image' => '/iipars/ugcnet/storage/uploads/courses/',
+    'iipars_base_url' => 'http://localhost/iipars',
+    'iipars_admin_base_url' => 'http://localhost/iipars/admin',
   ),
   'payment' => 
   array (
@@ -793,6 +800,28 @@
   array (
     'private_key' => NULL,
     'public_key' => NULL,
+  ),
+  'sanctum' => 
+  array (
+    'stateful' => 
+    array (
+      0 => 'localhost',
+      1 => 'localhost:3000',
+      2 => '127.0.0.1',
+      3 => '127.0.0.1:8000',
+      4 => '::1',
+      5 => 'teachinns.com',
+    ),
+    'guard' => 
+    array (
+      0 => 'web',
+    ),
+    'expiration' => NULL,
+    'middleware' => 
+    array (
+      'verify_csrf_token' => 'App\\Http\\Middleware\\VerifyCsrfToken',
+      'encrypt_cookies' => 'App\\Http\\Middleware\\EncryptCookies',
+    ),
   ),
   'terbilang' => 
   array (

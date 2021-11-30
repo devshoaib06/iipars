@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 
 
 Route::any('authentication', 'API\AuthController@authenticateClient');
+Route::any('admin/authentication', 'API\AuthController@authenticateClientFromIIpars');
+Route::get('admin/login', 'API\AuthController@adminloginIIPARS');
 
 
 
@@ -28,17 +30,18 @@ Route::group(['middleware' => 'APIToken'], function(){
     Route::post('register', 'API\UserController@register');
     Route::post('login', 'API\UserController@login');
     Route::post('forgot-password', 'API\UserController@forgotPassword');
-
-
+    
+    
     Route::post('getAllCourseList', 'API\CourseController@getAllCourseList');
     Route::post('getPreviewCourses', 'API\CourseController@getPreviewCourses');
     Route::post('getFullCourseDetails', 'API\CourseController@getFullCourseDetails');
     Route::post('getCourseDetails', 'API\CourseController@getCourseDetails');
     Route::post('getNewsFeed', 'API\AppController@getNewsFeed');
     Route::post('getBannerSliders', 'API\AppController@getBannerSliders');
-
+    
     Route::post('contactQuery', 'API\AppController@contactAction');
-
+    
+    
     Route::group(['middleware' => 'studentauth'], function(){
         Route::post('logout', 'API\UserController@logout');
         Route::post('getuserinfo','API\UserController@getUserInfo');
@@ -64,6 +67,9 @@ Route::group(['middleware' => 'APIToken'], function(){
         Route::get('/mock-test/result/{exam_id}', 'API\MockTestController@showResult')->name('mt-result');
 
     });
+
+
+   
 });
 
 

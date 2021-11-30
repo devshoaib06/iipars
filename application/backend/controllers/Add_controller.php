@@ -9,6 +9,7 @@ class add_controller extends CI_Controller
 			$this->load->library('encrypt');
 			$this->load->helper('url');
 			$this->load->helper('form');
+			$this->load->helper('custom');
 			
 			$this->load->model('common/common_model');  /*****************/
 			//$this->load->model('doctor_list_model'); /**********************/

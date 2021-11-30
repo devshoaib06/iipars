@@ -30,3 +30,9 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /assets/*
 /ugcnet/public/*
 /user_guide/*
+ugcnet/composer.lock
+ugcnet/composer.lock
+ugcnet/storage/*
+ugcnet/bootstrap/*
+ugcnet/bootstrap/cache/services.php
+ugcnet/bootstrap/cache/config.php

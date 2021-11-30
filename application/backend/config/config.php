@@ -24,6 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/iipars/admin';
+$config['base_teach_url'] = 'http://localhost/iipars/ugcnet/admin';
+$config['base_admin_teach_email'] = 'contact@teachinns.com';
 
 /*
 |--------------------------------------------------------------------------

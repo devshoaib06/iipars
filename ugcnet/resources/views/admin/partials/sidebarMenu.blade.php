@@ -103,6 +103,12 @@
                     <span class="title">News Feed </span>
                 </a>
             </li>
+            <li class="nav-item  @if ($menu_child == 'list_testimonial')  active open @endif">
+                <a href="{{ url(config('constants.admin_prefix') . '/testimonials') }}" class="nav-link ">
+                    <i class="fa fa-list"></i>
+                    <span class="title">Testimonials</span>
+                </a>
+            </li>
             <li class="nav-item  @if ($menu_child == 'students')  active open @endif">
                 <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_package" class="nav-link ">
                     <!--<i class="icon-user"></i>-->
@@ -266,8 +272,8 @@
             </li>
         </ul>
     </li>
-    
-    
+
+
     <li class="nav-item  @if ($menu_parent == 'mock-test')  active open @endif">
         <a href="javascript:;" class="nav-link nav-toggle">
             <i class="fa fa-question" aria-hidden="true"></i>
@@ -275,7 +281,7 @@
             <span class="arrow @if ($menu_parent == 'mock-test')  open @endif"></span>
         </a>
         <ul class="sub-menu">
-           
+
             <li class="nav-item  @if ($menu_child == 'examlist')  active open @endif">
                 <a href="{{ route('mocktestlist') }}" class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
@@ -283,21 +289,21 @@
                 </a>
             </li>
 
-           
+
             <li class="nav-item  @if ($menu_child == 'questionslist')  active open @endif">
                 <a href="{{ route('showMockQuestionList') }}" class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Questions</span>
                 </a>
             </li>
-            
+
             <li class="nav-item  @if ($menu_child == 'mock-template')  active open @endif">
                 <a href="{{ route('showMockTemplateList') }}" class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Test Pattern</span>
                 </a>
             </li>
-            
+
             <li class="nav-item  @if ($menu_child == 'questions-level')  active open @endif">
                 <a href="{{ route('showQuestionLevelList') }}" class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
@@ -342,22 +348,24 @@
                 </a>
             </li>
             <li class="nav-item  @if ($menu_child == 'list_video')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_ebook/ebook_list" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_ebook/ebook_list"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Book List</span>
                 </a>
             </li>
             <li class="nav-item  @if ($menu_child == 'list_video')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_ebook/purchase_ebook" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_ebook/purchase_ebook"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Purchase E-Book</span>
                 </a>
             </li>
-        
+
         </ul>
     </li>
 
-   
+
 
     <li class="nav-item  @if ($menu_parent == 'payment-request')  active open @endif">
         <a href="javascript:;" class="nav-link nav-toggle">
@@ -367,18 +375,20 @@
         </a>
         <ul class="sub-menu">
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_research_guideline" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_research_guideline"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Manage General Guideline</span>
                 </a>
             </li>
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_research_guideline/research_paper_consul_form" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_research_guideline/research_paper_consul_form"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Research Paper Consultancy Application</span>
                 </a>
             </li>
- 
+
         </ul>
     </li>
     <li class="nav-item  @if ($menu_parent == 'payment-request')  active open @endif">
@@ -389,19 +399,21 @@
         </a>
         <ul class="sub-menu">
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_disertation_guideline" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_disertation_guideline"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Manage General Guideline</span>
                 </a>
             </li>
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_disertation_guideline/thesis_consul_list" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_disertation_guideline/thesis_consul_list"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Thesis Consultancy Application</span>
                 </a>
             </li>
-            
- 
+
+
         </ul>
     </li>
     <li class="nav-item  @if ($menu_parent == 'payment-request')  active open @endif">
@@ -412,18 +424,20 @@
         </a>
         <ul class="sub-menu">
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_phd_thesis_guideline" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_phd_thesis_guideline"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Manage General Guideline</span>
                 </a>
             </li>
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_phd_thesis_guideline/phd_thesis_online_application" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/manage_phd_thesis_guideline/phd_thesis_online_application"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">PHD Thesis Online Application</span>
                 </a>
             </li>
- 
+
         </ul>
     </li>
     <li class="nav-item  @if ($menu_parent == 'payment-request')  active open @endif">
@@ -434,13 +448,14 @@
         </a>
         <ul class="sub-menu">
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/Admin_datalist/form_list" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/Admin_datalist/form_list"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Service Data List</span>
                 </a>
             </li>
-            
- 
+
+
         </ul>
     </li>
     <li class="nav-item  @if ($menu_parent == 'payment-request')  active open @endif">
@@ -451,24 +466,27 @@
         </a>
         <ul class="sub-menu">
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/Manage_video_category" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/Manage_video_category"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Gallery Category</span>
                 </a>
             </li>
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/Manage_video_category/video_gallery_view" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/Manage_video_category/video_gallery_view"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Video Gallery</span>
                 </a>
             </li>
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/Manage_video_category/video_gallery_view" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/Manage_video_category/video_gallery_view"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Image Gallery</span>
                 </a>
             </li>
-            
+
         </ul>
     </li>
     <li class="nav-item  @if ($menu_parent == 'payment-request')  active open @endif">
@@ -479,20 +497,21 @@
         </a>
         <ul class="sub-menu">
             <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
-                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/page_list_manage" class="nav-link ">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/page_list_manage"
+                    class="nav-link ">
                     <i class="fa fa-list" aria-hidden="true"></i>
                     <span class="title">Manage Page</span>
                 </a>
             </li>
-           
-            
+
+
         </ul>
     </li>
 
 
 
-    
 
-        </ul>
-    </li>
+
+</ul>
+</li>
 </ul>

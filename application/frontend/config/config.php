@@ -30,7 +30,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // } else {
 // 	$ht = "http://";
 // }
-$config['base_url'] = 'https://iipars.com/';
+//$config['base_url'] = 'https://iipars.com/';
+$config['base_url'] = 'https://iipars.karmickdev.com/';
 
 
 /*

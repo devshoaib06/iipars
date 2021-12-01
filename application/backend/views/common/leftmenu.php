@@ -95,6 +95,11 @@
                                     } ?>"><a href="<?php echo base_url(); ?>index.php/manage_news_feed"><i class="fa fa-list"></i>News Feed
                             </a>
                         </li>
+                        <li class="nav-item  @if ($menu_child == 'list_testimonial')  active open @endif">
+                            <a href="<?php echo $this->config->item('base_teach_url'); ?>/testimonials" class="nav-link ">
+                            <i class="fa fa-list"></i><span class="title">Testimonials</span>
+                            </a>
+                        </li>
 
                         <li class="<?php if (@$active == 'manage_package') {
                                         echo 'active';

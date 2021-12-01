@@ -46,10 +46,10 @@ class Home extends CI_Controller
 
 	 	$data['download'] = $this->common_model->common($table_name = 'tbl_download', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
 
-	 	// echo "<pre>"; print_r($data['manage_home']);exit;
-
+		 
 		 $data['active']="home";
-
+		 $data['testimonials'] = $this->teachinns_home_model->common($table_name = 'testimonials', $field = array(), $where = array('status'=>'1'), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');		
+	 	// echo "<pre>"; print_r($data['testimonials']);exit;
 
 
 		
@@ -236,4 +236,3 @@ $email_list=$this->common_model->common($table_name = 'tbl_email', $field = arra
 
 	
 }
-?>

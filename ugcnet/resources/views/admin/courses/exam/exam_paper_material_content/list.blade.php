@@ -169,7 +169,7 @@
 												<th width="5%"> # </th>
 												<th width="20%"> Exam </th>
                                                 <th width="20%"> Paper </th>
-                                                <th width="20%"> Subject </th>
+                                                <th width="20%"> Unit </th>
                                                 <th width="20%"> Material Type</th>
                                                 <th width="15%"> Added Date </th>
                                                 <th width="10%"> Status </th>
@@ -197,7 +197,7 @@
                                                 </td>
                                                 <td>
                                                     <select name="subject_id" id="subject_id" class="form-control form-filter input-sm" > 
-                                                        <option value="" >Select Subject</option>
+                                                        <option value="" >Select Unit</option>
                                                         @foreach($allSubjects as $v)
                                                         <option value="{{ $v->id }}" >{{ $v->subject_name }}</option>
                                                         @endforeach

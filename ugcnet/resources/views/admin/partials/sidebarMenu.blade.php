@@ -252,7 +252,7 @@
             </li>
             <li class="nav-item  @if ($menu_child == 'list_subject')  active open @endif">
                 <a href="{{ url(config('constants.admin_prefix') . '/subjects') }}" class="nav-link ">
-                    <span class="title">Subjects</span>
+                    <span class="title">Units</span>
                 </a>
             </li>
             <li class="nav-item  @if ($menu_child == 'list_material')  active open @endif">

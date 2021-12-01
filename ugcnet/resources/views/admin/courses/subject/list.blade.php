@@ -104,7 +104,7 @@
                             <div class="portlet-title">
                                 <div class="caption ">
                                     <i class="fa fa-book"></i>
-                                    <span class="caption-subject sbold ">  Subject List</span>
+                                    <span class="caption-subject sbold ">  Unit List</span>
                                 </div>
                                 <!--<div class="actions">
                                     <div class="btn-group btn-group-devided" data-toggle="buttons">
@@ -166,7 +166,7 @@
                                         <thead>
                                             <tr role="row" class="heading">	
 												<th width="5%"> # </th>
-												<th width="20%"> Subject Name </th>
+												<th width="20%"> Unit </th>
 												<th width="20%"> Exam Name </th>
                                                 <th width="15%"> Added Date </th>
                                                 <th width="10%"> Status </th>

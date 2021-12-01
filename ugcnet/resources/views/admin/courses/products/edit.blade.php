@@ -222,7 +222,7 @@
                                                                                 </div>
                                                                                 <div class="subject-section">
                                                                                     <div class="form-group">
-                                                                                        <label class="control-label subject-info">Subject <span class="required"> * </span></label>
+                                                                                        <label class="control-label subject-info">Unit <span class="required"> * </span></label>
                                                                                         <div class="radio-list subject-list">
                                                                                             @foreach ($allSubjects as $subject)
                                                                                             <label class="radio-inline" for="example-inline-radio{{$paper->paper_id}}-{{$subject->id}}">

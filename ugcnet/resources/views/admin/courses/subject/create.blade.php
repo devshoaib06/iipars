@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('page_title')
-Subjects
+Unit
 @endsection
 
 @section('page_level_plugins_css')
@@ -74,7 +74,7 @@ Subjects
                             <div class="portlet-title">
                                 <div class="caption">
                                     <i class="icon-settings font-dark"></i>
-                                    <span class="caption-subject  sbold ">Add Subject
+                                    <span class="caption-subject  sbold ">Add Unit
                                     </span>
                                 </div>
                                 <!--<div class="actions">
@@ -132,7 +132,7 @@ Subjects
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-3">Subject Name
+                                            <label class="control-label col-md-3">Unit
                                                 <span class="required"> * </span>
                                             </label>
                                             <div class="col-md-6">

@@ -133,7 +133,7 @@ Exams Paper
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-3">Subject <span class="required"> * </span></label>
+                                            <label class="control-label col-sm-3">Unit <span class="required"> * </span></label>
                                             <div class="col-sm-6">
                                                 <select name="subject_id" id="subject" class="form-control">
                                                     <option value="">Select Subject</option>

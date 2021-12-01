@@ -167,37 +167,7 @@
                                                             <div class="form-group" id="paper-section">
                                                                 
                                                             </div>  
-                                                            {{-- <div class="form-group">
-                                                                <label class="control-label subject-info">Subject <span class="required"> * </span></label>
-                                                                <div class="radio-list subject-list">
-                                                                   @foreach ($allSubjects as $subject)
-                                                                    <label class="radio-inline" for="example-inline-radio{{$subject->id}}">
-                                                                        <input id="example-inline-radio{{$subject->id}}" 
-                                                                               type="checkbox" 
-                                                                               value="{{$subject->id}}" 
-                                                                               name="subject_list[]"
-                                                                        >
-                                                                        {{$subject->subject_name}}
-                                                                    </label>
-                                                                   @endforeach
-                                                                   
-                                                                </div>
-                                                            </div>   --}}
-                                                            {{-- <div class="form-group">
-                                                                <label class="control-label">Material <span class="required"> * </span></label>
-                                                                <div class="radio-list subject-list">
-                                                                    @foreach ($allMaterials as $material)
-                                                                     <label class="radio-inline" for="example-inline-radio{{$material->id}}">
-                                                                         <input id="example-inline-radio{{$material->id}}" 
-                                                                                type="checkbox" 
-                                                                                value="{{$material->id}}" 
-                                                                                name="subject_list[]"
-                                                                         >
-                                                                         {{$material->material_name}}
-                                                                     </label>
-                                                                    @endforeach
-                                                                 </div>
-                                                            </div> --}}
+                                                            
                                                            
                                                                 <div class="form-group">
                                                                     <label class="control-label">Name <span class="required"> * </span></label>
@@ -835,7 +805,7 @@
                             paperhtml+='</div>';
 
                         let subjecthtml=  ' <div class="form-group">';
-                            subjecthtml+= '<label class="control-label subject-info">Subject <span class="required"> * </span></label>'
+                            subjecthtml+= '<label class="control-label subject-info">Unit <span class="required"> * </span></label>'
                             subjecthtml+= '<div class="radio-list subject-list">'
                         $.each(response.allSubjects,function(key,subject){
                             subjecthtml+= '<label class="radio-inline" for="example-inline-radio'+key+'-'+subject.id+'">'

@@ -136,10 +136,10 @@ Exams Paper
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-3">Subject <span class="required"> * </span></label>
+                                            <label class="control-label col-sm-3">Unit <span class="required"> * </span></label>
                                             <div class="col-sm-6">
                                                 <select name="subject_id" id="subject" class="form-control" disabled>
-                                                    <option value="">Select Subject</option>
+                                                    <option value="">Select Unit</option>
                                                 @foreach($subjects as $subject)   
                                                     <option value="{{$subject->id}}" {{$relatedexam->subject_id==$subject->id?'selected':''}}>{{$subject->subject_name}}</option>
                                                 @endforeach

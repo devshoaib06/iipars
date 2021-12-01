@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('page_title')
-Subject
+Unit
 @endsection
 
 @section('page_level_plugins_css')
@@ -109,7 +109,7 @@ Subject
                             <div class="portlet-title">
                                 <div class="caption">
                                     <i class="icon-settings font-dark"></i>
-                                    <span class="caption-subject  sbold ">Edit Subject</span>
+                                    <span class="caption-subject  sbold ">Edit Unit</span>
                                 </div>
                                 <!--<div class="actions">
                                     <div class="btn-group btn-group-devided" data-toggle="buttons">
@@ -161,9 +161,7 @@ Subject
                                             </div>
 
 										<div class="form-group">
-                                            <label class="control-label col-md-3">Subject Name
-                                                <span class="required"> * </span>
-                                            </label>
+                                            <label class="control-label col-md-3">Unit</label>
                                             <div class="col-md-6">
                                                 <input type="text" name="subject_name" class="form-control"  value="{{ $subject->subject_name }}"/ autocomplete="off"> </div>
 

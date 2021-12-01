@@ -228,7 +228,7 @@ class ExamPaperController extends Controller {
                 foreach($material_lists as $material_list){
                     $material=MaterialMaster::find($material_list);
 
-                    $allmaterials[]=$material->material_name;
+                    $allmaterials[]=@$material->material_name;
 
                 }
                 $related_materials= implode(",<br>",$allmaterials);            

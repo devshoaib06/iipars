@@ -1,255 +1,148 @@
 @push('page_meta')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endpush
-<section class="mainheader">
-    <div class="container">
-        <div class="d-flex align-item p-rel">
-        <a href="#"  class="menu-btn"><i class="fa fa-bars" aria-hidden="true"></i></a>
-            <div class="logo"><a href="{{route('home')}}"><img src="{{ asset('public/frontend/images/logo.png') }}" title="Teachinns"  alt="India’s no.1 online study material for UGC & CSIR NTA NET/SET/JRF"/></a>
-        </div>
-        
-        @if( isset($exams) )
-            
-            
-            <div class="course">
-                <a href="#"><i class="fa fa-th" aria-hidden="true"></i>&nbsp;Courses</a>
+<div class="header-nav p_cus_mobile_toggol_menu">
+    <div class="header-nav-wrapper navbar-scrolltofixed bg-white">
+        <div class="container">
+            <nav id="menuzord" class="menuzord red">
+                <ul class="menuzord-menu">
+                    <li><a href="https://iipars.com/home">Home</a></li>
+                    <li><a href="about_us">About Us</a></li>
+                    <li class="active"><a href="//">UGC - NET</a>
+                        <ul class="dropdown" aria-labelledby="dropdownMenu1">
 
-                <div class="menulist">
-
-                    <ul>
-                        @foreach ($exams as $exam )
-                            
                             <li>
-                                <a href="#">{{$exam->exam_name}}</a>
-                                @if($exam->id==1)
-                                    <?php 
-                                        $myLibrary=new \App\library\myFunctions;
-                                        $allSubjects=$myLibrary->getExamSubject($exam->id);
-                                    
-                                    ?>
-                                    <ul>
-                                        @if($exam->id==1)
-                                        <!-- <li>
-                                            <h4>All Pack</h4></li> -->
-                                        
-                                        <li><a href="#">Combo Pack</a>
-                                           @if( isset($combo_pack_products) && count($combo_pack_products) > 0)
-                                            <ul class="o-flow-y h-350 w-350">
-                                                <!-- <li>
-                                                    <h4>All Combo Courses</h4></li> -->
-                                                    
-                                                @foreach ($combo_pack_products as $combo_pack_product)
-                                                    <li>
-                                                        <a href="{{route('front.corsCont',['exam'=>Str::slug( $exam->exam_name, '-'),'slug'=>$combo_pack_product->slug])}}">
-                                                            {{$combo_pack_product->name}}
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                               
-                                                
-                                            </ul>
-                                            @endif 
-                                        </li>
-                                        <li><a href="#">Individual Pack</a>
-                                        @endif 
-                                          @if( isset($allSubjects) && count($allSubjects) > 0)
-                                            <ul>
-                                                <!-- <li>
-                                                    <h4>Subjects</h4></li> -->
-                                                @foreach ($allSubjects as $subject)
-                                                    <?php 
-                                                        $allCourses=[];
-                                                        $allCourses=$myLibrary->getCourseExamSubject($exam->id,$subject->id);
-                                                    ?>
-                                                    <li>
-                                                        <a href="#">{{$subject->subject_name}}</a>
-                                                        @if(count($allCourses)>0)
-                                                        <ul>
-                                                            @foreach ($allCourses as $allCourse)
-                                                        <li><a href="{{route('front.corsCont',['exam'=>Str::slug( $exam->exam_name, '-'),'slug'=>$allCourse->slug])}}">{{$allCourse->name}}</a></li>
-                                                            @endforeach
-                                                        </ul>
-                                                        @endif
-                                                    </li>
-                                                    
-                                                @endforeach
-                                               
-                                            </ul>
-                                           @endif
-                                        </li>
-                                        
-                                       
-                                    </ul>
-                                @else
-                                <?php 
-                                    $myLibrary=new \App\library\myFunctions;
-                                    $allSubjects=[];
-                                    $allSubjects=$myLibrary->getExamSubject($exam->id);
-                                    
-                                ?>
-                                        <!-- <li>
-                                            <h4>Subjects</h4></li> -->
-                                        @if(count($allSubjects)>0)       
-                                        <ul>
-                                        @foreach ($allSubjects as $subject)
-                                        <?php 
-                                            $allCourses=$myLibrary->getCourseExamSubject($exam->id,$subject->id);
-                                        ?>
-                                        <li>
-                                            <a href="#">{{$subject->subject_name}}</a>
-                                            @if(isset($allCourses) && count($allCourses)>0)
-                                            <ul>
-                                                @foreach ($allCourses as $allCourse)
-                                                 <li><a href="{{route('front.corsCont',['exam'=>Str::slug( $exam->exam_name, '-'),'slug'=>$allCourse->slug])}}">{{$allCourse->name}}</a></li>
-                                                @endforeach
-                                            </ul>
-                                            @endif
-                                        </li>
-                                            
-                                        @endforeach
-                                        
-                                        </ul>
-                                        @endif
-                                    
-                                @endif
+                                <h4 style="padding-left: 22px;">Subjects
+                                    <!--  - Subjects -->
+                                </h4>
                             </li>
-                        @endforeach
-                        <li>
-                            <a href="{{url('/ugc-net-syllabus-pdf-free-download')}}">UGC-NET Syllabus PDF Free Download</a>
-                        </li>
-                        <li>
-                            <a href="{{url('/csir-net-syllabus-free-download')}}">CSIR-NET Syllabus Free Download</a>
-                        </li>
-                    </ul>
 
-                </div>
+                            <li><a href="#">Bengali</a></li>
+                            <li><a href="#">Commerce</a></li>
+                            <li><a href="#">Sanskrit</a></li>
+                            <li><a href="#">Philosophy</a></li>
+                            <li><a href="#">Economics</a></li>
+                            <li><a href="#">Geography</a></li>
+                            <li><a href="#">History</a></li>
+                            <li><a href="#">English</a></li>
+                            <li><a href="#">Education</a></li>
 
-            </div>
-        @endif
-            @php 
-                $segment1 =  Request::segment(1);  
-                $segment2 =  Request::segment(2);  
-            @endphp 
-            <div class="rightmenu">
-                <ul>
-                    <li @if($segment1 == 'about-us') @endif><a href="{{ url('/about-us') }}">About Us</a></li>
-                    <li @if($segment1 == 'why-us') @endif><a href="{{ url('/why-us') }}">Why Us</a></li>
-                    {{-- <li><a href="#">E-Book</a></li> --}}
-                    <li @if($segment1 == 'articles') @endif>
-                        <a href="{{route('articles',['category'=>'current-affairs'])}}">Current Affairs</a>
-                        {{-- <a href="javascript::void(0)">Articles</a> --}}
-                        {{-- <ul>
-                        <li><a href="{{route('showArticleForm')}}">Submit Your Article</a></li>
-                        <li><a href="{{route('all-articles')}}">All Articles</a></li>
-                        @forelse ($articlecats as $articlecat)
-                        <li><a href="{{route('articles',['category'=>$articlecat->slug])}}">{{$articlecat->name}}</a></li>
-                            
-                        @empty
-                            
-                        @endforelse        
-                            
-                        </ul> --}}
+                            <li><a href="#">
+                                    <h4 class="m-0">Paper – I</h4>
+                                </a>
+
+                                <ul class="dropdown" aria-labelledby="dropdownSubMenu1">
+                                    <li>
+                                        <h4 style="padding-left: 22px;">Units</h4>
+                                    </li>
+                                    <li role="separator" class="divider bg-dark" style="height: 1px; background: #ccc;">
+                                    </li>
+                                    <li><a href="#">Unit - 1</a>
+
+                                        <ul class="dropdown" aria-labelledby="dropdownSubMenu2">
+                                            <li><a href="#">PDF</a>
+                                                <ul class="dropdown" aria-labelledby="dropdownSubMenu3">
+                                                    <li><a href="#">Order Now</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">PPT</a></li>
+                                            <li><a href="#">PYQ</a></li>
+                                            <li><a href="#">Mock Test</a></li>
+                                        </ul>
+
+                                    </li>
+                                    <li><a href="#">Unit - 2</a></li>
+                                    <li><a href="#">Unit - 3</a></li>
+                                    <li><a href="#">Unit - 4</a></li>
+                                    <li><a href="#">Unit - 5</a></li>
+                                    <li><a href="#">Unit - 6</a></li>
+                                    <li><a href="#">Unit - 7</a></li>
+                                    <li><a href="#">Unit - 8</a></li>
+                                    <li><a href="#">Unit - 9</a></li>
+                                    <li><a href="#">Unit - 10</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+
                     </li>
-                    <li><a href="{{route('contributorlogin')}}">Contributor</a></li>
-                    <li><a href="{{route('resellerlogin')}}">Reseller</a></li>
-                    {{-- <li>
-                        @auth
-                            <a href="{{route('showInstruction')}}">Mock Test</a>
-                            
-                        @endauth
-                        @guest
-                            <a href="#" class="mock-test-login" data-toggle="modal" data-target=".login-modal">Mock Test</a>
-                        @endguest
-                    </li> --}}
-                    <li class="{{$segment1 == 'contact-us'?'active':''}}"><a href="{{ url('/contact-us') }}">Contact Us</a></li>
+                    <li><a href="economics.html">Economics</a></li>
+
+                    <li><a href="Manage_research/all">Writing Consultancy</a>
+                        <ul class="dropdown">
+
+
+
+                            <li><a href="Manage_research/writing_consultancy">Research Paper Writing Consultancy</a>
+                            </li>
+                            <li><a href="Manage_research/paper_publication">Research Paper Publication Consultancy</a>
+                            </li>
+                            <li><a href="Manage_phd">Ph. D. Thesis writing Consultancy</a></li>
+
+                            <li><a href="Manage_research/mphil_dissertation">M.Phil. Dissertation writing
+                                    Consultancy</a></li>
+                            <li><a href="Manage_research/project_work">Project Work Writing Consultancy</a></li>
+                            <li><a href="Manage_research/data_analysis">Data Analysis & Research Methodology</a></li>
+
+
+
+
+
+
+                        </ul>
+
+
+
+                    </li>
+                    <li><a href="Manage_self_book_publication">Book Publication</a>
+                        <ul class="dropdown">
+                            <li><a href="Manage_self_book_publication/writing_consultancy">Book Writing Consultancy</a>
+                            </li>
+                            <li><a href="Manage_self_book_publication/publication_consultacy">Book Publication
+                                    Consultancy</a>
+                            </li>
+                            <li><a href="Manage_self_book_publication/thesis_publication">Thesis to Book Publication</a>
+                            </li>
+                            <li><a href="Manage_self_book_publication/dissertation_publication">M.Phil. Dissertation to
+                                    Book
+                                    Publication</a></li>
+                            <li><a href="Manage_self_book_publication/project_work_book">Project Work to Book
+                                    Publication</a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    <!--  <li><a href="Manage_ebook/book_list">Our Books</a></li> -->
+
+
+
+
+
+                    <li><a href="#">Gallery</a>
+                        <ul class="dropdown">
+                            <li><a href="https://iipars.com/Manage_image">Image</a>
+                            <li><a href="https://iipars.com/Manage_video">Video</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- <li><a href="#">Blogs</a></li> -->
+
+                    <!--  <li ><a href="https://iipars.com/video-gallery">Video Gallery</a></li> -->
+
+
+
+                    <li><a href="https://iipars.com/contact-us">Contact Us</a></li>
+
                 </ul>
 
-            </div>
-
-            <div class="rightbutton log-btn">
-                
-                @auth
-                <div class="dropdown">
-                    <a href="#" class="login dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" style="text-transform:capitalize;">
-                        {{Auth::user()->name}}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right" style="margin-top:27px;">
-                        @if(Auth::user()->user_type_id==2)
-                        <li>
-                        <a href="{{route('dashboard')}}" class="page-unload-prevent">
-                                <i class="fa fa-user"></i> My Dashboard </a>
-                        </li>
-                        @elseif(Auth::user()->user_type_id==3)
-                        <li>
-                        <a href="{{route('contributordashboard')}}" class="page-unload-prevent">
-                                <i class="fa fa-user"></i> My Dashboard </a>
-                        </li>
-                        @elseif(Auth::user()->user_type_id==4)
-                        <li>
-                        <a href="{{route('resellerdashboard')}}" class="page-unload-prevent">
-                                <i class="fa fa-user"></i> My Dashboard </a>
-                        </li>
-                        @endif
-                        <li class="divider"> </li>
-                        <li>
-                            <a href="{{route('frontendlogout')}}" class="page-unload-prevent">
-                                <i class="fa fa-lock"></i> Log Out </a>
-                        </li>
-                    </ul>
-                </div>
-                @endauth
-               @guest
-               <?php 
-                   $restricted_url=array('contributor','reset-password'); 
-               ?>
-               @if(!in_array($segment1,$restricted_url))            
-                <a href="#" class="login" data-toggle="modal" data-target=".login-modal">login</a>
-                
-               @endif 
-               @endguest 
-                
-                <div class="clearfix"></div>
-            </div>
-            
-            
-    
-            <div class="clearfix"></div>
-            </div>
-    </div>
-    @if(count($newsfeed)>0)
-    <div class="container">
-        <div class="row">    
-            <div class="col-sm-12 col-md-12">
-                <div class="announceCont">
-                    <div class="announceHead">
-                        <h4>News Feed:</h4>
-                    </div>
-                    <div id="newsTicker" class="accounceBox ticker">
-                        <ul>
-                            @foreach ($newsfeed as $new)
-                                
-                            <li>{!!html_entity_decode($new->newsfeed)!!}</li>
-                            @endforeach
-                            
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
+            </nav>
         </div>
     </div>
-    @endif
- </section>
-
-
- <div class="site-overlay"><span class="crossmenu"><img src="{{ asset('public/frontend/images/crossicon.png') }}"  alt="Cross"/></span></div>
+</div>
 
 
 
 
- <!-- Modal -->
 
-
-
-
-  

@@ -1,6 +1,6 @@
 @include('frontend.includes.header')
 
-<header id="site_header" class="site_header1">
+<header id="header" class="header">
 	
     @include('frontend.includes.top_header_bar')
    

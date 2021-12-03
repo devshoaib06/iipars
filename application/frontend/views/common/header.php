@@ -60,7 +60,8 @@
 
   <!-- CSS | menuzord megamenu skins -->
 
-  <link id="menuzord-menu-skins" href="<?php echo base_url(); ?>assets/css/menuzord-skins/menuzord-boxed.css" rel="stylesheet" />
+  <link id="menuzord-menu-skins" href="<?php echo base_url(); ?>assets/css/menuzord-skins/menuzord-boxed.css"
+    rel="stylesheet" />
 
 
 
@@ -86,7 +87,8 @@
 
   <link href="<?php echo base_url(); ?>assets/js/revolution-slider/css/layers.css" rel="stylesheet" type="text/css" />
 
-  <link href="<?php echo base_url(); ?>assets/js/revolution-slider/css/navigation.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo base_url(); ?>assets/js/revolution-slider/css/navigation.css" rel="stylesheet"
+    type="text/css" />
 
 
 
@@ -142,13 +144,14 @@
 
       <!-- Header News -->
       <div class="header-top d-none_mobile">
-        <?php 
-          if(isset($news_feed)){
+        <?php
+        if (isset($news_feed)) {
         ?>
         <div class="container news_fes_p_cus">
           <div class="d-flex align-items-cencer">
             <div class="news-title">
-              <h4 class="mt-0 line-height-1 mb-0">News <span class="text-theme-colored2"> Feed</span> <img src="https://iipars.com/assets/img/arrow.gif"></h4>
+              <h4 class="mt-0 line-height-1 mb-0">News <span class="text-theme-colored2"> Feed</span> <img
+                  src="https://iipars.com/assets/img/arrow.gif"></h4>
             </div>
             <div id="newsTicker" class="accounceBox ticker">
               <ul>
@@ -159,30 +162,33 @@
 
 
 
-                ?>
+                  ?>
 
-                  <li>
+                <li>
 
-                    <?php
+                  <?php
 
-                    if ($row->image == '') {
-
-
+                      if ($row->image == '') {
 
 
 
-                    ?>
-
-                      <a href="<?php echo $row->description; ?>" target="_blank"><?php echo $row->title; ?><img src="<?php echo base_url(); ?>assets/img/new.gif" class="new_gif_class"></a>
-
-                    <?php } else { ?>
 
 
-                      <a download href=" <?php echo base_url(); ?>assets/upload/news_feed/<?php echo $row->image ?>" target="_blank"><?php echo $row->title; ?><img src="<?php echo base_url(); ?>assets/img/new.gif" class="new_gif_class"></a>
+                      ?>
 
-                    <?php } ?>
+                  <a href="<?php echo $row->description; ?>" target="_blank"><?php echo $row->title; ?><img
+                      src="<?php echo base_url(); ?>assets/img/new.gif" class="new_gif_class"></a>
 
-                  </li>
+                  <?php } else { ?>
+
+
+                  <a download href=" <?php echo base_url(); ?>assets/upload/news_feed/<?php echo $row->image ?>"
+                    target="_blank"><?php echo $row->title; ?><img src="<?php echo base_url(); ?>assets/img/new.gif"
+                      class="new_gif_class"></a>
+
+                  <?php } ?>
+
+                </li>
 
 
 
@@ -209,7 +215,7 @@
           </div>
 
         </div>
-        <?php }?>                
+        <?php } ?>
       </div>
 
 
@@ -274,15 +280,19 @@
 
             <div class="col-xs-12 col-sm-12 col-md-3">
 
-              <a class="menuzord-brand pull-left flip sm-pull-center" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/new-aeducation-logo.png" alt=""></a>
+              <a class="menuzord-brand pull-left flip sm-pull-center" href="<?php echo base_url(); ?>"><img
+                  src="<?php echo base_url(); ?>assets/images/new-aeducation-logo.png" alt=""></a>
 
             </div>
 
             <div class="col-xs-12 col-sm-4 col-md-9 text-ali-rt text-ce-res">
 
               <div class="hed-cont widget mt-10 mb-10 m-0 res-none">
-                <a class="btn mt-10 trans-btn" href="https://web.whatsapp.com/send?phone=9547046102&amp;text=Hi, I am interested in one of your courses. Reply me back to help me with further enquiry." target="_blank">
-                  <!-- <i class="fa fa-lg fa-mobile text-primary" aria-hidden="true"></i> --><img src="<?php echo base_url(); ?>assets/images/whatsapp-M.png" alt="Whatsapp" style="height: 16px">
+                <a class="btn mt-10 trans-btn"
+                  href="https://web.whatsapp.com/send?phone=9547046102&amp;text=Hi, I am interested in one of your courses. Reply me back to help me with further enquiry."
+                  target="_blank">
+                  <!-- <i class="fa fa-lg fa-mobile text-primary" aria-hidden="true"></i> --><img
+                    src="<?php echo base_url(); ?>assets/images/whatsapp-M.png" alt="Whatsapp" style="height: 16px">
                   WhatsApp
                 </a>
               </div>
@@ -291,7 +301,8 @@
 
               <div class="hed-cont widget mt-10 mb-10 m-0 res-none">
 
-                <a class="btn mt-10 trans-btn" href="#"><i class="fa fa-lg fa-envelope-o text-primary" aria-hidden="true"></i><?php echo @$contact[0]->primary_email; ?></a>
+                <a class="btn mt-10 trans-btn" href="#"><i class="fa fa-lg fa-envelope-o text-primary"
+                    aria-hidden="true"></i><?php echo @$contact[0]->primary_email; ?></a>
 
                 <!-- <i class="fa fa-lg fa-envelope-o text-theme-colored2 font-25 mt-5 mr-sm-0 sm-display-block pull-left flip sm-pull-none"></i>
 
@@ -303,7 +314,8 @@
 
               <div class="hed-cont widget mt-10 mb-10 m-0 res-none">
 
-                <a class="btn mt-10 trans-btn" href="#"><i class="fa fa-lg fa-mobile text-primary" aria-hidden="true"></i><?php echo @$contact[0]->contact_no; ?></a>
+                <a class="btn mt-10 trans-btn" href="#"><i class="fa fa-lg fa-mobile text-primary"
+                    aria-hidden="true"></i><?php echo @$contact[0]->contact_no; ?></a>
 
                 <!-- <i class="fa fa-lg fa-mobile text-theme-colored2 font-25 mt-5 mr-sm-0 sm-display-block pull-left flip sm-pull-none"></i>
 
@@ -327,15 +339,16 @@
 
               ?>
 
-                <div class="hed-cont widget mt-10 mb-10 m-0 login_p_cus_mobile">
+              <div class="hed-cont widget mt-10 mb-10 m-0 login_p_cus_mobile">
 
-                  <a class="btn mt-10 btn-success" href="<?php echo $this->url->link(2); ?>"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+                <a class="btn mt-10 btn-success" href="<?php echo $this->url->link(2); ?>"><i class="fa fa-sign-in"
+                    aria-hidden="true"></i> Login</a>
 
-                  <!-- <i class="fa fa-user-o text-theme-colored2 font-25 mt-5 mr-sm-0 sm-display-block pull-left flip sm-pull-none" aria-hidden="true"></i>
+                <!-- <i class="fa fa-user-o text-theme-colored2 font-25 mt-5 mr-sm-0 sm-display-block pull-left flip sm-pull-none" aria-hidden="true"></i>
 
               <h5 class="font-13 text-black m-0"><a href="#" class="log-sty"> Login</a></h5> -->
 
-                </div>
+              </div>
 
               <?php }
 
@@ -351,33 +364,36 @@
 
 
 
-                <div class="hed-cont widget mt-10 mb-10 m-0">
+              <div class="hed-cont widget mt-10 mb-10 m-0">
 
-                  <div class="dropdown">
+                <div class="dropdown">
 
-                    <a class="btn mt-10 trans-btn dropdown-toggle" href="javascript:void(0)" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-o" aria-hidden="true"></i>Hi <?php echo @$login_avail[0]->first_name; ?><span class="caret"></span></a>
+                  <a class="btn mt-10 trans-btn dropdown-toggle" href="javascript:void(0)" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-o"
+                      aria-hidden="true"></i>Hi <?php echo @$login_avail[0]->first_name; ?><span
+                      class="caret"></span></a>
 
-                    <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 					Dropdown button
 
 				  </button> -->
 
-                    <div class="dropdown-menu nw-drop-menu" aria-labelledby="dropdownMenuButton">
+                  <div class="dropdown-menu nw-drop-menu" aria-labelledby="dropdownMenuButton">
 
-                      <a class="dropdown-item" href="<?php echo $this->url->link(4); ?>">My Account</a>
+                    <a class="dropdown-item" href="<?php echo $this->url->link(4); ?>">My Account</a>
 
-                      <a class="dropdown-item" href="<?php echo $this->url->link(5); ?>">Profile Update</a>
+                    <a class="dropdown-item" href="<?php echo $this->url->link(5); ?>">Profile Update</a>
 
-                      <a class="dropdown-item" href="<?php echo $this->url->link(8); ?>">My Plan</a>
+                    <a class="dropdown-item" href="<?php echo $this->url->link(8); ?>">My Plan</a>
 
-                      <a class="dropdown-item" href="<?php echo $this->url->link(6); ?>">Logout</a>
-
-                    </div>
+                    <a class="dropdown-item" href="<?php echo $this->url->link(6); ?>">Logout</a>
 
                   </div>
 
                 </div>
+
+              </div>
 
 
 
@@ -428,56 +444,68 @@
                 <li><a href="<?php echo $this->url->link(1); ?>">Home</a></li>
 
                 <li><a href="<?php echo base_url(); ?>about_us">About Us</a></li>
-                <li class="active"><a href="//">UGC - NET</a>
-                  <ul class="dropdown" aria-labelledby="dropdownMenu1">
-                    
-                <li><h4 style="padding-left: 22px;">Subjects<!--  - Subjects --></h4></li>
-                
-                <li><a href="#">Bengali</a></li>
-                <li><a href="#">Commerce</a></li>
-                <li><a href="#">Sanskrit</a></li>
-                <li><a href="#">Philosophy</a></li>
-                <li><a href="#">Economics</a></li>
-                <li><a href="#">Geography</a></li>
-                <li><a href="#">History</a></li>
-                <li><a href="#">English</a></li>
-                <li><a href="#">Education</a></li>
 
-                <li><a href="#"><h4 class="m-0">Paper – I</h4></a>
 
-                     <ul class="dropdown" aria-labelledby="dropdownSubMenu1">
-                      <li><h4 style="padding-left: 22px;">Units</h4></li>
-                      <li role="separator" class="divider bg-dark" style="height: 1px; background: #ccc;"></li>
-                      <li><a href="#">Unit - 1</a>
+                <li><a href="#">UGC - NET</a>
+                  
+                  <ul class="dropdown">
+                    <?php
+                      foreach ($subjects as $subject) {
+                    ?>
+                      
+                      <li><a href="#">
+                          <?php
+                            echo $subject->paper_name=='PAPER - I'?'<h4 class="m-0">Paper – I</h4>':$subject->paper_name;
+                          ?>
+                            
+                          <span class="indicator"><i class="fa fa-angle-right"></i></span>
+                        </a>
+  
+                        <ul class="dropdown" aria-labelledby="dropdownSubMenu1" style="">
+                          <li>
+                            <h4 style="padding-left: 22px;">Units</h4>
+                          </li>
+                          <li role="separator" class="divider bg-dark" style="height: 1px; background: #ccc;"></li>
+                          <?php
+                            $units=$this->teachinns_home_model->getPaperUnits(1,$subject->id);
+                                  
+                            
+                            foreach ($units as $unit) {
+                          ?>
 
-                       <ul class="dropdown" aria-labelledby="dropdownSubMenu2">
-                        <li><a href="#">PDF</a>
-                          <ul class="dropdown" aria-labelledby="dropdownSubMenu3">
-                            <li><a href="#">Order Now</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="#">PPT</a></li>
-                        <li><a href="#">PYQ</a></li>
-                        <li><a href="#">Mock Test</a></li>
-                      </ul>
+                         
+                          <li>
+                            <a href="#">
+                              <?= $unit->subject_name;?>
+                            </a>
+                            <ul class="dropdown" aria-labelledby="dropdownSubMenu2" style="">
+                              <?php 
+                                $course=$this->teachinns_home_model->getCourseInfo(1,$subject->id);
+                                
+                                $slug=$course->slug;
+                                if($unit->is_preview==1){
+                              ?>
 
-                    </li>
-                    <li><a href="#">Unit - 2</a></li>
-                    <li><a href="#">Unit - 3</a></li>
-                    <li><a href="#">Unit - 4</a></li>
-                    <li><a href="#">Unit - 5</a></li>
-                    <li><a href="#">Unit - 6</a></li>
-                    <li><a href="#">Unit - 7</a></li>
-                    <li><a href="#">Unit - 8</a></li>
-                    <li><a href="#">Unit - 9</a></li>
-                    <li><a href="#">Unit - 10</a></li>
+                              <li><a href="<?= base_url()?>ugcnet/course/<?= $slug.'/'.$unit->subject_name.'/preview';?>">Preview</a>
+                              </li>
+                              <?php }else{ ?>    
+                              <!--/course/{exam}/{slug} -->
+                              <li><a href="<?= base_url()?>ugcnet/course/<?= $slug.'/'.$unit->subject_name ;?>">Order Now</a>
+                              </li>
+                              <?php }?>
+                            </ul>  
+                          </li>
+                          <?php }?>
+                         
+                        </ul>
+  
+                      </li>
+                    <?php }?>
+                   
                   </ul>
-
                 </li>
-              </ul>
 
-            </li>
-            <li><a href="#">Economics</a></li>
+                <li><a href="#">Economics</a></li>
 
 
                 <li><a href="<?php echo base_url(); ?>Manage_research/all">Writing Consultancy</a>
@@ -508,28 +536,9 @@
 
                     <li><a href="<?php echo base_url(); ?>Manage_research/data_analysis">Data Analysis & Research
                         Methodology</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
                   </ul>
-
-
-
-
-
-
-
                 </li>
+
 
                 <li><a href="<?php echo base_url(); ?>Manage_self_book_publication">Book Publication</a>
 
@@ -541,13 +550,15 @@
                     <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/publication_consultacy">Book
                         Publication Consultancy</a></li>
 
-                    <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/thesis_publication">Thesis to Book
+                    <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/thesis_publication">Thesis to
+                        Book
                         Publication</a></li>
 
                     <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/dissertation_publication">M.Phil.
                         Dissertation to Book Publication</a></li>
 
-                    <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/project_work_book">Project Work to
+                    <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/project_work_book">Project Work
+                        to
                         Book Publication</a></li>
 
                   </ul>

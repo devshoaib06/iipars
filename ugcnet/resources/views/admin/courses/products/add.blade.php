@@ -245,7 +245,7 @@
                                                                     </span>
                                                                     @endif
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group hide">
                                                                     <label class="control-label">No of Students. </label>
                                                                     <input type="text"  name="no_of_students" id="no_of_students" class="form-control" value="{{ old('no_of_students') }}"/> 
                                                                     @if ($errors->has('no_of_students'))
@@ -355,7 +355,7 @@
                                                                             <input id="featured-inline-radio2" type="radio" value="0" name="is_popular"> No</label>
                                                                     </div>
                                                                 </div> 
-																<div class="form-group">
+																<div class="form-group hide">
                                                                     <label class="ccontrol-label">Is Combo Course <span class="required"> * </span></label>
                                                                     <div class="radio-list">
                                                                         <label class="radio-inline" for="combo-course-inline-radio1">
@@ -364,7 +364,7 @@
                                                                             <input id="combo-course-inline-radio2" type="radio" value="0" name="is_combo" checked="checked" > No</label>
                                                                     </div>
                                                                 </div> 
-                                                                <div class="form-group">
+                                                                <div class="form-group ">
                                                                     <label class="ccontrol-label">Is Preview  <span class="required"> * </span></label>
                                                                     <div class="radio-list">
                                                                         <label class="radio-inline" for="preview-inline-radio1">
@@ -373,7 +373,7 @@
                                                                             <input id="preview-inline-radio2" type="radio" value="0" name="is_preview" checked > No</label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group hide">
                                                                     <label class="ccontrol-label">Show on Home slider <span class="required"> * </span></label>
                                                                     <div class="radio-list">
                                                                         <label class="radio-inline" for="homeslider-inline-radio5">
@@ -382,7 +382,7 @@
                                                                             <input id="homeslider-inline-radio6" type="radio" value="0" name="home_slider" checked="checked"> No</label>
                                                                     </div>
                                                                 </div> 
-                                                                <div class="form-group">
+                                                                <div class="form-group hide">
                                                                     <label class="ccontrol-label">Will Reseller Charge apply ?  <span class="required"> * </span></label>
                                                                     <div class="radio-list">
                                                                         <label class="radio-inline" for="reseller-inline-radio5">
@@ -749,20 +749,30 @@
                     let paperhtml='<label class="control-label">Paper</label>';
                         paperhtml+='<span class="required" aria-required="true"> * </span>';
                         paperhtml+='<div class="check-list ">';
-                    $.each(response,function(key,res){
                         paperhtml+='<div class="paper-sub-section">';
-                        paperhtml+='<label class="check-inline" for="example-inline-check-'+key+'-'+res.paper_id+'">';
-                        //paperhtml+='<div class="checker" id="example-inline-check-'+key+'"><span>';
-                        paperhtml+='<input id="example-inline-check-'+key+'-'+res.paper_id+'" class="paper_check" type="checkbox" value="'+res.paper_id+'" name="paper_list[]">';
-                        //paperhtml+='</span></div>';
-                        paperhtml+=' '+res.paper_name;
-                        paperhtml+='</label>';
-                        paperhtml+='<div class="material-section"></div>';
-                        //paperhtml+='<label class="control-label">Subject</label>';
-                        paperhtml+='<div class="subject-section"></div>';
-                        paperhtml+='</div>';
+                        paperhtml+='<select name="paper_list[]" id="paper_id" class="form-control">';
+                        paperhtml+='<option value="">Select Paper</option>';
+                        $.each(response,function(key,res){
+                            paperhtml+='<option value="'+res.paper_id+'">'+res.paper_name+'</option>';
+                        })
+                        paperhtml+='</select>';
                         
-                    })
+                        // $.each(response,function(key,res){
+                        //     paperhtml+='<div class="paper-sub-section">';
+                        //     paperhtml+='<label class="check-inline" for="example-inline-check-'+key+'-'+res.paper_id+'">';
+                        //     //paperhtml+='<div class="checker" id="example-inline-check-'+key+'"><span>';
+                        //     paperhtml+='<input id="example-inline-check-'+key+'-'+res.paper_id+'" class="paper_check" type="checkbox" value="'+res.paper_id+'" name="paper_list[]">';
+                        //     //paperhtml+='</span></div>';
+                        //     paperhtml+=' '+res.paper_name;
+                        //     paperhtml+='</label>';
+                        //     //paperhtml+='<label class="control-label">Subject</label>';
+                        //     paperhtml+='<div class="material-section"></div>';
+                        //     paperhtml+='<div class="subject-section"></div>';
+                        //     paperhtml+='</div>';
+                            
+                        // })
+                        paperhtml+='<div class="subject-section"></div>';
+                        paperhtml+='<div class="material-section"></div>';
                         paperhtml+='</div>';
                                                                     
                     $("#paper-section").html(paperhtml);                                      
@@ -771,7 +781,7 @@
 
       
         })
-        $(document).on('click','.paper_check',function(){
+        $(document).on('change','#paper_id',function(){
             var $this=$(this);
             let exam_id=$("#exam_id").val();
             let paper_id=$(this).val();
@@ -779,18 +789,20 @@
                 exam_id:exam_id,
                 paper_id:paper_id
             }
+            debugger
             let url="{{route('ajaxAddCourseExamPaperMaterial')}}"
             $this.parents('.paper-sub-section').find('.material-section').html('');
             $this.parents('.paper-sub-section').find('.subject-section').html('');
 
-            if($(this).is(":checked")){
+            //if($(this).is(":checked")){
                 $.post(url,data,function(response){
                     
 
                     if ( response.length != 0 ){
                         let paperhtml='';
-                            paperhtml='<div class="check-list paper-material-list">';
-                            paperhtml='<div class="check-list paper-material-list">';
+                            
+                            paperhtml+='<div class="check-list paper-material-list">';
+                            paperhtml+='<label class="control-label subject-info">Materials <span class="required"> * </span></label>';
                             paperhtml+='<label class="check col-sm-12" for="example-check-all-'+paper_id+'">';
                             paperhtml+='<input id="example-check-all-'+paper_id+'" class="material-list-all-check" type="checkbox" value="1" name="all_material'+paper_id+'[]">';
                             paperhtml+=' All '
@@ -815,8 +827,8 @@
                         });                                           
                                                                    
                             subjecthtml+= '</div>'
-                            subjecthtml+= '</div>'; 
-                                                                        
+                            
+
                             $this.parents('.paper-sub-section').find('.material-section').html(paperhtml);   
                             $this.parents('.paper-sub-section').find('.subject-section').html(subjecthtml);   
                             $this.parents('.paper-sub-section').find('.material-section').find('input.material-list-check').prop('checked',true);                                   
@@ -824,7 +836,7 @@
                     }
                     
                 })  
-            }    
+            //}    
       
         })
 

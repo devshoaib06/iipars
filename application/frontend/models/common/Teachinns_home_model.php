@@ -1,890 +1,190 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class teachinns_home_model extends CI_Model {
+class teachinns_home_model extends CI_Model
+{
 	public $db2;
-    
-    function __construct()
-    {
-        // Call the Model constructor
-        parent::__construct();
-		$this->db2=$this->load->database('database2', TRUE);
-    }
 
-	public function common($table_name='',$field=array(),$where=array(),$where_or=array(),$like=array(),$like_or=array(),$order=array(),$start='',$end='',$where_in_array=array())
+	function __construct()
+	{
+		// Call the Model constructor
+		parent::__construct();
+		$this->db2 = $this->load->database('database2', TRUE);
+	}
+
+	public function common($table_name = '', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '', $where_in_array = array())
 	{
 		// echo "<pre>";
 		// print_r($this->db2);
 		// die;
-		if(trim($table_name))
-		{
-			if(count($field)>0)
-			{
-				 $field=implode(',',$field);
+		if (trim($table_name)) {
+			if (count($field) > 0) {
+				$field = implode(',', $field);
+			} else {
+				$field = '*';
 			}
-			else
-			{
-				$field='*';
-			}
-			
-			$this->db2->select($field);  
-			$this->db2->from($table_name); 
-			
-			if(count($where)>0)
-			{
-			
-				foreach($where as $key=>$val)
-				{
-					if(trim($val))
-					{
-						$this->db2->where($key,$val);
-					} 
-				}
-			
-			}
-			
-			
-			if(count($where_or)>0)
-			{
-				foreach($where_or as $key=>$val)
-				{
-					
-				
-					if(trim($val))
-					{
-							
-						$this->db2->or_where($key,$val);
-					} 
-				}
-			}
-			
-			if(count($order)>0)
-			{
-			
-				foreach($order as $key=>$val)
-				{
-					if(trim($val))
-					{
-						$this->db2->order_by($key,$val);
-					} 
-				}
-			
-			}
-			
-			if(count($like)>0)
-			{
-			
-				foreach($like as $key=>$val)
-				{
-					if(trim($val))
-					{
-					   $this->db2->like($key,$val);
-					 
-					} 
-				}
-			
-			}
-			
-			
-			if($end)
-			{
 
-				$this->db2->limit($end,$start);
+			$this->db2->select($field);
+			$this->db2->from($table_name);
+
+			if (count($where) > 0) {
+
+				foreach ($where as $key => $val) {
+					if (trim($val)) {
+						$this->db2->where($key, $val);
+					}
+				}
 			}
-			
-			if(count($where_in_array)>0)
-			{
-				
+
+
+			if (count($where_or) > 0) {
+				foreach ($where_or as $key => $val) {
+
+
+					if (trim($val)) {
+
+						$this->db2->or_where($key, $val);
+					}
+				}
+			}
+
+			if (count($order) > 0) {
+
+				foreach ($order as $key => $val) {
+					if (trim($val)) {
+						$this->db2->order_by($key, $val);
+					}
+				}
+			}
+
+			if (count($like) > 0) {
+
+				foreach ($like as $key => $val) {
+					if (trim($val)) {
+						$this->db2->like($key, $val);
+					}
+				}
+			}
+
+
+			if ($end) {
+
+				$this->db2->limit($end, $start);
+			}
+
+			if (count($where_in_array) > 0) {
+
 				$this->db2->where_in('user_id', $where_in_array);
 			}
-			 
+
 			$query = $this->db2->get();
-			$resultResponse=$query->result();
+			$resultResponse = $query->result();
 			return $resultResponse;
-					
-			}
-			else
-			{
-					 echo 'Table name should not be empty';exit;
-			}
-	
-	   }
-
-		public function sum($table_name='',$field_name='',$where=array(),$where_or=array(),$start='',$end='')
-		{
-			if(trim($field_name) && trim($table_name) )
-			{
-				$this->db->select_sum($field_name);
-				$this->db->from($table_name);
-			 
-			if(count($where)>0)
-			{
-			
-				foreach($where as $key=>$val)
-				{
-					if(trim($val))
-					{
-						$this->db->where($key,$val);
-					} 
-				}
-			
-			}
-			    $query = $this->db->get();
-				$resultResponse=$query->result();
-			    return $resultResponse;
-			}
-			else 
-			{
-				echo 'Opps!something went wrong';
-			}
+		} else {
+			echo 'Table name should not be empty';
+			exit;
 		}
-	
-	
-function subject()  
-{  
-    //$this->db->select('DISTINCT(subject_name)'); 
-   	$this->db->select('*');
-	//$this->db->group_by('subject_name'); 
-	$this->db->from('tbl_subject');  
-  
-   $query=$this->db->get();  
-   return $query->result();
+	}
 
+	public function sum($table_name = '', $field_name = '', $where = array(), $where_or = array(), $start = '', $end = '')
+	{
+		if (trim($field_name) && trim($table_name)) {
+			$this->db->select_sum($field_name);
+			$this->db->from($table_name);
 
-}
+			if (count($where) > 0) {
 
-function preffered_location($adds_type)  
-{  
-    $this->db->select('*');
-	$this->db->group_by('area'); 
-	$this->db->from('tbl_address');
-	$this->db->where('address_type',$adds_type);
-
-
-   $query=$this->db->get();  
-   return $query->result();  
-}
-
-function teacher_search($value)  
-{  
-    
-   	$this->db->select('*');
-	$this->db->group_by('subject_name'); 
-	$this->db->from('tbl_subject'); 
-	$this->db->where('status','active'); 
-	
-	$this->db->like('subject_name',$value); 
-  
-   	$query=$this->db->get();  
-   	return $query->result();
-
-
-}
-
-
-function search_by_loc_sub($location,$subject)  
-{  
-    
-   
-   
-   	$this->db->select('*');
-	$this->db->group_by('tu.id'); 
-	$this->db->from('tbl_user tu'); 
-	$this->db->join('tbl_address ta','ta.user_id=tu.id','left');
-    $this->db->join('tbl_tutor_subject tts','tts.user_id=tu.id','left');
-    $this->db->join('tbl_subject ts','ts.id=tts.subject_id','left');
-    if($location!="" && $subject=="") 
-    { 
-    	$this->db->where('ta.area',$location);
-    }
-    if($subject!="" && $location=="") 
-    {
-    	$this->db->where('ts.subject_name',$subject);
-    }
-    if($location!="" && $subject!="") 
-    { 
-         $this->db->where('ta.area',$location);
-         $this->db->where('ts.subject_name',$subject);
-    }
-    $query=$this->db->get();  
-   	return $query->result();
-   	}
-	
-
-function search_by_loc_sub_pagination($location,$subject,$page,$per_page)  
-{  
-    
-   	$this->db->select('*');
-	$this->db->group_by('tu.id'); 
-	$this->db->from('tbl_user tu'); 
-	$this->db->join('tbl_address ta','ta.user_id=tu.id','left');
-    $this->db->join('tbl_tutor_subject tts','tts.user_id=tu.id','left');
-    $this->db->join('tbl_subject ts','ts.id=tts.subject_id','left');
-	
-	$this->db->where('ta.area',$location);
-	$this->db->or_where('ts.subject_name',$subject); 
-	//$this->db->like('ta.area',$location);
-	//$this->db->or_like('ts.subject_name',$subject); 
-	$this->db->limit($per_page,$page);
-  
-  
-   	$query=$this->db->get();  
-   	return $query->result();
-
-
-}
-
-function fetch_first($table,$columname)
-    {
-         $this->db->select_min($columname);
-         $this->db->from($table);
-         $query = $this->db->get();
-         return $query->result();
-    }
-
-function convert_number($number) {
-		if (($number < 0) || ($number > 999999999)) {
-			throw new Exception("Number is out of range");
-		}
-
-		$Gn = floor($number / 1000000);
-		/* Millions (giga) */
-		$number -= $Gn * 1000000;
-		$kn = floor($number / 1000);
-		/* Thousands (kilo) */
-		$number -= $kn * 1000;
-		$Hn = floor($number / 100);
-		/* Hundreds (hecto) */
-		$number -= $Hn * 100;
-		$Dn = floor($number / 10);
-		/* Tens (deca) */
-		$n = $number % 10;
-		/* Ones */
-
-		$res = "";
-
-		if ($Gn) {
-			$res .= $this->convert_number($Gn) .  "Million";
-		}
-
-		if ($kn) {
-			$res .= (empty($res) ? "" : " ") .$this->convert_number($kn) . " Thousand";
-		}
-
-		if ($Hn) {
-			$res .= (empty($res) ? "" : " ") .$this->convert_number($Hn) . " Hundred";
-		}
-
-		$ones = array("", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eightteen", "Nineteen");
-		$tens = array("", "", "Twenty", "Thirty", "Fourty", "Fifty", "Sixty", "Seventy", "Eigthy", "Ninety");
-
-		if ($Dn || $n) {
-			if (!empty($res)) {
-				$res .= " and ";
-			}
-
-			if ($Dn < 2) {
-				$res .= $ones[$Dn * 10 + $n];
-			} else {
-				$res .= $tens[$Dn];
-
-				if ($n) {
-					$res .= "-" . $ones[$n];
+				foreach ($where as $key => $val) {
+					if (trim($val)) {
+						$this->db->where($key, $val);
+					}
 				}
 			}
+			$query = $this->db->get();
+			$resultResponse = $query->result();
+			return $resultResponse;
+		} else {
+			echo 'Opps!something went wrong';
 		}
-
-		if (empty($res)) {
-			$res = "zero";
-		}
-
-		return $res;
 	}
 
 
-
-
-
-
-
-
-//*************************************** for kinzee product list *************************************************
-	function product_list_total_row($data)
+	public function subjects()
 	{
-		$parent_category_id=@$data['parent_category_id'];
-		$sub_category_id=@$data['sub_category_id'];
-		$category_id=@$data['category_id'];
-		
+		//$this->db->select('DISTINCT(subject_name)'); 
+		//echo "<pre>";
+		//print_r($this->db2);die;
+		$this->db2->select('*');
+		//$this->db->group_by('subject_name'); 
+		$this->db2->from('paper_masters');
+		$this->db2->where('status', 1);
 
-		$this->db->select('*');
-		$this->db->from('tbl_product p');
-		$this->db->join('tbl_category c','c.category_id=p.cat_id');
-		if($parent_category_id!="" && ($sub_category_id=="" && $category_id==""))
-		{
-			$this->db->where('c.parent_category',$parent_category_id);
-		}
-		if($sub_category_id!="" && $category_id=="")
-		{
-			$this->db->where('c.sub_category',$sub_category_id);
-		}
-		if($category_id!="")
-		{
-			$this->db->where('c.category_id',$category_id);
-		}
-		
-		$this->db->where('p.status ','Active');
-		$this->db->order_by('c.category_id','desc');
-		
-		$query=$this->db->get();
+
+		$query = $this->db2->get();
 		return $query->result();
 	}
-
-	function product_list_by_category($data,$page,$per_page)
+	public function units()
 	{
-		$parent_category_id=@$data['parent_category_id'];
-		$sub_category_id=@$data['sub_category_id'];
-		$category_id=@$data['category_id'];
-		
 
-		$this->db->select('*');
-		$this->db->from('tbl_product p');
-		$this->db->join('tbl_category c','c.category_id=p.cat_id');
-		if($parent_category_id!="" && ($sub_category_id=="" && $category_id==""))
-		{
-			$this->db->where('c.parent_category',$parent_category_id);
-		}
-		if($sub_category_id!="" && $category_id=="")
-		{
-			$this->db->where('c.sub_category',$sub_category_id);
-		}
-		if($category_id!="")
-		{
-			$this->db->where('c.category_id',$category_id);
-		}
-		
-		$this->db->where('p.status ','Active');
-		$this->db->order_by('c.category_id','desc');
-		$this->db->limit($per_page,$page);
-		
-		$query=$this->db->get();
+		$this->db2->select('*');
+		//$this->db->group_by('subject_name'); 
+		$this->db2->from('subject_masters');
+		$this->db2->where('status', 1);
+
+
+		$query = $this->db2->get();
 		return $query->result();
 	}
-
-	function product_list_by_brand_home($data,$page,$per_page)
+	public function subjectUnits($subject_id)
 	{
-		$this->db->select('*');
-		$this->db->from('tbl_product');
-		$this->db->where('brand_id ',$data);
-		$this->db->where('status ','Active');
-		
-		$this->db->limit($per_page,$page);
-		
-		$query=$this->db->get();
+		// echo "<pre>";
+		// print_r($subject_id);die;
+		$this->db2->select('*');
+		$this->db2->from('paper_masters');
+		$this->db2->where('status', 1);
+
+
+		$query = $this->db2->get();
 		return $query->result();
 	}
-
-
-	function sale_product_by_category_home($cat_id,$start,$end)
+	public function subjectUnitMaterial($subject_id)
 	{
-		
-		
-
-		$this->db->select('*');
-		$this->db->from('tbl_product p');
-		$this->db->join('tbl_category c','c.category_id=p.cat_id');
-		//$this->db->join('tbl_product_image pi','pi.product_id=p.id');
-		$this->db->where('c.parent_category',$cat_id);
-		$this->db->where('p.discount !=','');	
-		$this->db->order_by('p.discount','desc');	
-		$this->db->where('p.status ','Active');
-		$this->db->limit($end,$start);
-	
-		$query=$this->db->get();
-		return $query->result();
-	}
-
-	function product_list_by_material($material_id,$data)
-	{
+		// echo "<pre>";
+		// print_r($subject_id);die;
+		$this->db2->select('*');
+		$this->db2->from('paper_masters');
+		$this->db2->where('status', 1);
 
 
-		$parent_category_id=@$data['parent_category_id'];
-		$sub_category_id=@$data['sub_category_id'];
-		$category_id=@$data['category_id'];
-
-		
-		$this->db->select('*');
-		$this->db->from('tbl_material m');
-		$this->db->join('tbl_product p','p.material_id=m.id');
-		$this->db->join('tbl_category c','c.category_id=p.cat_id');
-		if(count($material_id)>0)
-        {
-
-            $this->db->where_in('p.material_id',$material_id);
-        }
-		
-		if($parent_category_id!="" && ($sub_category_id=="" && $category_id==""))
-		{
-			$this->db->where('c.parent_category',$parent_category_id);
-		}
-		if($sub_category_id!="" && $category_id=="")
-		{
-			
-			$this->db->where('c.sub_category',$sub_category_id);
-		}
-		if($category_id!="")
-		{
-			
-			$this->db->where('c.category_id',$category_id);
-		}
-			
-		
-	
-		
-		
-		$this->db->where('p.status ','Active');
-		
-		
-		$query=$this->db->get();
+		$query = $this->db2->get();
 		return $query->result();
 	}
 
 
 
-	function product_by_material_in_search($material_id,$cat_id,$pro_name)
+	public function getCourseInfo($exam_id = 1, $paper_id)
 	{
+		$this->db2->select('cepr.product_id,cepr.exam_id,cepr.paper_id,products.name,products.slug');
+		$this->db2->join('products','cepr.product_id=products.product_id');
+		$this->db2->from('course_exam_paper_relations as cepr');
+		$this->db2->where('exam_id', $exam_id);
+		$this->db2->where('paper_id', $paper_id);
 
-		
-		$this->db->select('*');
-		$this->db->from('tbl_product p');
-		
-		if(count($material_id)>0)
-        {
 
-            $this->db->where_in('p.material_id',$material_id);
-            
-        }
-        if($cat_id!=0)
-        {
+		$query = $this->db2->get();
+		return $query->row();
+	}
+	public function getPaperUnits($exam_id = 1, $paper_id)
+	{
+		$this->db2->select('cepsr.product_id,products.is_preview,cepsr.exam_id,cepsr.paper_id,products.name,products.slug,subject_masters.subject_name,cepsr.subject_id');
+		$this->db2->join('products','cepsr.product_id=products.product_id');
+		$this->db2->join('subject_masters','cepsr.subject_id=subject_masters.id');
+		$this->db2->from('course_exam_paper_subject_relations as cepsr');
+		$this->db2->where('cepsr.exam_id', $exam_id);
+		$this->db2->where('cepsr.paper_id', $paper_id);
+		$this->db2->order_by('subject_masters.id', 'asc');
 
-		 $this->db->where('p.cat_id',$cat_id);			
-        }
-        if($pro_name!='')
-        {
-        	$this->db->where('p.product_name',$pro_name);
-        }
-		
-           
-         $this->db->where('p.status ','Active');
-		
-		
-		$query=$this->db->get();
+		$query = $this->db2->get();
+		// print_r($query->result());die;
 		return $query->result();
 	}
-
-
-
-	function product_list_by_brand($brand_id,$data)
-	{
-
-
-		$parent_category_id=@$data['parent_category_id'];
-		$sub_category_id=@$data['sub_category_id'];
-		$category_id=@$data['category_id'];
-
-		
-		$this->db->select('*');
-		$this->db->from('tbl_brand b');
-		$this->db->join('tbl_product p','p.brand_id=b.brand_id');
-		$this->db->join('tbl_category c','c.category_id=p.cat_id');
-		if(count($brand_id)>0)
-        {
-
-            $this->db->where_in('p.brand_id',$brand_id);
-        }
-		
-		if($parent_category_id!="" && ($sub_category_id=="" && $category_id==""))
-		{
-			$this->db->where('c.parent_category',$parent_category_id);
-		}
-		if($sub_category_id!="" && $category_id=="")
-		{
-			
-			$this->db->where('c.sub_category',$sub_category_id);
-		}
-		if($category_id!="")
-		{
-			
-			$this->db->where('c.category_id',$category_id);
-		}
-			
-		
-	
-		
-		
-		$this->db->where('p.status ','Active');
-		
-		
-		$query=$this->db->get();
-		return $query->result();
-	}
-
-
-
-	function product_by_brand_in_search($brand_id,$cat_id,$pro_name)
-	{
-
-
-		
-		$this->db->select('*');
-		$this->db->from('tbl_product p');
-		
-		if(count($brand_id)>0)
-        {
-
-            $this->db->where_in('p.brand_id',$brand_id);
-            
-        }
-        if($cat_id!=0)
-        {
-
-		 $this->db->where('p.cat_id',$cat_id);			
-        }
-        if($pro_name!='')
-        {
-        	$this->db->where('p.product_name',$pro_name);
-        }
-		
-           
-         $this->db->where('p.status ','Active');
-		
-		
-		$query=$this->db->get();
-		return $query->result();
-	}
-
-
-
-
-	function product_list_by_price_range($low_price,$high_price,$data)
-	{
-
-		$parent_category_id=@$data['parent_category_id'];
-		$sub_category_id=@$data['sub_category_id'];
-		$category_id=@$data['category_id'];
-
-		$this->db->select('*');
-		$this->db->from('tbl_product p');
-		$this->db->join('tbl_category c','c.category_id=p.cat_id');
-		
-		
-		if($parent_category_id!="" && ($sub_category_id=="" && $category_id==""))
-		{
-			$this->db->where('c.parent_category',$parent_category_id);
-		}
-		if($sub_category_id!="" && $category_id=="")
-		{
-			
-			$this->db->where('c.sub_category',$sub_category_id);
-		}
-		if($category_id!="")
-		{
-			
-			$this->db->where('c.category_id',$category_id);
-		}
-		
-		
-		
-		$this->db->where('p.net_price >',$low_price);
-		$this->db->where('p.net_price <',$high_price);
-        
-		
-		$this->db->where('p.status ','Active');
-		
-		
-		$query=$this->db->get();
-		return $query->result();
-	}
-
-
-
-	function product_by_price_in_search($low_price,$high_price,$cat_id,$pro_name)
-	{
-		
-
-		$this->db->select('*');
-		$this->db->from('tbl_product p');
-
-		if($cat_id!=0)
-        {
-
-		 $this->db->where('p.cat_id',$cat_id);			
-        }
-        if($pro_name!='')
-        {
-        	$this->db->where('p.product_name',$pro_name);
-        }
-
-		$this->db->where('p.net_price >',$low_price);
-		$this->db->where('p.net_price <',$high_price);
-      		
-		$this->db->where('p.status ','Active');
-		
-		
-		$query=$this->db->get();
-		return $query->result();
-	}
-
-
-//*************************************** end *************************************************
-
-
-
-	function product_list_total($data,$page,$per_page)
-	{
-		$parent_category_id=@$data['parent_category_id'];
-		$sub_category_id=@$data['sub_category_id'];
-		$category_id=@$data['category_id'];
-		
-
-		$this->db->select('*');
-		$this->db->from('tbl_product p');
-		$this->db->join('tbl_category c','c.category_id=p.cat_id');
-		if($parent_category_id!="" && ($sub_category_id=="" && $category_id==""))
-		{
-			$this->db->where('c.parent_category',$parent_category_id);
-		}
-		if($sub_category_id!="" && $category_id=="")
-		{
-			$this->db->where('c.sub_category',$sub_category_id);
-		}
-		if($category_id!="")
-		{
-			$this->db->where('c.category_id',$category_id);
-		}
-		
-		$this->db->where('p.status ','Active');
-		$this->db->order_by('c.category_id','desc');
-		$this->db->limit($per_page,$page);
-		$query=$this->db->get();
-		return $query->result();
-	}
-
-
-	function product_list_total_by_brand($data,$brand_id)
-	{
-		$parent_category_id=@$data['parent_category_id'];
-		$sub_category_id=@$data['sub_category_id'];
-		$category_id=@$data['category_id'];
-		
-
-		$this->db->select('*');
-		$this->db->from('tbl_product p');
-		$this->db->join('tbl_category c','c.category_id=p.cat_id');
-		$this->db->join('tbl_brand b','p.brand_id=b.brand_id','left');
-		if($parent_category_id!="" && ($sub_category_id=="" && $category_id==""))
-		{
-			$this->db->where('c.parent_category',$parent_category_id);
-		}
-		if($sub_category_id!="" && $category_id=="")
-		{
-			$this->db->where('c.sub_category',$sub_category_id);
-		}
-		if($category_id!="")
-		{
-			$this->db->where('c.category_id',$category_id);
-		}
-		if($brand_id!="")
-		{
-			$this->db->where('p.brand_id',$brand_id);
-		}
-		
-		$this->db->where('p.status ','Active');
-		$this->db->order_by('c.category_id','desc');
-		
-		$query=$this->db->get();
-		return $query->result();
-	}
-
-
-
-
-
-	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	function all_parent_category()
-	{
-        $this->db->select('*');
-        $this->db->from('tbl_category c');
-        $this->db->where('c.parent_category','0');
-        $this->db->where('c.sub_category','0');
-		$this->db->where('c.status','active');
-        $this->db->order_by('c.category_sort_order','asc');
-        $query=$this->db->get();
-        return $query->result();
-    }
-    function all_sub_category($category_id)
-    {
-        $this->db->select('*');
-        $this->db->from('tbl_category c');
-		if($category_id!="")
-		{
-			$this->db->where('c.parent_category',$category_id);
-		}
-		else
-		{
-			$this->db->where('c.parent_category !=','0');
-		}
-        $this->db->where('c.sub_category','0');
-		$this->db->where('c.status','active');
-        $this->db->order_by('c.category_sort_order','asc');
-        $query=$this->db->get();
-        return $query->result();
-    }
-	function all_category($category_id)
-    {
-        $this->db->select('*');
-        $this->db->from('tbl_category c');
-		$this->db->where('c.parent_category !=','0');
-		if($category_id!="")
-		{
-			$this->db->where('c.sub_category',$category_id);
-		}
-		else
-		{
-			$this->db->where('c.sub_category !=','0');
-		}
-		$this->db->where('c.status','active');
-		$this->db->order_by('c.category_sort_order','asc');
-        $query=$this->db->get();
-        return $query->result();
-    }
-
-    public function check_book_availivity($time, $date)
-	{
-		$this->db->select('*');
-		$this->db->from('tbl_service_book');
-		$this->db->where('booking_date',$date);
-		$this->db->where('booking_time',$time);
-		$query = $this->db->get();
-		$resultResponse=$query->result();
-		return @$resultResponse;
-		
-	}
-
-	function get_plan($user_id)
-    {
-        $this->db->select('*');
-        $this->db->from('tbl_user_package tup');
-        $this->db->join('tbl_plan tp','tp.id=tup.plan_id');
-        $this->db->join('tbl_online_service tos','tos.id=tup.service_id');
-        $this->db->order_by('tup.id','desc');
-        $this->db->where('tup.user_id',$user_id);
-        $query=$this->db->get();
-        return $query->result();
-
-    }
-
-     function check_pickup_pin($pincode)
-    {
-    	$this->db->select('*');
-    	$this->db->from('table_ship_pin');
-    	$this->db->where('pincodes',$pincode);
-    	$this->db->where('pickup','Y');
-    	$query= $this->db->get();
-    	return $query->result();
-    }
-
-    function sales_history($saller_id)
-{
-	$this->db->select('*');
-	$this->db->from('tbl_order_details');
-	$this->db->where('product_seller_id', $saller_id);
-	$this->db->where('order_product_status', 'Delivered');
-	$this->db->order_by('order_details_id','DESC');
-	$query= $this->db->get();
-	return $query->result();
 }
-
-	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-
-function evafly_product_search($data,$product_name)
-	{
-		$parent_category_id=@$data['parent_category_id'];
-		$sub_category_id=@$data['sub_category_id'];
-		$category_id=@$data['category_id'];
-		
-
-		$this->db->select('*');
-		$this->db->from('tbl_product p');
-		$this->db->join('tbl_category c','c.category_id=p.cat_id');
-		if($parent_category_id!="" && ($sub_category_id=="" && $category_id==""))
-		{
-			$this->db->where('c.parent_category',$parent_category_id);
-		}
-		if($sub_category_id!="" && $category_id=="")
-		{
-			$this->db->where('c.sub_category',$sub_category_id);
-		}
-		if($category_id!="")
-		{
-			$this->db->where('c.category_id',$category_id);
-		}
-		
-		$this->db->where('p.status ','Active');
-		$this->db->order_by('c.category_id','desc');
-		$this->db->like('p.product_name',$product_name);
-		//$this->db->limit($per_page,$page);
-		
-		$query=$this->db->get();
-		return $query->result();
-	}
-
-	function fetch_all_guide($table,$limit,$start)
-    {
-        $this->db->limit($limit,$start);
-        $this->db->select('*');
-        $this->db->from($table);
-        $this->db->where('status','Active');
-        $this->db->where('user_type_id','3');
-         $this->db->where('admin_approve','Yes');
-        $this->db->order_by('user_id','random');
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-    function fetch_all_searchwise($destination, $location,$gender,$limit,$start)
-    {
-        $this->db->limit($limit,$start);
-        $this->db->select('*');
-        $this->db->from('tbl_user u');
-         $this->db->join('tbl_guide_details g','g.guide_id=u.user_id');
-         $this->db->where('u.user_type_id',3);
-
-         if($destination!="")
-
-         {
-        		  $this->db->like('g.destination',$destination);
-         }
-         if($location!="")
-
-         {
-                  $this->db->like('u.country',$location);
-          }
-
-
-         if($gender!="")
-
-         {
-
-                   $this->db->where('u.gender',$gender);
-
-         }
- $this->db->order_by('u.user_id','random');
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-}
-?>

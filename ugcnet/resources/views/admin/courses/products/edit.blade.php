@@ -95,9 +95,9 @@
                                     <button type="submit"  class="btn green" id="save-button">
                                         <i class="fa fa-check"></i> Save
                                     </button>
-                                    <button type="submit"  class="btn green" id="duplicate-button">
+                                    {{-- <button type="submit"  class="btn green" id="duplicate-button">
                                         <i class="fa fa-check"></i> Save & Duplicate
-                                    </button>
+                                    </button> --}}
                                     <!--<button class="btn green" id="save_and_duplicate">
                                         <i class="fa fa-check"></i> Save & Duplicate
                                     </button>-->
@@ -168,80 +168,72 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-                                                            {{-- <div class="form-group" >
-                                                                
-                                                            </div>   --}}
+                                                            <div class="form-group" id="paper-section">
+                                                                <label class="control-label">Paper <span class="required"> * </span></label>
+                                                                <select name="paper_list[]" id="paper_id" class="form-control">
+                                                                    <option value="">Select Paper</option>
+                                                                    @foreach($allPapers as $paper)   
+                                                                        <option value="{{$paper->paper_id}}" {{$relatedPapers[0]==$paper->paper_id?'selected':''}}>{{$paper->paper_name}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>  
                                                             <div class="form-group " id="paper-section">
-                                                                <label class="control-label prevpaper">Paper <span class="required"> * </span></label>
+                                                                
                                                                 <div class="check-list">
+                                                                    <div class="subject-section">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label subject-info">Unit <span class="required"> * </span></label>
+                                                                            <div class="radio-list subject-list">
+                                                                                @foreach ($allSubjects as $subject)
+                                                                                <label class="radio-inline" for="example-inline-radio{{$relatedPapers[0]}}-{{$subject->id}}">
+                                                                                    <input id="example-inline-radio{{$relatedPapers[0]}}-{{$subject->id}}" 
+                                                                                    type="checkbox" 
+                                                                                    value="{{$subject->id}}" 
+                                                                                    name="subject_list{{$relatedPapers[0]}}[]"
+                                                                                    {{@in_array($subject->id,$relatedSubjects[$relatedPapers[0]])?'checked':''}}
+                                                                                    
+                                                                                    >
+                                                                                {{$subject->subject_name}}
+                                                                                </label>
+                                                                                @endforeach
+                                                                           
+                                                                            </div>
+                                                                         </div>  
+                                                                    </div>
+                                                                    <div class="material-section">
+                                                                        <label class="control-label subject-info">Materials <span class="required"> * </span></label>
+                                                                        <div class="check-list paper-material-list">
+                                                                            
+                                                                            <label class="check col-sm-12" >
+                                                                                <input  
+                                                                                class="material-list-all-check" 
+                                                                                type="checkbox" 
+                                                                                value="1" 
+                                                                                name="all_material{{$relatedPapers[0]}}[]"
+                                                                                {{@in_array('1',$all_material_array[$relatedPapers[0]])?'checked':''}}
+                                                                                >All 
+                                                                            </label>
+                                                                            
+                                                                            @foreach ($related_materials as $key=>$material)
+                                                                            @if($relatedPapers[0]==$material['paper_id'])
+                                                                            
+                                                                                <label class="check col-sm-12" >
+                                                                                    <input  
+                                                                                    class="material-list-check" 
+                                                                                    type="checkbox" 
+                                                                                    value="{{$material['material_id']}}" 
+                                                                                    name="material_list{{$relatedPapers[0]}}[]"
+                                                                                    {{@in_array($material['material_id'],$selectedmaterials[$relatedPapers[0]])?'checked':''}}
+                                                                                    >{{$material['material_name']}}
+                                                                                </label>
+                                                                            @endif      
+                                                                        @endforeach
+                                                                        
+                                                                    </div>
                                                                     <?php
                                                                         
                                                                     ?>
-                                                                    @foreach ($allPapers as $paper)
-                                                                        <div class="paper-sub-section">
-                                                                        <label class="check-inline" for="example-radio{{$paper->paper_id}}">
-                                                                            <input id="example-radio{{$paper->paper_id}}" 
-                                                                                   type="checkbox" 
-                                                                                   value="{{$paper->paper_id}}" 
-                                                                                   name="paper_list[]"
-                                                                                   class="paper_check"
-                                                                                   {{in_array($paper->paper_id,$relatedPapers)?'checked':''}}
-                                                                                   >
-                                                                                   {{$paper->paper_name}}
-                                                                                </label>
-                                                                                <div class="material-section">
-
-                                                                                    <div class="check-list paper-material-list">
-                                                                                        
-                                                                                        <label class="check col-sm-12" >
-                                                                                            <input  
-                                                                                            class="material-list-all-check" 
-                                                                                            type="checkbox" 
-                                                                                            value="1" 
-                                                                                            name="all_material{{$paper->paper_id}}[]"
-                                                                                            {{@in_array('1',$all_material_array[$paper->paper_id])?'checked':''}}
-                                                                                            >All 
-                                                                                        </label>
-                                                                                        
-                                                                                        @foreach ($related_materials as $key=>$material)
-                                                                                        @if($paper->paper_id==$material['paper_id'])
-                                                                                        
-                                                                                            <label class="check col-sm-12" >
-                                                                                                <input  
-                                                                                                class="material-list-check" 
-                                                                                                type="checkbox" 
-                                                                                                value="{{$material['material_id']}}" 
-                                                                                                name="material_list{{$paper->paper_id}}[]"
-                                                                                                {{@in_array($material['material_id'],$selectedmaterials[$paper->paper_id])?'checked':''}}
-                                                                                                >{{$material['material_name']}}
-                                                                                            </label>
-                                                                                        @endif      
-                                                                                    @endforeach
-                                                                                    
-                                                                                </div>
-                                                                                </div>
-                                                                                <div class="subject-section">
-                                                                                    <div class="form-group">
-                                                                                        <label class="control-label subject-info">Unit <span class="required"> * </span></label>
-                                                                                        <div class="radio-list subject-list">
-                                                                                            @foreach ($allSubjects as $subject)
-                                                                                            <label class="radio-inline" for="example-inline-radio{{$paper->paper_id}}-{{$subject->id}}">
-                                                                                                <input id="example-inline-radio{{$paper->paper_id}}-{{$subject->id}}" 
-                                                                                                type="checkbox" 
-                                                                                                value="{{$subject->id}}" 
-                                                                                                name="subject_list{{$paper->paper_id}}[]"
-                                                                                                {{@in_array($subject->id,$relatedSubjects[$paper->paper_id])?'checked':''}}
-                                                                                                
-                                                                                                >
-                                                                                            {{$subject->subject_name}}
-                                                                                            </label>
-                                                                                            @endforeach
-                                                                                       
-                                                                                        </div>
-                                                                                     </div>  
-                                                                                </div>
-                                                                            </div>
-                                                                            @endforeach
+                                                                   
                                                                             
                                                                 </div>
                                                                 </div>  
@@ -296,7 +288,7 @@
                                                                     @endif
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Price <span class="required"> * </span></label>
+                                                                    <label class="control-label">Price (Per Unit) <span class="required"> * </span></label>
                                                                     <input type="text"  name="course_price" id="course_price" class="form-control" value="{{$product->price}}"/> 
                                                                     @if ($errors->has('course_price'))
                                                                     <span class="help-block">
@@ -305,7 +297,7 @@
                                                                     @endif
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Revised Percent (%) </label>
+                                                                    <label class="control-label">Revised Percent (%) (Per Unit) </label>
                                                                     <input type="text"  name="revised_percent" id="revised_percent" class="form-control" value="{{$product->revised_percent}}"/> 
                                                                     @if ($errors->has('revised_percent'))
                                                                     <span class="help-block">
@@ -314,7 +306,7 @@
                                                                     @endif
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Revised Price </label>
+                                                                    <label class="control-label">Revised Price (Per Unit) </label>
                                                                     <input type="text"  name="revised_price" id="revised_price" class="form-control" value="{{$product->revised_price}}"/> 
                                                                     @if ($errors->has('revised_price'))
                                                                     <span class="help-block">
@@ -322,7 +314,7 @@
                                                                     </span>
                                                                     @endif
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group hide">
                                                                     <label class="control-label">No. of Students </label>
                                                                     <input type="text"  name="no_of_students" id="no_of_students" class="form-control" value="{{$product->no_of_students}}"/> 
                                                                     @if ($errors->has('no_of_students'))
@@ -453,7 +445,7 @@
                                                                             <input id="featured-inline-radio2" type="radio" value="0" name="is_popular" {{$product->is_popular==0?'checked':''}}> No</label>
                                                                     </div>
                                                                 </div> 
-                                                                <div class="form-group">
+                                                                <div class="form-group hide">
                                                                     <label class="ccontrol-label">Is Combo Course  <span class="required"> * </span></label>
                                                                     <div class="radio-list">
                                                                         <label class="radio-inline" for="combo-course-inline-radio1">
@@ -462,7 +454,7 @@
                                                                             <input id="combo-course-inline-radio2" type="radio" value="0" name="is_combo" {{$product->is_combo==0?'checked':''}} > No</label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group ">
                                                                     <label class="ccontrol-label">Is Preview  <span class="required"> * </span></label>
                                                                     <div class="radio-list">
                                                                         <label class="radio-inline" for="preview-inline-radio1">
@@ -471,7 +463,7 @@
                                                                             <input id="preview-inline-radio2" type="radio" value="0" name="is_preview" {{$product->is_preview==0?'checked':''}} > No</label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group hide">
                                                                     <label class="ccontrol-label">Show on Home slider <span class="required"> * </span></label>
                                                                     <div class="radio-list">
                                                                         <label class="radio-inline" for="slider-inline-radio5">
@@ -480,7 +472,7 @@
                                                                             <input id="slider-inline-radio6" type="radio" value="0" name="home_slider" {{$product->home_slider==0?'checked':''}} > No</label>
                                                                     </div>
                                                                 </div> 
-                                                                <div class="form-group">
+                                                                <div class="form-group hide">
                                                                     <label class="ccontrol-label">Will Reseller Charge apply ?  <span class="required"> * </span></label>
                                                                     <div class="radio-list">
                                                                         <label class="radio-inline" for="reseller-inline-radio5">

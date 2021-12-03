@@ -16,7 +16,7 @@
     <section class="breadcamp">
         <div class="container">
             <ul>
-                <li><a href="{{ url('/') }}">Home</a></li>
+                <li><a href="{{ env('IIPARS_APP_URL') }}">Home</a></li>
                 <li>{{ $course_details_page->name }}</li>
             </ul>
         </div>
@@ -196,7 +196,7 @@
                                     </ul>
                                     @endif
                                 @endforeach
-                                </div>
+                            </div>
                             {!!html_entity_decode($course_details_page->description)!!}
                         </div>
                         <div class="outerleftsection">

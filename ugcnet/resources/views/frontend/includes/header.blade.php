@@ -5,16 +5,17 @@ $defLng = 'en';
 @endphp
 
 <!doctype html>
-<html lang="{{$defLng}}">
-    <head>
-        <meta http-equiv=Content-Type content="text/html;charset=utf-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <!--- META -->
-        @stack('page_meta')
-        <!--- END META -->
-        <link rel="shortcut icon" href="{{ asset('public/frontend/images/favicon.png') }}">
-    
-        <!-- Bootstrap Css -->
+<html lang="{{ $defLng }}">
+
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--- META -->
+    @stack('page_meta')
+    <!--- END META -->
+    <link rel="shortcut icon" href="{{ asset('public/frontend/images/favicon.png') }}">
+
+    {{-- <!-- Bootstrap Css -->
         <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/css/bootstrap.css') }}" />
         <!-- <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/css/bootstrap-theme.css') }}" /> -->
         <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/css/font-awesome.css') }}" />
@@ -32,60 +33,54 @@ $defLng = 'en';
         <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/css/responsive.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/css/messagebox.css') }}" />
         <link href="{{ asset('public/frontend/css/jquery.toast.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('public/frontend/css/style-main.css') }}" rel="stylesheet" type="text/css"> --}}
+
+    <title>IIPARS</title>
+
+    <!-- Favicon and Touch Icons -->
+    <link href="assets/images/favicon.png" rel="shortcut icon" type="image/png">
+
+    <!-- Stylesheet -->
+    <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('public/frontend/css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('public/frontend/css/animate.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('public/frontend/css/css-plugin-collections.css')}}" rel="stylesheet" />
+    <!-- CSS | menuzord megamenu skins -->
+    <link id="menuzord-menu-skins" href="{{asset('public/frontend/css/menuzord-skins/menuzord-boxed.css')}}" rel="stylesheet" />
+
+    <!-- CSS | Preloader Styles -->
+    <link href="{{asset('public/frontend/css/preloader.css')}}" rel="stylesheet" type="text/css">
+    <!-- CSS | Custom Margin Padding Collection -->
+    <link href="{{asset('public/frontend/css/custom-bootstrap-margin-padding.css')}}" rel="stylesheet" type="text/css">
+    <!-- CSS | Responsive media queries -->
+    <link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet" type="text/css">
 
 
-        
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
-        
-                
-        @stack('page_css')
-        <!-- Global site tag (gtag.js) - Google Ads: 622923898 -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-622923898"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    <!-- Revolution Slider 5.x CSS settings -->
+    <link href="{{asset('public/frontend/js/revolution-slider/css/settings.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('public/frontend/js/revolution-slider/css/layers.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('public/frontend/js/revolution-slider/css/navigation.css"')}} rel="stylesheet" type="text/css" />
 
-        gtag('config', 'AW-622923898');
-        </script>
-        
-        @if (strpos($_SERVER['REQUEST_URI'], "thank-you") !== false)
-            <!-- Event snippet for Website lead conversion page -->
-            <script>
-            gtag('event', 'conversion', {'send_to': 'AW-622923898/PxBcCNqQldQBEPqghKkC'});
-            </script>
-        @endif
-        
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-159588925-1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+    <!-- CSS | Theme Color -->
+    <link href="{{asset('public/frontend/css/colors/theme-skin-color-set1.css')}}" rel="stylesheet" type="text/css">
+    <!-- CSS | Main style file -->
+    <link href="{{asset('public/frontend/css/style-main.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/owl.theme.default.min.css')}}">
 
-          gtag('config', 'UA-159588925-1');
-        </script>
-        <!-- Facebook Pixel Code -->
-        <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1150067828687642');
-        fbq('track', 'PageView');
-        </script>
-        <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=1150067828687642&ev=PageView&noscript=1"
-        /></noscript>
-    <!-- End Facebook Pixel Code -->
 
-    </head>
+
+
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+
+    @stack('page_css')
+
+
+</head>
+
 <body>
     <div class="loaderdiv" style="display: none">
-        <img src="{{ asset('public/frontend/images/loader.png') }}"   alt=""/>
+        <img src="{{ asset('public/frontend/images/loader.png') }}" alt="" />
     </div>
-    <div class="main-container">
+    <div id="wrapper" class="clearfix">

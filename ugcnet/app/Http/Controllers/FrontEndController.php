@@ -103,7 +103,7 @@ class FrontEndController extends Controller
     	return view('frontend.home', $DataBag);
     }
     
-    public function courseContent($exam,$slug)
+    public function courseContent($slug)
     {
         $DataBag = $meta_array = array();
         
@@ -158,7 +158,8 @@ class FrontEndController extends Controller
 
         //return $DataBag['related_materials'];
         $DataBag['page_metadata'] = (object)$meta_array;
-        
+        // dd($DataBag);
+        return view('frontend.course.iiparsdetails', $DataBag);
         return view('frontend.course.details', $DataBag);
         }else{
         abort(404); 

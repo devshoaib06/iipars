@@ -447,68 +447,71 @@
 
 
                 <li><a href="#">UGC - NET</a>
-                  
+
                   <ul class="dropdown">
                     <?php
                       foreach ($subjects as $subject) {
                     ?>
-                      
-                      <li><a href="#">
-                          <?php
+
+                    <li><a href="#">
+                        <?php
                             echo $subject->paper_name=='PAPER - I'?'<h4 class="m-0">Paper – I</h4>':$subject->paper_name;
                           ?>
-                            
-                          <span class="indicator"><i class="fa fa-angle-right"></i></span>
-                        </a>
-  
-                        <ul class="dropdown" aria-labelledby="dropdownSubMenu1" style="">
-                          <li>
-                            <h4 style="padding-left: 22px;">Units</h4>
-                          </li>
-                          <li role="separator" class="divider bg-dark" style="height: 1px; background: #ccc;"></li>
-                          <?php
+
+                        <span class="indicator"><i class="fa fa-angle-right"></i></span>
+                      </a>
+
+                      <ul class="dropdown" aria-labelledby="dropdownSubMenu1" style="">
+                        <li>
+                          <h4 style="padding-left: 22px;">Units</h4>
+                        </li>
+                        <li role="separator" class="divider bg-dark" style="height: 1px; background: #ccc;"></li>
+                        <?php
                             $units=$this->teachinns_home_model->getPaperUnits(1,$subject->id);
-                                  
                             
                             foreach ($units as $unit) {
                           ?>
 
-                         
-                          <li>
-                            <a href="#">
-                              <?= $unit->subject_name;?>
-                            </a>
-                            <ul class="dropdown" aria-labelledby="dropdownSubMenu2" style="">
-                              <?php 
-                                $course=$this->teachinns_home_model->getCourseInfo(1,$subject->id);
-                                
-                                $slug=$course->slug;
-                                if($unit->is_preview==1){
-                              ?>
 
-                              <li><a href="<?= base_url()?>ugcnet/course/<?= $slug.'/'.$unit->subject_name.'/preview';?>">Preview</a>
-                              </li>
-                              <?php }else{ ?>    
-                              <!--/course/{exam}/{slug} -->
-                              <li><a href="<?= base_url()?>ugcnet/course/<?= $slug.'/'.$unit->subject_name ;?>">Order Now</a>
-                              </li>
-                              <?php }?>
-                            </ul>  
-                          </li>
-                          <?php }?>
-                         
-                        </ul>
-  
-                      </li>
+                        <li>
+                          <a href="#">
+                            <?= $unit->subject_name;?>
+                          </a>
+                          <ul class="dropdown" aria-labelledby="dropdownSubMenu2" style="">
+                            <?php 
+                                $courses=$this->teachinns_home_model->getCourseInfo(1,$subject->id,$unit->subject_id);
+                                
+                                //print_r($courses);
+                                foreach ($courses as $course) {
+                                  $slug=$course->slug;
+                                  if($course->is_preview==1){?>
+                                    <li><a
+                                        href="<?= base_url()?>ugcnet/course/<?= $slug.'/'.$unit->subject_name;?>">Preview</a>
+                                    </li>
+                                  <?php } if($course->is_preview==0){?>
+                                    <li><a href="<?= base_url()?>ugcnet/course/<?= $slug.'/'.$unit->subject_name ;?>">Order
+                                        Now</a>
+                                    </li>
+                                  
+                                  <?php }?>
+
+                                <?php }?>
+                            
+                          </ul>
+                        </li>
+                        <?php }?>
+                        
+                      </ul>
+
+                    </li>
                     <?php }?>
-                   
+
                   </ul>
                 </li>
 
                 <li><a href="#">Economics</a></li>
 
-
-                <li><a href="<?php echo base_url(); ?>Manage_research/all">Writing Consultancy</a>
+                <li><a href="<?php echo base_url(); ?>cms/writing_consultancy_all">Writing Consultancy</a>
 
                   <ul class="dropdown">
 
@@ -518,47 +521,50 @@
 
 
 
-                    <li><a href="<?php echo base_url(); ?>Manage_research/writing_consultancy">Research Paper Writing
+                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/writing_consultancy">Research Paper
+                        Writing
                         Consultancy</a></li>
 
-                    <li><a href="<?php echo base_url(); ?>Manage_research/paper_publication">Research Paper Publication
+                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/paper_publication">Research Paper
+                        Publication
                         Consultancy</a></li>
 
-                    <li><a href="<?php echo base_url(); ?>Manage_phd">Ph. D. Thesis writing Consultancy</a></li>
+                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/Manage_phd">Ph. D. Thesis writing
+                        Consultancy</a></li>
 
 
 
-                    <li><a href="<?php echo base_url(); ?>Manage_research/mphil_dissertation">M.Phil. Dissertation
+                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/mphil_dissertation">M.Phil.
+                        Dissertation
                         writing Consultancy</a></li>
 
-                    <li><a href="<?php echo base_url(); ?>Manage_research/project_work">Project Work Writing
+                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/project_work">Project Work Writing
                         Consultancy</a></li>
 
-                    <li><a href="<?php echo base_url(); ?>Manage_research/data_analysis">Data Analysis & Research
+                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/data_analysis">Data Analysis &
+                        Research
                         Methodology</a></li>
                   </ul>
                 </li>
 
 
-                <li><a href="<?php echo base_url(); ?>Manage_self_book_publication">Book Publication</a>
+                <li><a href="<?php echo base_url(); ?>cms/book_publication_all">Book Publication</a>
 
                   <ul class="dropdown">
 
-                    <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/writing_consultancy">Book Writing
+                    <li><a href="<?php echo base_url(); ?>cms/book_publication/book_writing_consultancy">Book Writing
                         Consultancy</a></li>
 
-                    <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/publication_consultacy">Book
+                    <li><a href="<?php echo base_url(); ?>cms/book_publication/book_publication_consultacy">Book
                         Publication Consultancy</a></li>
 
-                    <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/thesis_publication">Thesis to
-                        Book
+                    <li><a href="<?php echo base_url(); ?>cms/book_publication/thesis_publication">Thesis to Book
                         Publication</a></li>
 
-                    <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/dissertation_publication">M.Phil.
+                    <li><a href="<?php echo base_url(); ?>cms/book_publication/dissertation_publication">M.Phil.
                         Dissertation to Book Publication</a></li>
 
-                    <li><a href="<?php echo base_url(); ?>Manage_self_book_publication/project_work_book">Project Work
-                        to
+                    <li><a href="<?php echo base_url(); ?>cms/book_publication/project_work_book">Project Work to
                         Book Publication</a></li>
 
                   </ul>

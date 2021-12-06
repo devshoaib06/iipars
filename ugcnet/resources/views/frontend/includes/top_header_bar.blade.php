@@ -8,14 +8,25 @@
         </div>
         <div id="newsTicker" class="accounceBox ticker">
           <ul>
+            @foreach ($newsfeed as $news)
+              @if ($news->image == '')
+                <li><a download href="{{ $news->description }}"
+                    target="_blank">{{ $news->title  }}<img src="{{ config('path.iipars_base_url') }}assets/img/new.gif" class="new_gif_class"></a>
+                </li>
+                  
+              @else
+                <li><a download href=" {{ config('path.iipars_base_url') }}/upload/news_feed/{{ $news->image }}"
+                    target="_blank">{{ $news->title  }}<img src="{{ config('path.iipars_base_url') }}assets/img/new.gif" class="new_gif_class"></a>
+                </li>
+                  
+              @endif
+            @endforeach
 
-            <li><a download href=" https://iipars.com/assets/upload/news_feed/059366000_1636422671.jpeg"
-                target="_blank">WBSET EXAM 09/01/2022 --- IIPARS Introduce an offline Crash Course for PAPAR - I at
-                Mecheda (Near SBI)<img src="https://iipars.com/assets/img/new.gif" class="new_gif_class"></a></li>
 
-            <li><a download href=" https://iipars.com/assets/upload/news_feed/059366000_1636422671.jpeg"
+
+            {{-- <li><a download href=" https://iipars.com/assets/upload/news_feed/059366000_1636422671.jpeg"
                 target="_blank">IIPARS Introduce an offline Crash Course for PAPAR - I at Mecheda (Near SBI)<img
-                  src="https://iipars.com/assets/img/new.gif" class="new_gif_class"></a></li>
+                  src="https://iipars.com/assets/img/new.gif" class="new_gif_class"></a></li> --}}
 
 
           </ul>

@@ -45,7 +45,7 @@ class FrontEndController extends Controller
                         ->get();
         $articles_cat=\App\ArticleCategory::where('status',1)->get();                
         $shareData['articlecats'] = $articles_cat;   
-        $newsfeed=\App\NewsFeedMaster::where('status',1)->get();    
+        $newsfeed=DB::connection('mysql2')->table('tbl_news_feed')->where('status',1)->get();    
         $floatersignup=\App\FloaterSignUpMaster::where('status',1)->first();   
         $shareData['floatersignup'] = $floatersignup;            
         
@@ -53,7 +53,7 @@ class FrontEndController extends Controller
         $shareData['combo_pack_products'] = $combo_pack_products;
         $shareData['mainMenu'] = $mainMenu;
         $shareData['exams'] = $exams;
-        
+        //dd($newsfeed);
         
         View::share($shareData);
 	}
@@ -103,7 +103,7 @@ class FrontEndController extends Controller
     	return view('frontend.home', $DataBag);
     }
     
-    public function courseContent($slug)
+    public function courseContent($slug,$unit='')
     {
         $DataBag = $meta_array = array();
         

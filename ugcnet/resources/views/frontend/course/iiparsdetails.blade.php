@@ -8,10 +8,26 @@
     $protocol = $myfunction->getYoutubeProtocol();                                                
 
 ?>
-<section class="innerbanner">
+<!-- <section class="innerbanner">
     <img src="{{ asset('public/frontend/images/shortbanner.jpg') }}" alt="Crack the CSIR-UGC NET/SET/JRF exam with our online course material
 ">
-</section>
+</section> -->
+<section class="inner-header divider parallax layer-overlay1 overlay-white-8" style="background-image: url({{ asset('public/frontend/images/shortbanner.jpg') }}); background-repeat: no-repeat; background-size: 100%; background-position: 0 0; height:200px">
+
+    <div class="container pt-30 pb-30">
+
+      <!-- Section Content -->
+
+      <div class="section-content">
+
+          
+
+        </div>
+
+      </div>
+
+    </section>
+
 <!-- Section: Breadcrumb  -->
 <section class="breadcamp">
     <div class="container">
@@ -136,34 +152,36 @@
                 <div class="rightvideo">
                     <div class="tabdiv">
 
+                            <?php 
+                                $course_image=asset('storage/uploads/courses/5f2cda75c6c65.jpg');
+                                if($course_details_page->image){
+                                    $course_image=asset('storage/uploads/courses/'.$course_details_page->image);
+                                }
+                            ?>
                         <div class="tabtop">
-                            <img src="https://teachinns.com/storage/uploads/courses/5f2cda75c6c65.jpg"
-                                alt="UGC-NTA NET/SET/JRF NET-Leader-Bengali 2020 ">
+                                <img src="{{$course_image}}" alt="{{$exam_name}} {{ $course_details_page->name }} 2020 ">
                         </div>
 
-                        <div class="rating" style="display:none"><i class="fa fa-star" aria-hidden="true"></i><i
-                                class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
-                                aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-                                class="fa fa-star-half-o" aria-hidden="true"></i> 4.7 (7,373)
+                        <div class="rating" style="display:none"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i> 4.7 (7,373)
                         </div>
                         <div class="sublist">
                             <h2>This course includes</h2>
-                            <ul>
-                                <li>Unit wise separate text in pdf version.</li>
-                                <li>The Solution of previous years questions with proper references or explanation.</li>
-                                <li>1000 model MCQs with answers and proper references or explanation.</li>
-                                <li>500 key points for Last Minute Suggestion.</li>
-                                <li>Online MOCK test.</li>
-                                <li>Daily updates till last night before the exam.</li>
-                            </ul>
+                            {!!html_entity_decode($course_details_page->short_description)!!}
                         </div>
+                        @if((floor($course_details_page->price)==0))    
+                                <div class="rightprice ">
+                                    Free
+                        </div>
+                        @else
                         <div class="rightprice">
-                            <span>₹3,499</span>
-                            ₹1,399
+                        @if( isset($course_details_page->revised_price) )
+                        <span>₹{{ number_format(floor($course_details_page->price)) }}</span>
+                        @endif
+                        ₹{{ number_format(floor($course_details_page->revised_price!=""?$course_details_page->revised_price:$course_details_page->price)) }}
                         </div>
+                        @endif
 
-                        <a href="#" class="buynow btn btn-success" data-toggle="modal" data-productid="102"
-                            data-target=".login-modal">Enroll Now</a>
+                        <a href="#" class="buynow btn btn-success" >Enroll Now</a>
 
 
                     </div>

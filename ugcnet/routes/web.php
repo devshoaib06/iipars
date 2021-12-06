@@ -25,7 +25,7 @@ Route::get('/clear-cache', function() {
 
 Route::get('/', 'FrontEndController@home')->name('home');
 // Route::get('/course/{exam}/{slug}', 'FrontEndController@courseContent')->name('front.corsCont');
-Route::get('/course/{slug}', 'FrontEndController@courseContent')->name('front.corsCont');
+Route::get('/course/{slug}/{unit?}', 'FrontEndController@courseContent')->name('front.corsCont');
 Route::get('/course-list/{slug}', 'FrontEndController@coursetagList')->name('front.corstagList');
 Route::get('/contact-us', 'FrontEndController@contactus')->name('contactus');
 Route::post('/contact-us', 'FrontEndController@contactAction')->name('contactAction');

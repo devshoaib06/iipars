@@ -1455,6 +1455,48 @@ class myFunctions {
 
     }
 
+    public function getPapers()
+    {
+        $papers=\App\PaperMaster::where('status',1)->get();
+        return $papers;
+
+    }
+
+
+    
+
+    public function getCourseInfo($exam_id = 1, $paper_id,$subject_id)
+	{
+		$results = DB::table('course_exam_paper_subject_relations as cepsr')
+            ->select('cepsr.product_id','products.is_preview','cepsr.exam_id','cepsr.paper_id','products.name','products.slug','subject_masters.subject_name','cepsr.subject_id')
+		    ->join('products','cepsr.product_id','products.product_id')
+		    ->join('subject_masters','cepsr.subject_id','subject_masters.id')
+		    ->where('cepsr.exam_id', $exam_id)
+		    ->where('cepsr.paper_id', $paper_id)
+		    ->where('cepsr.subject_id', $subject_id)
+            ->get();
+
+
+		
+		// echo "<pre>";
+		// print_r($query->result());
+		// echo "</pre>";
+		return $results;
+	}
+	public function getPaperUnits($exam_id = 1, $paper_id)
+	{
+		$results = DB::table('course_exam_paper_subject_relations as cepsr')
+            ->select('cepsr.product_id','products.is_preview','cepsr.exam_id','cepsr.paper_id','products.name','products.slug','subject_masters.subject_name','cepsr.subject_id')
+		    ->join('products','cepsr.product_id','products.product_id')
+		    ->join('subject_masters','cepsr.subject_id','subject_masters.id')
+		    ->where('cepsr.exam_id', $exam_id)
+		    ->where('cepsr.paper_id', $paper_id)
+            ->groupBy('cepsr.subject_id')
+            ->get();
+		
+		return $results;
+	}
+
 
 }
 

@@ -32,6 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // }
 //$config['base_url'] = 'https://iipars.com/';
 $config['base_url'] = 'https://iipars.karmickdev.com/';
+// $config['base_url'] = 'http://localhost/iipars';
 
 
 /*

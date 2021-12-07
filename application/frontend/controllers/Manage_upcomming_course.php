@@ -21,8 +21,8 @@ class Manage_upcomming_course extends CI_Controller
    $data['active']="upcoming";
 
 
-		
-		 $this->load->view('common/header',$data);
+		$data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('upcomming_event');
 		$this->load->view('common/footer');
 	}

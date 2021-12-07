@@ -6,6 +6,7 @@ class About_us extends CI_Controller
     {
           parent::__construct();
            $this->load->database();
+           $this->load->model('page_model');
 
 	}
 	
@@ -22,9 +23,11 @@ class About_us extends CI_Controller
 
 		$data['manage_home'] = $this->common_model->common($table_name = 'tbl_manage_home', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
 
-
+         $data['subjects']=$this->teachinns_home_model->subjects();	
+		 $data['book_publication_page_detl']=$this->page_model->book_publication_detl_all();
+		$data['writing_consultancy_page_detl']=$this->page_model->writing_consultancy_detl_all();
 		
-		 $this->load->view('common/header');
+		 $this->load->view('common/header',$data);
 		$this->load->view('about_us_page',$data);
 		$this->load->view('common/footer');
 	}
@@ -36,8 +39,11 @@ class About_us extends CI_Controller
 
 		$data['privacy_policy'] = $this->common_model->common($table_name = 'tbl_page_manage', $field = array(), $where = array('routes_id'=>16), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
 
-
-		$this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();	
+        $data['book_publication_page_detl']=$this->page_model->book_publication_detl_all();
+		$data['writing_consultancy_page_detl']=$this->page_model->writing_consultancy_detl_all();
+		
+		$this->load->view('common/header',$data);
 		$this->load->view('privacy_policy',$data);
 		$this->load->view('common/footer');
 	}
@@ -47,8 +53,11 @@ class About_us extends CI_Controller
 
 		$data['terms_cond'] = $this->common_model->common($table_name = 'tbl_page_manage', $field = array(), $where = array('routes_id'=>17), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
 
-
-		$this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();	
+        $data['book_publication_page_detl']=$this->page_model->book_publication_detl_all();
+		$data['writing_consultancy_page_detl']=$this->page_model->writing_consultancy_detl_all();
+		
+		$this->load->view('common/header',$data);
 		$this->load->view('terms_cond',$data);
 		$this->load->view('common/footer');
 	}

@@ -20,9 +20,10 @@ class Manage_plan extends CI_Controller
 
    			$data['active']="upcoming";
 
+            $data['subjects']=$this->teachinns_home_model->subjects();
 
 		
-		 $this->load->view('common/header');
+		 $this->load->view('common/header',$data);
 		$this->load->view('plan_page',$data);
 		$this->load->view('common/footer');
 	}

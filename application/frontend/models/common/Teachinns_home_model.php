@@ -163,7 +163,7 @@ class teachinns_home_model extends CI_Model
 
 	public function getCourseInfo($exam_id = 1, $paper_id,$subject_id)
 	{
-		$this->db2->select('cepsr.product_id,products.is_preview,cepsr.exam_id,cepsr.paper_id,products.name,products.slug,subject_masters.subject_name,cepsr.subject_id');
+		$this->db2->select('cepsr.product_id,products.is_preview,cepsr.exam_id,cepsr.paper_id,products.name,products.slug,subject_masters.subject_name,cepsr.subject_id,subject_masters.subject_slug');
 		$this->db2->join('products','cepsr.product_id=products.product_id');
 		$this->db2->join('subject_masters','cepsr.subject_id=subject_masters.id');
 		$this->db2->from('course_exam_paper_subject_relations as cepsr');
@@ -180,14 +180,14 @@ class teachinns_home_model extends CI_Model
 	}
 	public function getPaperUnits($exam_id = 1, $paper_id)
 	{
-		$this->db2->select('cepsr.product_id,products.is_preview,cepsr.exam_id,cepsr.paper_id,products.name,products.slug,subject_masters.subject_name,cepsr.subject_id');
+		$this->db2->select('cepsr.product_id,products.is_preview,cepsr.exam_id,cepsr.paper_id,products.name,products.slug,subject_masters.subject_name,cepsr.subject_id,subject_masters.subject_slug');
 		$this->db2->join('products','cepsr.product_id=products.product_id');
 		$this->db2->join('subject_masters','cepsr.subject_id=subject_masters.id');
 		$this->db2->from('course_exam_paper_subject_relations as cepsr');
 		$this->db2->where('cepsr.exam_id', $exam_id);
 		$this->db2->where('cepsr.paper_id', $paper_id);
 		$this->db2->order_by('subject_masters.id', 'asc');
-		//$this->db2->group_by('cepsr.subject_id');
+		// $this->db2->group_by('cepsr.subject_id');
 		$query = $this->db2->get();
 		
 		return $query->result();

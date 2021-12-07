@@ -6,6 +6,7 @@ class Login extends CI_Controller
     {
           parent::__construct();
            $this->load->database();
+           $this->load->model('page_model');
 
 	}
 	
@@ -18,8 +19,10 @@ class Login extends CI_Controller
 
 
 
-		
-		 $this->load->view('common/header');
+		$data['subjects']=$this->teachinns_home_model->subjects();
+		$data['book_publication_page_detl']=$this->page_model->book_publication_detl_all();
+		$data['writing_consultancy_page_detl']=$this->page_model->writing_consultancy_detl_all();
+		 $this->load->view('common/header',$data);
 		$this->load->view('login_page');
 		$this->load->view('common/footer');
 	}

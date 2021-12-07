@@ -14,9 +14,9 @@
 
             <ul class="list-border">
 
-              <li><a href="<?php  echo $this->url->link(16);?>">Privacy Policy</a></li>
+              <li><a href="<?php echo base_url(); ?>cms/page/privacy_policy">Privacy Policy</a></li>
 
-              <li><a href="<?php  echo $this->url->link(17);?>">Terms & Conditions</a></li>
+              <li><a href="<?php echo base_url(); ?>cms/page/terms-conditions">Terms & Conditions</a></li>
 
             </ul>
 
@@ -126,11 +126,11 @@
 
             <ul class="list-border">
 
-              <li><a href="#">Upcoming Courses</a></li>
+              <li><a href="<?php echo base_url(); ?>cms/page/upcoming_courses">Upcoming Courses</a></li>
 
-              <li><a href="<?php echo base_url(); ?>manage_ebook">Invitation for E-Book</a></li>
+              <!--<li><a href="<?php //echo base_url(); ?>manage_ebook">Invitation for E-Book</a></li>-->
 
-			  <li><a href="<?php  echo $this->url->link(14);?>">Plan</a></li>
+			  <!--<li><a href="<?php  echo $this->url->link(14);?>">Plan</a></li>-->
 
             </ul>
 
@@ -142,15 +142,15 @@
 
           <div class="widget">
 
-            <h5 class="widget-title line-bottom">News</h5>
+            <!--<h5 class="widget-title line-bottom">News</h5>-->
 
-            <ul class="list-border">
+            <!--<ul class="list-border">
 
               <li><a href="#">Upcoming Courses</a></li>
 
-              <li><a href="<?php echo base_url(); ?>manage_ebook">Invitation for E-Book</a></li>
+              <li><a href="<?php //echo base_url(); ?>manage_ebook">Invitation for E-Book</a></li>
 
-            </ul>
+            </ul>-->
 
           </div>
 

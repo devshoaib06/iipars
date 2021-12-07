@@ -443,7 +443,7 @@
 
                 <li><a href="<?php echo $this->url->link(1); ?>">Home</a></li>
 
-                <li><a href="<?php echo base_url(); ?>about_us">About Us</a></li>
+                <li><a href="<?php echo base_url(); ?>cms/page/about">About Us</a></li>
 
 
                 <li><a href="#">UGC - NET</a>
@@ -486,10 +486,10 @@
                                   $slug=$course->slug;
                                   if($course->is_preview==1){?>
                                     <li><a
-                                        href="<?= base_url()?>ugcnet/course/<?= $slug.'/'.$unit->subject_name;?>">Preview</a>
+                                        href="<?= base_url()?>ugc-net/course/<?= $slug.'/'.$unit->subject_slug;?>">Preview</a>
                                     </li>
                                   <?php } if($course->is_preview==0){?>
-                                    <li><a href="<?= base_url()?>ugcnet/course/<?= $slug.'/'.$unit->subject_name ;?>">Order
+                                    <li><a href="<?= base_url()?>ugc-net/course/<?= $slug.'/'.$unit->subject_slug ;?>">Order
                                         Now</a>
                                     </li>
                                   
@@ -509,41 +509,51 @@
                   </ul>
                 </li>
 
-                <li><a href="#">Economics</a></li>
+                <li><a href="<?php echo base_url(); ?>cms/page/economics">Economics</a></li>
 
                 <li><a href="<?php echo base_url(); ?>cms/writing_consultancy_all">Writing Consultancy</a>
 
                   <ul class="dropdown">
 
+                    <?php 
+					    if(!empty($writing_consultancy_page_detl)){
+					        //echo '<pre>';print_r($writing_consultancy_page_detl); exit;
+					        foreach($writing_consultancy_page_detl as $wcpd){
+					        ?>
+					        <li><a href="<?php echo base_url();?>cms/writing_consultancy/<?php echo $wcpd->slug; ?>"><?php echo $wcpd->title; ?></a></li>
+					        
+					       
+					        <?php
+					        }
+					    }?>
+
+
+    
+
+
+                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/writing_consultancy">Research Paper-->
+                    <!--    Writing-->
+                    <!--    Consultancy</a></li>-->
+
+                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/paper_publication">Research Paper-->
+                    <!--    Publication-->
+                    <!--    Consultancy</a></li>-->
+
+                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/Manage_phd">Ph. D. Thesis writing-->
+                    <!--    Consultancy</a></li>-->
 
 
 
+                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/mphil_dissertation">M.Phil.-->
+                    <!--    Dissertation-->
+                    <!--    writing Consultancy</a></li>-->
 
+                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/project_work">Project Work Writing-->
+                    <!--    Consultancy</a></li>-->
 
-
-                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/writing_consultancy">Research Paper
-                        Writing
-                        Consultancy</a></li>
-
-                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/paper_publication">Research Paper
-                        Publication
-                        Consultancy</a></li>
-
-                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/Manage_phd">Ph. D. Thesis writing
-                        Consultancy</a></li>
-
-
-
-                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/mphil_dissertation">M.Phil.
-                        Dissertation
-                        writing Consultancy</a></li>
-
-                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/project_work">Project Work Writing
-                        Consultancy</a></li>
-
-                    <li><a href="<?php echo base_url(); ?>cms/writing_consultancy/data_analysis">Data Analysis &
-                        Research
-                        Methodology</a></li>
+                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/data_analysis">Data Analysis &-->
+                    <!--    Research-->
+                    <!--    Methodology</a></li>-->
                   </ul>
                 </li>
 
@@ -551,21 +561,30 @@
                 <li><a href="<?php echo base_url(); ?>cms/book_publication_all">Book Publication</a>
 
                   <ul class="dropdown">
+                      
+                      <?php 
+					    if(!empty($book_publication_page_detl)){
+					        foreach($book_publication_page_detl as $bppd){
+					        ?>
+					        <li><a href="<?php echo base_url();?>cms/book_publication/<?php echo $bppd->slug; ?>"><?php echo $bppd->title; ?> </a></li>
+					        <?php
+					        }
+					    }?>
 
-                    <li><a href="<?php echo base_url(); ?>cms/book_publication/book_writing_consultancy">Book Writing
-                        Consultancy</a></li>
+                    <!--<li><a href="<?php echo base_url(); ?>cms/book_publication/book_writing_consultancy">Book Writing-->
+                    <!--    Consultancy</a></li>-->
 
-                    <li><a href="<?php echo base_url(); ?>cms/book_publication/book_publication_consultacy">Book
-                        Publication Consultancy</a></li>
+                    <!--<li><a href="<?php echo base_url(); ?>cms/book_publication/book_publication_consultacy">Book-->
+                    <!--    Publication Consultancy</a></li>-->
 
-                    <li><a href="<?php echo base_url(); ?>cms/book_publication/thesis_publication">Thesis to Book
-                        Publication</a></li>
+                    <!--<li><a href="<?php echo base_url(); ?>cms/book_publication/thesis_publication">Thesis to Book-->
+                    <!--    Publication</a></li>-->
 
-                    <li><a href="<?php echo base_url(); ?>cms/book_publication/dissertation_publication">M.Phil.
-                        Dissertation to Book Publication</a></li>
+                    <!--<li><a href="<?php echo base_url(); ?>cms/book_publication/dissertation_publication">M.Phil.-->
+                    <!--    Dissertation to Book Publication</a></li>-->
 
-                    <li><a href="<?php echo base_url(); ?>cms/book_publication/project_work_book">Project Work to
-                        Book Publication</a></li>
+                    <!--<li><a href="<?php echo base_url(); ?>cms/book_publication/project_work_book">Project Work to-->
+                    <!--    Book Publication</a></li>-->
 
                   </ul>
 

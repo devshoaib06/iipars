@@ -1,0 +1,98 @@
+.u-vmenu ul li {
+	width: 100%;
+	list-style: none;
+	border-bottom:1px solid #ddd;
+}
+.u-vmenu ul ul{
+	display: none;
+}
+.u-vmenu > ul > li {
+	/*background: url(../images/vmenu/zakladka.png) left top no-repeat;*/
+	background-size: 100% auto;
+}
+.u-vmenu ul li a {
+	line-height: 38px;
+	display: block;
+	font-size: 14px;
+	color: #bfbfbf;
+	text-decoration: none;
+	outline: none;
+}
+/*.u-vmenu > ul > li > a {
+	height: 42px;
+	line-height: 42px;
+	padding-left: 15px;
+	background:#fff;
+	color: #9b9b9b;
+	}*/
+
+	.u-vmenu > ul > li > a {
+	line-height: 1;
+	padding: 15px;
+	background: #fff;
+	color: #9b9b9b;
+}
+	
+	.u-vmenu > ul > li:hover a{color:#f87000;}
+	.u-vmenu ul li h4 {
+    font-size: 15px;
+    padding: 8px;
+    font-weight: bold;
+}
+	
+.u-vmenu > ul > li > ul > li > a {
+	padding-left: 20px;
+	background:#4f4e4e;
+}
+.u-vmenu > ul > li > ul > li > a[data-option='on']{
+	background: url(../images/on.png) right center no-repeat #eaeaea; color: #626262;
+}
+.u-vmenu > ul > li > ul > li > a[data-option='off']{
+	background: url(../images/off.png) right center no-repeat #f4f4f4; color: #626262;
+}
+.u-vmenu > ul > li:hover li a{color:#626262;}
+
+.u-vmenu > ul > li > ul > li > ul > li > a,
+.u-vmenu > ul > li > ul > li > ul > li > ul > li > a {
+	padding: 10px;
+    background: #eaeaea;
+    color: #626262;
+    line-height: 1.5;
+}
+
+/*.u-vmenu > ul > li > ul > li > ul > li > a[data-option='on']{
+	background: url(../images/on.png) right center no-repeat #6a6a6a;
+}
+.u-vmenu > ul > li > ul > li > ul > li > a[data-option='off']{
+	background: url(../images/off.png) right center no-repeat #6a6a6a;
+}
+
+
+
+
+
+.u-vmenu > ul > li > ul > li > ul > li > ul > li > a {
+	padding-left: 60px;
+	background:#797979;
+}
+
+.u-vmenu > ul > li > ul > li > ul > li > ul > li > a[data-option='on']{
+	background: url(../images/on.png) right center no-repeat #797979;
+}
+.u-vmenu > ul > li > ul > li > ul > li > ul > li > a[data-option='off']{
+	background: url(../images/off.png) right center no-repeat #797979;
+}
+*/
+
+.u-vmenu > ul > li img {
+    margin-right: 10px;
+}
+
+
+
+.u-vmenu ul li a[data-option='on']{
+	background: url(../images/on.png) right center no-repeat #fff;
+}
+.u-vmenu ul li a[data-option='off'] {
+	background: url(../images/off.png) right center no-repeat #fff;
+}

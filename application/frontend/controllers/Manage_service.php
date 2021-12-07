@@ -50,9 +50,8 @@ class manage_service extends CI_Controller
 		 $data['active']="service";
 
 
-
-		
-		 $this->load->view('common/header',$data);
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('subject_list',$data);
 		$this->load->view('common/footer');
 	}
@@ -157,7 +156,7 @@ class manage_service extends CI_Controller
 		 // }
 
 		$data['university']=  $this->common_model->common($table_name = 'tbl_cc', $field = array(), $where = array('status'=>'active'), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
-
+        $data['subjects']=$this->teachinns_home_model->subjects();
 		$this->load->view('common/header',$data);
 		$this->load->view('institute',$data);
 		$this->load->view('common/footer');
@@ -198,7 +197,8 @@ class manage_service extends CI_Controller
              $data['service_name']=@$service_type[0]->examination_name;
 
 
-	    $this->load->view('common/header');
+	    $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('service_details',$data);
 		$this->load->view('common/footer');
 	}

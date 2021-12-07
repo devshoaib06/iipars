@@ -6,6 +6,9 @@ class Sign_up extends CI_Controller
     {
           parent::__construct();
            $this->load->database();
+           $this->load->model('page_model');
+           $this->load->model('teachinns_home_model');
+           
 
 	}
 	
@@ -18,9 +21,10 @@ class Sign_up extends CI_Controller
 
        
         $data['subject'] = $this->common_model->common($table_name = 'tbl_kpo', $field = array(), $where = array('status'=>'active'), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
-
-		
-		 $this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$data['book_publication_page_detl']=$this->page_model->book_publication_detl_all();
+		$data['writing_consultancy_page_detl']=$this->page_model->writing_consultancy_detl_all();
+		 $this->load->view('common/header',$data);
 		$this->load->view('sign_up_page',$data);
 		$this->load->view('common/footer');
 	}

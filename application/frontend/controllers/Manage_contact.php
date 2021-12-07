@@ -6,6 +6,7 @@ class Manage_contact extends CI_Controller
     {
           parent::__construct();
            $this->load->database();
+           $this->load->model('page_model');
 
 	}
 	
@@ -16,15 +17,17 @@ class Manage_contact extends CI_Controller
 			// $user_id=@$this->session->userdata('user_session_id');
 
 		$user['contact']=$this->admin_model->selectAll('tbl_contact');
-
+        
 
 
    //          $login_avail['user_details']=  $this->common_model->common($table_name = 'tbl_user', $field = array(), $where = array('user_id'=>$user_id), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
 
     $data['active']="contact";
+    $data['book_publication_page_detl']=$this->page_model->book_publication_detl_all();
+		$data['writing_consultancy_page_detl']=$this->page_model->writing_consultancy_detl_all();
 
 
-		
+		$data['subjects']=$this->teachinns_home_model->subjects();
 		 $this->load->view('common/header',$data);
 		$this->load->view('contact_us',$user);
 		$this->load->view('common/footer');

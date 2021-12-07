@@ -1,0 +1,116 @@
+.page-header.navbar .page-logo .logo-default {
+    max-height: 25px;
+}
+
+.last-login span {
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+    padding-top: 12px;
+    display: block;
+}
+
+.alerttopbar {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: #ee4a4a;
+    color: #fff;
+    z-index: 999999;
+}
+
+.alertboxupper {
+    position: fixed;
+    top: 200px;
+    left: 0px;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    z-index: 999999;
+    width: 100%;
+}
+
+.alertinner {
+    background-color: #ee4a4a;
+    margin: 25px auto;
+    width: 600px;
+    padding: 15px;
+    border: 2px solid #a10c0c;
+    box-shadow: 0px 0px 10px RED;
+}
+
+.p-rel {
+    position: relative
+}
+
+.p-art {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.pb-30 {
+    padding-bottom: 30px
+}
+
+.video iframe,
+.video embed {
+    width: 100%;
+}
+
+@media (max-width:767px) {
+    /*.video iframe, .video embed{width:auto;}
+
+	.video div.checker, .video div.radio {
+		display: block;
+	}*/
+}
+
+.contri-list {
+    list-style-type: none;
+}
+
+.subject-list label,
+.paper-list label {
+    width: 33%;
+    margin: 0 !important;
+    padding: 0;
+}
+
+.material-list label {
+    width: 41%;
+    margin: 0 !important;
+    padding: 0;
+}
+
+.paper-material-list {
+    margin-left: 30px;
+    margin-bottom: 8px;
+}
+
+table.dataTable tbody th,
+table.dataTable tbody td {
+    padding: 8px 10px !important;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+    padding: 8px 10px !important;
+}
+
+.btn-search,
+.btn-reset {
+    width: 80px;
+}
+
+.viewBilling,
+.remove-order {
+    width: 80px;
+}
+
+.edit-btn {
+    width: 90%;
+}

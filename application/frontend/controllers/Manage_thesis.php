@@ -17,8 +17,8 @@ class Manage_thesis extends CI_Controller
         $data['manage_home']=$this->admin_model->selectAll('tbl_disertation_guideline');
           
 
-		
-		 $this->load->view('common/header');
+		$data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('thesis_consultancy_general_guide_view',$data);
 		$this->load->view('common/footer');
 	}

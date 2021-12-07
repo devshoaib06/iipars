@@ -21,8 +21,8 @@ class Manage_my_plan extends CI_Controller
             $login_avail['active']="my_plan";
 
 
-		
-		 $this->load->view('common/header');
+		$login_avail['subjects']=$this->teachinns_home_model->subjects();	
+		 $this->load->view('common/header',$login_avail);
 		$this->load->view('my_plan_page',$login_avail);
 		$this->load->view('common/footer');
 	}

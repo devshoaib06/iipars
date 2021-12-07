@@ -18,8 +18,8 @@ class Marketing extends CI_Controller
 		$data['manage_home'] = $this->common_model->common($table_name = 'tbl_manage_home', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
 
 
-		
-		 $this->load->view('common/header');
+		$data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('marketing_page',$data);
 		$this->load->view('common/footer');
 	}
@@ -31,8 +31,8 @@ class Marketing extends CI_Controller
 
 		$data['privacy_policy'] = $this->common_model->common($table_name = 'tbl_page_manage', $field = array(), $where = array('routes_id'=>16), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
 
-
-		$this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('privacy_policy',$data);
 		$this->load->view('common/footer');
 	}
@@ -42,8 +42,8 @@ class Marketing extends CI_Controller
 
 		$data['terms_cond'] = $this->common_model->common($table_name = 'tbl_page_manage', $field = array(), $where = array('routes_id'=>17), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
 
-
-		$this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('terms_cond',$data);
 		$this->load->view('common/footer');
 	}

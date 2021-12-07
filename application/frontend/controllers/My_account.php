@@ -24,7 +24,8 @@ class My_account extends CI_Controller
 
 
 		
-		 $this->load->view('common/header');
+		 $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('my_account_page',$login_avail);
 		$this->load->view('common/footer');
 	}
@@ -39,7 +40,8 @@ class My_account extends CI_Controller
 
             $login_avail['active']="profile";
 
-		$this->load->view('common/header');
+		$data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('profile_page',$login_avail);
 		$this->load->view('common/footer');
 	}
@@ -87,7 +89,8 @@ class My_account extends CI_Controller
             $login_avail['active']="reset_psw";
 
 
-            $this->load->view('common/header');
+            $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 			$this->load->view('reset_password',$login_avail);
 			$this->load->view('common/footer');
 	}

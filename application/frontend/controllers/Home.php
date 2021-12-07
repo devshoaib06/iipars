@@ -6,6 +6,7 @@ class Home extends CI_Controller
     {
           parent::__construct();
            $this->load->database();
+           $this->load->model('page_model');
 
 
 	}
@@ -49,7 +50,10 @@ class Home extends CI_Controller
 		 
 		 $data['active']="home";
 		 $data['testimonials'] = $this->teachinns_home_model->common($table_name = 'testimonials', $field = array(), $where = array('status'=>'1'), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');		
-		 $data['subjects']=$this->teachinns_home_model->subjects();		
+		 $data['subjects']=$this->teachinns_home_model->subjects();	
+		 
+		 $data['book_publication_page_detl']=$this->page_model->book_publication_detl_all();
+         $data['writing_consultancy_page_detl']=$this->page_model->writing_consultancy_detl_all();
 		 $data['units']=$this->teachinns_home_model->units();		
 	 	// echo "<pre>"; print_r($data['units']);exit;
 		

@@ -1,0 +1,4 @@
+
+ALTER TABLE `subject_masters` ADD `subject_slug` VARCHAR(255) NOT NULL AFTER `exam_id`;
+
+UPDATE `subject_masters` SET `subject_slug` = 'unit-2' WHERE `subject_masters`.`id` = 3; UPDATE `subject_masters` SET `subject_slug` = 'unit-3' WHERE `subject_masters`.`id` = 5; UPDATE `subject_masters` SET `subject_slug` = 'unit-4' WHERE `subject_masters`.`id` = 6; UPDATE `subject_masters` SET `subject_slug` = 'unit-5' WHERE `subject_masters`.`id` = 7; UPDATE `subject_masters` SET `subject_slug` = 'unit-6' WHERE `subject_masters`.`id` = 100; UPDATE `subject_masters` SET `subject_slug` = 'unit-7' WHERE `subject_masters`.`id` = 107; UPDATE `subject_masters` SET `subject_slug` = 'unit-8' WHERE `subject_masters`.`id` = 108; UPDATE `subject_masters` SET `subject_slug` = 'unit-9' WHERE `subject_masters`.`id` = 109; UPDATE `subject_masters` SET `subject_slug` = 'unit-10' WHERE `subject_masters`.`id` = 110;

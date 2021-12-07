@@ -17,7 +17,8 @@ class Manage_research extends CI_Controller
 
 
 
-		$this->load->view('common/header');
+		$data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('research_general_guideline_view',$data);
 		$this->load->view('common/footer');
 	}
@@ -31,13 +32,8 @@ class Manage_research extends CI_Controller
 
         $data['manage_home']=$this->admin_model->selectAll('tbl_research_guideline');
 
-
-
-	
-
-
-		
-		 $this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('research_work_service',$data);
 		$this->load->view('common/footer');
 	}
@@ -50,14 +46,8 @@ $data['page_title']= 'Research Paper Writing Consultancy';
 
 
         $data['manage_home']=$this->admin_model->selectAll('tbl_research_guideline');
-
-
-
-	
-
-
-		
-		 $this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('research_general_guideline_view',$data);
 		$this->load->view('common/footer');
 	}
@@ -71,13 +61,8 @@ $data['page_title']= 'Research Paper Publication Consultancy';
 
         $data['manage_home']=$this->admin_model->selectAll('tbl_research_guideline');
 
-
-
-	
-
-
-		
-		 $this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('research_publication_consultancy',$data);
 		$this->load->view('common/footer');
 	}
@@ -90,13 +75,8 @@ $data['page_title']= 'Synopsis Writing Consultanc';
 
         $data['manage_home']=$this->admin_model->selectAll('tbl_research_guideline');
 
-
-
-	
-
-
-		
-		 $this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('research_general_guideline_view',$data);
 		$this->load->view('common/footer');
 	}
@@ -109,14 +89,8 @@ $data['page_title']= 'M.Phil. Dissertation writing Consultancy';
 
 
         $data['manage_home']=$this->admin_model->selectAll('tbl_research_guideline');
-
-
-
-	
-
-
-		
-		 $this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('mphil_consultancy',$data);
 		$this->load->view('common/footer');
 	}
@@ -130,13 +104,8 @@ $data['page_title']= 'Project Work Writing Consultancy';
 
         $data['manage_home']=$this->admin_model->selectAll('tbl_research_guideline');
 
-
-
-	
-
-
-		
-		 $this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('project_work_writing_consult',$data);
 		$this->load->view('common/footer');
 	}
@@ -149,14 +118,8 @@ $data['page_title']= 'Data Analysis & Research Methodology';
 
 
         $data['manage_home']=$this->admin_model->selectAll('tbl_research_guideline');
-
-
-
-	
-
-
-		
-		 $this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('data_analylis_view',$data);
 		$this->load->view('common/footer');
 	}
@@ -170,13 +133,8 @@ $data['page_title']= 'Project Work to Book Publication';
 
         $data['manage_home']=$this->admin_model->selectAll('tbl_research_guideline');
 
-
-
-	
-
-
-		
-		 $this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('project_work_to_book_view',$data);
 		$this->load->view('common/footer');
 	}
@@ -189,14 +147,8 @@ $data['page_title']= 'Plagiarism Checking ';
 
 
         $data['manage_home']=$this->admin_model->selectAll('tbl_research_guideline');
-
-
-
-	
-
-
-		
-		 $this->load->view('common/header');
+        $data['subjects']=$this->teachinns_home_model->subjects();
+		$this->load->view('common/header',$data);
 		$this->load->view('research_general_guideline_view',$data);
 		$this->load->view('common/footer');
 	}

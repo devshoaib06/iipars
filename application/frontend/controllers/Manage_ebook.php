@@ -15,9 +15,9 @@ class Manage_ebook extends CI_Controller
 
 	
 
-
+    $data['subjects']=$this->teachinns_home_model->subjects();
 		
-		 $this->load->view('common/header');
+		 $this->load->view('common/header',$data);
 		$this->load->view('invitation_for_ebook_view');
 		$this->load->view('common/footer');
 	}
@@ -68,10 +68,10 @@ class Manage_ebook extends CI_Controller
 
 		$data['ebook_list']=$this->admin_model->selectAll('tbl_ebook');
 	    
-
+    $data['subjects']=$this->teachinns_home_model->subjects();
 
 		
-		 $this->load->view('common/header');
+		 $this->load->view('common/header',$data);
 		$this->load->view('purchase_your_ebook_view',$data);
 		$this->load->view('common/footer');
 	}
@@ -82,10 +82,10 @@ class Manage_ebook extends CI_Controller
 
 		$data['ebook_list']=$this->admin_model->selectAll('tbl_ebook');
 	    
-
+$data['subjects']=$this->teachinns_home_model->subjects();
 
 		
-		 $this->load->view('common/header');
+		 $this->load->view('common/header',$data);
 		$this->load->view('our_ebook_view',$data);
 		$this->load->view('common/footer');
 	}

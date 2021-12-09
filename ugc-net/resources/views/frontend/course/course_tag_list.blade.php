@@ -34,9 +34,10 @@
     </div>
 </section> --}}
 
-<section class="innerbanner">
+{{-- <section class="innerbanner">
         <img src="{{ asset('public/frontend/images/shortbanner.jpg') }}" alt="">
-    </section>
+    </section> --}}
+@include('frontend.includes.inner_page_banner')
 
 
 <section class="bodycont">

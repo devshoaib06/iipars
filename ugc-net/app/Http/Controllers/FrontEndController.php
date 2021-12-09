@@ -156,8 +156,8 @@ class FrontEndController extends Controller
     public function coursetagList($slug)
     {
         $DataBag = $meta_array = array();
-        $meta_array['meta_title']='Teachinns - Tags';
-        $meta_array['meta_desc']='Teachinns';
+        $meta_array['meta_title']=env('APP_NAME','IIPARS').' - Tags';
+        $meta_array['meta_desc']=env('APP_NAME','IIPARS').'';
         $meta_array['meta_keyword']=$slug;
        
         $DataBag['courses']=Product::select('product_id','name','price','revised_price','image','slug')->where('meta_key','like', '%' . $slug )->get();

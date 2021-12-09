@@ -12,21 +12,22 @@
     <img src="{{ asset('public/frontend/images/shortbanner.jpg') }}" alt="Crack the CSIR-UGC NET/SET/JRF exam with our online course material
 ">
 </section> -->
-<section class="inner-header divider parallax layer-overlay1 overlay-white-8" style="background-image: url({{ asset('public/frontend/images/shortbanner.jpg') }}); background-repeat: no-repeat; background-size: 100%; background-position: 0 0; height:200px">
+<section class="inner-header divider parallax layer-overlay1 overlay-white-8"
+    style="background-image: url({{ asset('public/frontend/images/shortbanner.jpg') }}); background-repeat: no-repeat; background-size: 100%; background-position: 0 0; height:200px">
 
     <div class="container pt-30 pb-30">
 
-      <!-- Section Content -->
+        <!-- Section Content -->
 
-      <div class="section-content">
+        <div class="section-content">
 
-          
+
 
         </div>
 
-      </div>
+    </div>
 
-    </section>
+</section>
 
 <!-- Section: Breadcrumb  -->
 <section class="breadcamp">
@@ -49,7 +50,7 @@
                     <div class="col-sm-8">
                         <h1>{{ $course_details_page->name }}</h1>
                         <h2> <?php $exam_name = $myfunction->getProductExamName($course_details_page->product_id);
-                            ?>  </h2>
+                            ?> </h2>
                         <div class="caption">
                             <div class="subcource">
                                 <ul>
@@ -58,9 +59,11 @@
                                     $meta_keys=array_filter($meta_keys);
 
                                 ?>
-                                @foreach($meta_keys as $info)
-                                <a href="{{route('front.corstagList',['slug'=>$info])}}"><li>{{$info}}</li></a>
-                                 @endforeach
+                                    @foreach($meta_keys as $info)
+                                    <a href="{{route('front.corstagList',['slug'=>$info])}}">
+                                        <li>{{$info}}</li>
+                                    </a>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -82,39 +85,43 @@
                     <div class="col-sm-4 text-right">
                         <!-- <h2 style="padding:0 0 0;">Course Fees</h2> -->
 
-                            @if((floor($course_details_page->price)==0))    
-                            <div class="rightprice " style="padding:0 0 10px">
-                                Free
-                            </div>
-                            @else
-                            <div class="rightprice" style="padding:0 0 10px">
+                        @if((floor($course_details_page->price)==0))
+                        <div class="rightprice " style="padding:0 0 10px">
+                            Free
+                        </div>
+                        @else
+                        <div class="rightprice" style="padding:0 0 10px">
                             @if( isset($course_details_page->revised_price) )
                             <span>₹{{ number_format(floor($course_details_page->price)) }}</span>
                             @endif
                             ₹{{ number_format(floor($course_details_page->revised_price!=""?$course_details_page->revised_price:$course_details_page->price)) }}
-                            </div>
-                            @endif
-                            @auth
-                        <input type="submit" class="buynow btn btn-success enrollbtn" value="{{(floor($course_details_page->price)==0)?'Preview Now':'Enroll Now'}}">
-                            @endauth
-                            {{-- @guest            
+                        </div>
+                        @endif
+                        @auth
+                        <input type="submit" class="buynow btn btn-success enrollbtn"
+                            value="{{(floor($course_details_page->price)==0)?'Preview Now':'Enroll Now'}}">
+                        @endauth
+                        {{-- @guest            
                             <a href="#" class="enrollbtn" data-toggle="modal" data-target=".login-modal">Enroll Now</a>
                            @endguest  --}}
-                           @guest
-                           <a href="#" class="buynow btn btn-success buy-now-login" data-toggle="modal" data-productid="{{$course_details_page->product_id}}" data-target=".login-modal">{{(floor($course_details_page->price)==0)?'Preview Now':'Enroll Now'}}</a>
-                           @endguest
-                           
-                            {{-- <a href="{{route('billing',['product_id'=>$course_details_page->product_id])}}" class="buynow">Enroll Now</a> --}}
+                        @guest
+                        <a href="#" class="buynow btn btn-success buy-now-login" data-toggle="modal"
+                            data-productid="{{$course_details_page->product_id}}"
+                            data-target=".login-modal">{{(floor($course_details_page->price)==0)?'Preview Now':'Enroll Now'}}</a>
+                        @endguest
+
+                        {{-- <a href="{{route('billing',['product_id'=>$course_details_page->product_id])}}"
+                        class="buynow">Enroll Now</a> --}}
                     </div>
                 </div>
 
-                
+
                 {!!html_entity_decode($course_details_page->intro_text)!!}
                 <hr>
 
                 <h3>What you'll Get</h3>
                 <div class="highlightsection">
-                                
+
                     @foreach ($related_materials as $paper=>$materials)
                     <?php $myFuntion=new \App\library\myFunctions; 
                         $paper_name= @$myFuntion->getPaperName($paper);
@@ -123,17 +130,17 @@
                         // echo "</pre>";
                     ?>
                     <h4>{{$paper_name}}</h4>
-                        @if(count($materials)>0)    
-                        <ul>
-                            @foreach ($materials as $material)
-                            <?php 
+                    @if(count($materials)>0)
+                    <ul>
+                        @foreach ($materials as $material)
+                        <?php 
                                 $material_name= @$myFuntion->getMaterialName($material);
                             ?>
-                            <li>{{$material_name}}</li>
-                            @endforeach
-                            
-                        </ul>
-                        @endif
+                        <li>{{$material_name}}</li>
+                        @endforeach
+
+                    </ul>
+                    @endif
                     @endforeach
                 </div>
                 {!!html_entity_decode($course_details_page->description)!!}
@@ -152,37 +159,42 @@
                 <div class="rightvideo">
                     <div class="tabdiv">
 
-                            <?php 
+                        <?php 
                                 $course_image=asset('storage/uploads/courses/5f2cda75c6c65.jpg');
                                 if($course_details_page->image){
                                     $course_image=asset('storage/uploads/courses/'.$course_details_page->image);
                                 }
                             ?>
                         <div class="tabtop">
-                                <img src="{{$course_image}}" alt="{{$exam_name}} {{ $course_details_page->name }} 2020 ">
+                            <img src="{{$course_image}}" alt="{{$exam_name}} {{ $course_details_page->name }} 2020 ">
                         </div>
 
-                        <div class="rating" style="display:none"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i> 4.7 (7,373)
+                        <div class="rating" style="display:none"><i class="fa fa-star" aria-hidden="true"></i><i
+                                class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
+                                class="fa fa-star-half-o" aria-hidden="true"></i> 4.7 (7,373)
                         </div>
                         <div class="sublist">
                             <h2>This course includes</h2>
                             {!!html_entity_decode($course_details_page->short_description)!!}
                         </div>
-                        @if((floor($course_details_page->price)==0))    
-                                <div class="rightprice ">
-                                    Free
+                        @if((floor($course_details_page->price)==0))
+                        <div class="rightprice ">
+                            Free
                         </div>
                         @else
                         <div class="rightprice">
-                        @if( isset($course_details_page->revised_price) )
-                        <span>₹{{ number_format(floor($course_details_page->price)) }}</span>
-                        @endif
-                        ₹{{ number_format(floor($course_details_page->revised_price!=""?$course_details_page->revised_price:$course_details_page->price)) }}
+                            @if( isset($course_details_page->revised_price) )
+                            <span>₹{{ number_format(floor($course_details_page->price)) }}</span>
+                            @endif
+                            ₹{{ number_format(floor($course_details_page->revised_price!=""?$course_details_page->revised_price:$course_details_page->price)) }}
                         </div>
                         @endif
-
-                        <a href="#" class="buynow btn btn-success" >Enroll Now</a>
-
+                        @if((floor($course_details_page->price)==0))
+                            <a href="#" class="buynow btn btn-success">Preview Now</a>
+                        @else
+                            <a href="#" class="buynow btn btn-success">Enroll Now</a>
+                        @endif
 
                     </div>
                 </div>

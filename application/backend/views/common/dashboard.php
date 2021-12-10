@@ -52,7 +52,8 @@
 
           </div>
 
-          <a href="<?php echo base_url(); ?>index.php/Admin_service/university_view" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="<?php echo base_url(); ?>index.php/Admin_service/university_view" class="small-box-footer">More info
+            <i class="fa fa-arrow-circle-right"></i></a>
 
         </div>
 
@@ -64,30 +65,31 @@
 
       if (@$admin_details[0]->user_type_id == '1') {
       ?>
-        <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-3 col-xs-6">
 
 
 
-          <div class="small-box bg-aqua">
+        <div class="small-box bg-aqua">
 
-            <div class="inner">
-              <?php
+          <div class="inner">
+            <?php
               $uni_type1 = $this->common->select($table_name = 'tbl_kpo', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
               ?>
-              Subject -<h3> <?php echo count($uni_type1); ?></h3>
-
-            </div>
-
-            <div class="icon">
-
-
-            </div>
-
-            <a href="<?php echo base_url(); ?>index.php/Admin_service/kpo_view" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            Subject -<h3> <?php echo count($uni_type1); ?></h3>
 
           </div>
 
+          <div class="icon">
+
+
+          </div>
+
+          <a href="<?php echo base_url(); ?>index.php/Admin_service/kpo_view" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+
         </div>
+
+      </div>
 
       <?php } ?>
 
@@ -98,31 +100,32 @@
       if (@$admin_details[0]->user_type_id == '1') {
       ?>
 
-        <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-3 col-xs-6">
 
 
 
-          <div class="small-box bg-aqua">
+        <div class="small-box bg-aqua">
 
-            <div class="inner">
-              <?php
+          <div class="inner">
+            <?php
               $uni_type2 = $this->common->select($table_name = 'tbl_examination', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
               ?>
-              Service -<h3> <?php echo count($uni_type2); ?></h3>
-
-            </div>
-
-            <div class="icon">
-
-
-
-            </div>
-
-            <a href="<?php echo base_url(); ?>index.php/Admin_service/examination_view" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            Service -<h3> <?php echo count($uni_type2); ?></h3>
 
           </div>
 
+          <div class="icon">
+
+
+
+          </div>
+
+          <a href="<?php echo base_url(); ?>index.php/Admin_service/examination_view" class="small-box-footer">More info
+            <i class="fa fa-arrow-circle-right"></i></a>
+
         </div>
+
+      </div>
 
       <?php } ?>
 
@@ -133,31 +136,32 @@
       if (@$admin_details[0]->user_type_id == '1') {
       ?>
 
-        <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-3 col-xs-6">
 
 
 
-          <div class="small-box bg-aqua">
+        <div class="small-box bg-aqua">
 
-            <div class="inner">
-              <?php
+          <div class="inner">
+            <?php
               $uni_type32 = $this->common->select($table_name = 'tbl_user', $field = array(), $where = array('user_type_id' => 6), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
               ?>
-              Employee -<h3> <?php echo count($uni_type32); ?></h3>
-
-            </div>
-
-            <div class="icon">
-
-
-
-            </div>
-
-            <a href="<?php echo base_url(); ?>index.php/sub_admin_list_manage" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            Employee -<h3> <?php echo count($uni_type32); ?></h3>
 
           </div>
 
+          <div class="icon">
+
+
+
+          </div>
+
+          <a href="<?php echo base_url(); ?>index.php/sub_admin_list_manage" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+
         </div>
+
+      </div>
 
       <?php } ?>
 
@@ -171,31 +175,32 @@
       if (@$admin_details[0]->user_type_id == '1') {
       ?>
 
-        <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-3 col-xs-6">
 
 
 
-          <div class="small-box bg-aqua">
+        <div class="small-box bg-aqua">
 
-            <div class="inner">
-              <?php
+          <div class="inner">
+            <?php
               $user_student = $this->common->select($table_name = 'tbl_user', $field = array(), $where = array('user_type_id' => 2), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
               ?>
-              User -<h3> <?php echo count($user_student); ?></h3>
-
-            </div>
-
-            <div class="icon">
-
-
-
-            </div>
-
-            <a href="<?php echo base_url(); ?>index.php/manage_user_student" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            User -<h3> <?php echo count($user_student); ?></h3>
 
           </div>
 
+          <div class="icon">
+
+
+
+          </div>
+
+          <a href="<?php echo base_url(); ?>index.php/manage_user_student" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+
         </div>
+
+      </div>
 
       <?php } ?>
 
@@ -207,31 +212,32 @@
       if (@$admin_details[0]->user_type_id == '1') {
       ?>
 
-        <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-3 col-xs-6">
 
 
 
-          <div class="small-box bg-aqua">
+        <div class="small-box bg-aqua">
 
-            <div class="inner">
-              <?php
+          <div class="inner">
+            <?php
               $invite_for_ebook = $this->common->select($table_name = 'tbl_invite_for_ebook', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
               ?>
-              Invite for Ebook -<h3> <?php echo count($invite_for_ebook); ?></h3>
-
-            </div>
-
-            <div class="icon">
-
-
-
-            </div>
-
-            <a href="<?php echo base_url(); ?>index.php/manage_ebook" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            Invite for Ebook -<h3> <?php echo count($invite_for_ebook); ?></h3>
 
           </div>
 
+          <div class="icon">
+
+
+
+          </div>
+
+          <a href="<?php echo base_url(); ?>index.php/manage_ebook" class="small-box-footer">More info <i
+              class="fa fa-arrow-circle-right"></i></a>
+
         </div>
+
+      </div>
 
       <?php } ?>
 
@@ -244,31 +250,32 @@
       if (@$admin_details[0]->user_type_id == '1') {
       ?>
 
-        <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-3 col-xs-6">
 
 
 
-          <div class="small-box bg-aqua">
+        <div class="small-box bg-aqua">
 
-            <div class="inner">
-              <?php
+          <div class="inner">
+            <?php
               $research = $this->common->select($table_name = 'tbl_research_paper_consul_form', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
               ?>
-              Research Paper Consultancy -<h3> <?php echo count($research); ?></h3>
-
-            </div>
-
-            <div class="icon">
-
-
-
-            </div>
-
-            <a href="<?php echo base_url(); ?>index.php/manage_research_guideline/research_paper_consul_form" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            Research Paper Consultancy -<h3> <?php echo count($research); ?></h3>
 
           </div>
 
+          <div class="icon">
+
+
+
+          </div>
+
+          <a href="<?php echo base_url(); ?>index.php/manage_research_guideline/research_paper_consul_form"
+            class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
         </div>
+
+      </div>
 
       <?php } ?>
 
@@ -281,31 +288,32 @@
       if (@$admin_details[0]->user_type_id == '1') {
       ?>
 
-        <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-3 col-xs-6">
 
 
 
-          <div class="small-box bg-aqua">
+        <div class="small-box bg-aqua">
 
-            <div class="inner">
-              <?php
+          <div class="inner">
+            <?php
               $thesis_consul = $this->common->select($table_name = 'tbl_thesis_cons_form', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
               ?>
-              Thesis Consultancy -<h3> <?php echo count($thesis_consul); ?></h3>
-
-            </div>
-
-            <div class="icon">
-
-
-
-            </div>
-
-            <a href="<?php echo base_url(); ?>index.php/manage_disertation_guideline/thesis_consul_list" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            Thesis Consultancy -<h3> <?php echo count($thesis_consul); ?></h3>
 
           </div>
 
+          <div class="icon">
+
+
+
+          </div>
+
+          <a href="<?php echo base_url(); ?>index.php/manage_disertation_guideline/thesis_consul_list"
+            class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
         </div>
+
+      </div>
 
       <?php } ?>
 
@@ -318,31 +326,32 @@
       if (@$admin_details[0]->user_type_id == '1') {
       ?>
 
-        <div class="col-lg-3 col-xs-6">
+      <div class="col-lg-3 col-xs-6">
 
 
 
-          <div class="small-box bg-aqua">
+        <div class="small-box bg-aqua">
 
-            <div class="inner">
-              <?php
+          <div class="inner">
+            <?php
               $phd = $this->common->select($table_name = 'tbl_phd_thesis_form', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
               ?>
-              PHD Thesis Consultancy -<h3> <?php echo count($phd); ?></h3>
-
-            </div>
-
-            <div class="icon">
-
-
-
-            </div>
-
-            <a href="<?php echo base_url(); ?>index.php/manage_phd_thesis_guideline/phd_thesis_online_application" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            PHD Thesis Consultancy -<h3> <?php echo count($phd); ?></h3>
 
           </div>
 
+          <div class="icon">
+
+
+
+          </div>
+
+          <a href="<?php echo base_url(); ?>index.php/manage_phd_thesis_guideline/phd_thesis_online_application"
+            class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
         </div>
+
+      </div>
 
       <?php } ?>
 
@@ -696,40 +705,43 @@
 </div>
 
 <?php 
- if(!$this->session->userdata('teachloggedIn')) {
+ //if(!$this->session->userdata('teachloggedIn')) {
    $this->session->set_userdata('teachloggedIn', '1');
 ?>
 
-  
-  <script>
-    $.ajax({
+
+<script>
+  $.ajax({
     type: "POST",
     url: "<?php echo $this->config->item('base_teach_url'); ?>/admin/login",
-    data: {email:"<?php echo $this->config->item('base_admin_teach_email'); ?>",'user_id':"<?= $this->session->userdata('hs_admin_id');?>"},
-    dataType:'json',
+    data: {
+      email: "<?php echo $this->config->item('base_admin_teach_email'); ?>",
+      'user_id': "<?= $this->session->userdata('hs_admin_id');?>"
+    },
+    dataType: 'json',
     success: function (response) {
-       if(response.success) {
-         location.reload();
-       }
+      if (response.success) {
+        location.reload();
+      }
     },
     error: function (jqXHR) {
       var response = $.parseJSON(jqXHR.responseText);
-      if(response.message) {
+      if (response.message) {
         alert(response.message);
       }
     }
-    });
+  });
   //   var popout = window.open("http://localhost/iipars/ugcnet/admin/admin/login");
   //   window.setTimeout(function(){
   //     popout.close();
   // }, 200);
-  </script>
-<?php }?>
+</script>
+<?php //}?>
 
 <script type="text/javascript">
   var ctx = document.getElementById("myChart").getContext('2d');
 
-  var chart_data = <?php echo $bar_chart_year; ?>;
+  var chart_data = < ? php echo $bar_chart_year; ? > ;
 
   //alert(chart_data);
 
@@ -781,7 +793,7 @@
 
       var ctx = document.getElementById("myChart").getContext('2d');
 
-      var chart_data = <?php echo $bar_chart_week; ?>;
+      var chart_data = < ? php echo $bar_chart_week; ? > ;
 
       //alert(chart_data);
 
@@ -829,9 +841,9 @@
 
       var ctx = document.getElementById("myChart").getContext('2d');
 
-      var chart_data = <?php echo $bar_chart_month; ?>;
+      var chart_data = < ? php echo $bar_chart_month; ? > ;
 
-      var chart_labels = <?php echo $bar_chart_month1; ?>;
+      var chart_labels = < ? php echo $bar_chart_month1; ? > ;
 
       //alert(chart_data);
 
@@ -881,7 +893,7 @@
 
       var ctx = document.getElementById("myChart").getContext('2d');
 
-      var chart_data = <?php echo $bar_chart_year; ?>;
+      var chart_data = < ? php echo $bar_chart_year; ? > ;
 
       //alert(chart_data);
 
@@ -933,7 +945,7 @@
 <script type="text/javascript">
   var ctx = document.getElementById('line_chart').getContext('2d');
 
-  var chart_data = <?php echo $bar_chart_year; ?>;
+  var chart_data = < ? php echo $bar_chart_year; ? > ;
 
   var myChart = new Chart(ctx, {
 
@@ -989,7 +1001,7 @@
 
       var ctx = document.getElementById("line_chart").getContext('2d');
 
-      var chart_data = <?php echo $bar_chart_week; ?>;
+      var chart_data = < ? php echo $bar_chart_week; ? > ;
 
       //alert(chart_data);
 
@@ -1041,9 +1053,9 @@
 
       var ctx = document.getElementById("line_chart").getContext('2d');
 
-      var chart_data = <?php echo $bar_chart_month; ?>;
+      var chart_data = < ? php echo $bar_chart_month; ? > ;
 
-      var chart_labels = <?php echo $bar_chart_month1; ?>;
+      var chart_labels = < ? php echo $bar_chart_month1; ? > ;
 
       //alert(chart_data);
 
@@ -1097,7 +1109,7 @@
 
       var ctx = document.getElementById("line_chart").getContext('2d');
 
-      var chart_data = <?php echo $bar_chart_year; ?>;
+      var chart_data = < ? php echo $bar_chart_year; ? > ;
 
       //alert(chart_data);
 

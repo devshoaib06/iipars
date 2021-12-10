@@ -25,23 +25,21 @@
                        
                         <div class="panel-group dashboard" id="accordion" role="tablist" aria-multiselectable="true">
                         @if( isset($purchasedcourses) && count($purchasedcourses) > 0)
-                            <?php 
+                            @php 
                                 $count=1;   
                                 $myLibrary=new \App\library\myFunctions();
                                 $protocol = $myLibrary->getYoutubeProtocol(); 
-                            ?>
+                            @endphp
                             @foreach ($purchasedcourses as $course)
                                 
                                     
                                 
-                                    <?php 
+                                    @php 
                                         $related_materials=$myLibrary->getRelatedMaterial($course->product_id);
                                         $related_materials_info=$myLibrary->getMaterialInfo($course->product_id);
-                                        // echo "<pre>";
-                                        //     print_r($related_materials_info[4]);
-                                        // echo "</pre>";
                                         
-                                    ?>
+                                        
+                                    @endphp
                                     <div class="panel panel-default">
                                         <div class="panel-heading" role="tab" id="heading-{{$course->tech_order_id}}">
                                             <h4 class="panel-title">
@@ -55,10 +53,10 @@
                                     <div id="collapse-{{$course->tech_order_id}}" class="panel-collapse collapse {{$count==1?'in':''}}" role="tabpanel" aria-labelledby="heading-{{$course->tech_order_id}}">
                                             <div class="panel-body">
                                                 <ul class="nav nav-tabs">
-                                                    <?php $material_count=[];$count_material=0;
+                                                    @php $material_count=[];$count_material=0;
                                                     $activecount=1;
                                                   
-                                                    ?>
+                                                    @endphp
                                                     
                                                     
                                                     <li class="active">
@@ -66,9 +64,9 @@
                                                     </li>
                                                 </ul>
                                                 <div class="tab-content">
-                                                    <?php $activecount=1;?>
+                                                    @php $activecount=1;@endphp
                                                     @foreach ($related_materials_info as $related_material)
-                                                        <?php 
+                                                        @php 
                                                             $subject_name=$myLibrary->getSubjectName($related_material['subject_id']);
                                                             $paper_name=$myLibrary->getPaperName($related_material['paper_id']);
                                                             $material_name=$myLibrary->getMaterialName($related_material['material_id']);
@@ -87,13 +85,13 @@
                                                             }
                                                             
                                                             
-                                                        ?>
+                                                        @endphp
                                                         
                                                         
-                                                                    <?php 
+                                                                    @php 
                                                                     $count_pdf=1;
                                                                    // echo $material_name;
-                                                                    ?>
+                                                                    @endphp
                                                                 @foreach ($course_data as $cdata) 
                                                                     @if($count_pdf && $cdata->media_type=='pdf')
                                                                         <div class="">
@@ -114,7 +112,7 @@
                     
                                                                                 </div>
                                                                                 
-                                                                                <?php $count_pdf++; ?>
+                                                                                @php $count_pdf++; @endphp
                                                                                 @endif
                                                                             </div>
                                                                         </div>
@@ -122,26 +120,26 @@
                                                                     @if($countvideo)
                                                                         @if($cdata->media_type=='video')
                                                                         <div class="col-sm-6 video-section">
-                                                                            <?php $count_video=0;?>
-                                                                                <?php  
+                                                                            @php $count_video=0;@endphp
+                                                                                @php  
                                                                                     
                                                                                     
-                                                                                $video_embed_link=$myLibrary->parseYouTubeUrl($cdata->value);?>
+                                                                                $video_embed_link=$myLibrary->parseYouTubeUrl($cdata->value);@endphp
                                                                                 
                                                                                 <div class="content_exists">
                                                                                     <iframe width="100%" height="300px" src="{{$protocol}}://www.youtube.com/embed/{{$video_embed_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                                                 
                                                                                 </div>
-                                                                                <?php $count_video++; ?>
+                                                                                @php $count_video++; @endphp
                                                                                 <h4 class="video_label">{{$cdata->title}}</h4>
 
                                                                         </div>
                                                                         @endif
                                                                     @endif
-                                                                    <?php 
+                                                                    @php 
                                                                         $activecount++;
                                                                     
-                                                                    ?>
+                                                                    @endphp
                                                                 @endforeach
                                                                      @php
                                                                          
@@ -179,9 +177,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php 
+                                    @php 
                                     $count++  
-                                    ?>
+                                    @endphp
                                 
                             @endforeach
                         @else

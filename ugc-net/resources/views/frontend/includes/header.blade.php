@@ -45,7 +45,7 @@ $defLng = 'en';
     <!-- CSS | Theme Color -->
     <link href="{{asset('public/frontend/css/colors/theme-skin-color-set1.css')}}" rel="stylesheet" type="text/css">
     <!-- CSS | Main style file -->
-    <link href="{{asset('public/frontend/css/style-main.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ config('path.iipars_base_url') }}/assets/css/style-main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{asset('public/frontend/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/owl.theme.default.min.css')}}">
 

@@ -78,10 +78,11 @@ class OrderController extends Controller {
     public function index(Request $request) {
         //echo $request->session()->pull('buy_course_id');die;
         //echo ;die;
+        // dd(Auth::check());
         if (Auth::check()) { 
-            $meta_array['meta_title']='Teachinns-Billing';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
+            $meta_array['meta_title']=env('APP_NAME','IIPARS').'-Billing';
+            $meta_array['meta_desc']=env('APP_NAME','IIPARS').'';
+            $meta_array['meta_keyword']=env('APP_NAME','IIPARS').'';
             
             $data_msg['page_metadata'] = (object)$meta_array;
             if($request->has('product_id')){
@@ -137,10 +138,13 @@ class OrderController extends Controller {
             $data_msg['userinfo'] =  DB::table('users')
                         ->join('students as st','st.user_id','users.id')
                         ->select('users.id', 'st.*', 'users.email')
-                        ->where('users.user_type_id', '=', '2')
+                        //->where('users.user_type_id', '=', '2')
                         ->where('users.id', '=', Auth::id())
                         ->first();
-            
+            // if(!$data_msg['userinfo']){
+            //     $data_msg['userinfo']=Auth::user();
+            // }
+            //     dd($data_msg['userinfo']);
             if(floor($data_msg['products']->price)=="0"){
                 $latestOrder=0;
                 $order_nr='TEC'.str_pad($latestOrder + 1, 5, "0", STR_PAD_LEFT);
@@ -186,11 +190,10 @@ class OrderController extends Controller {
          $result =  DB::table('users')
          ->join('students as st','st.user_id','users.id')
          ->select('users.id', 'st.*', 'users.email')
-         ->where('users.user_type_id', '=', '2')
+         //->where('users.user_type_id', '=', '2')
          ->where('users.id', '=', Auth::id());
          $result = $result->first();
-        //print_r($result);die;
- 
+            // dd($result);
             $billing_data=array(
                  'order_id'=>$localorderid,
                  'first_name'=>$result->firstname,
@@ -432,9 +435,9 @@ class OrderController extends Controller {
 
     public function orderPay(Request $request,$order_id)
     {
-        $meta_array['meta_title']='Teachinns-Order Pay';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
+        $meta_array['meta_title']=env('APP_NAME','IIPARS').'-Order Pay';
+            $meta_array['meta_desc']=env('APP_NAME','IIPARS').'';
+            $meta_array['meta_keyword']=env('APP_NAME','IIPARS').'';
             
             $data['page_metadata'] = (object)$meta_array;
         $order_id=Hasher::decode($order_id);
@@ -508,9 +511,9 @@ class OrderController extends Controller {
     public function thankYou(Request $request,$order_id)
     {
         
-        $meta_array['meta_title']='Teachinns-Thank You';
-        $meta_array['meta_desc']='Teachinns';
-        $meta_array['meta_keyword']='Teachinns';
+        $meta_array['meta_title']=env('APP_NAME','IIPARS').'-Thank You';
+        $meta_array['meta_desc']=env('APP_NAME','IIPARS').'';
+        $meta_array['meta_keyword']=env('APP_NAME','IIPARS').'';
         
         $data['page_metadata'] = (object)$meta_array;
         $order_id=Hasher::decode($order_id);
@@ -670,9 +673,9 @@ class OrderController extends Controller {
 
     public function paymentCancel(Request $request,$order_id)
     {
-        $meta_array['meta_title']='Teachinns-Cancel Payment';
-        $meta_array['meta_desc']='Teachinns';
-        $meta_array['meta_keyword']='Teachinns';
+        $meta_array['meta_title']=env('APP_NAME','IIPARS').'-Cancel Payment';
+        $meta_array['meta_desc']=env('APP_NAME','IIPARS').'';
+        $meta_array['meta_keyword']=env('APP_NAME','IIPARS').'';
         
         $data['page_metadata'] = (object)$meta_array;
         $order_id=Hasher::decode($order_id);
@@ -862,9 +865,9 @@ class OrderController extends Controller {
     {
         if (Auth::check())
         {
-            $meta_array['meta_title']='Teachinns-My Orders';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
+            $meta_array['meta_title']=env('APP_NAME','IIPARS').'-My Orders';
+            $meta_array['meta_desc']=env('APP_NAME','IIPARS').'';
+            $meta_array['meta_keyword']=env('APP_NAME','IIPARS').'';
            $data_msg['page_metadata'] = (object)$meta_array;
             $data_msg['allProducts']=Product::where('status',1)->orderBy('name','Asc')->get();
            

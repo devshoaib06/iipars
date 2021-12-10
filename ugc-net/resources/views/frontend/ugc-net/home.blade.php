@@ -42,16 +42,10 @@
                 @foreach ($papers as $paper)
                     <div class="col-sm-6 col-md-4">
                         <div class="course-details"><img alt=""
-                                src="https://teachinns.com/storage/uploads/banner/5fc9d6e685862.jpg"
+                                src="{{ url('public/frontend/images') }}/ugc_net_images/{{ $paper->paper_name }}.jpg"
                                 style="height:220px; width:100%">
                             <div class="details-overlay">
                                 <h3 class="text-white">{{ $paper->paper_name }}</h3>
-
-                                {{-- <div class="call-action" role="button" aria-hidden="true">
-                        <a
-                        href="https://teachinns.com/course/ugc-nta-netsetjrf/bengali-study-material"
-                        class=" btn btn-success">Only Paper-II</a>&nbsp;
-                    </div> --}}
                             </div>
                         </div>
                         <div class="unit">

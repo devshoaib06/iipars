@@ -182,7 +182,7 @@ Exams Paper
                                             </div>  
                                                                                                         
                                         </div>
-                                        <div class="contibutor-section">
+                                        {{-- <div class="contibutor-section">
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Contributor(s)</label>
                                                 
@@ -190,7 +190,7 @@ Exams Paper
                                             <div class="form-group contributor-list">
                                                 
                                             </div> 
-                                        </div> 
+                                        </div>  --}}
                                         <input type="hidden" id="checkcontent" name="check_content" value="0" >
                                         {{-- <div class="form-group">
                                             <label class="control-label col-md-3">Materials

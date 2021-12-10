@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class admin_login extends CI_Controller
+class admin_external_login extends CI_Controller
 {
     function __construct()
     {
@@ -26,7 +26,22 @@ class admin_login extends CI_Controller
         //$login_detail_subadmin=$this->admin_model->check_login_subadmin($username,$password);
         if (count($login_detail)) {
 
-           
+            /*if(@$login_detail[0]->user_type_id==3)
+            {
+                $this->session->set_flashdata('message', 'invalid user-name/password..!');
+                redirect(base_url().'index.php/admin_login');
+            }*/
+            // $ch = curl_init();
+            // curl_setopt($ch, CURLOPT_URL, "http://localhost/iipars/ugcnet/api/admin/login");
+            // curl_setopt($ch, CURLOPT_POST, 1);
+            // curl_setopt($ch, CURLOPT_POSTFIELDS, ['email'=>'contact@teachinns.com']);
+            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+            // $output = curl_exec($ch);
+            // curl_close($ch);
+            // echo "<pre>";
+            // print_r($output);
+            // die;
 
             $this ->response['response'] = json_decode($output);
             if (@$login_detail[0]->user_type_id == 6) {

@@ -341,7 +341,7 @@
 
               <div class="hed-cont widget mt-10 mb-10 m-0 login_p_cus_mobile">
 
-                <a class="btn mt-10 btn-success" href="<?php echo $this->url->link(2); ?>"><i class="fa fa-sign-in"
+                <a class="btn mt-10 btn-success" href="<?php echo base_url(); ?>/ugc-net/log-in"><i class="fa fa-sign-in"
                     aria-hidden="true"></i> Login</a>
 
                 <!-- <i class="fa fa-user-o text-theme-colored2 font-25 mt-5 mr-sm-0 sm-display-block pull-left flip sm-pull-none" aria-hidden="true"></i>

@@ -38,7 +38,8 @@ class admin_panel extends CI_Controller
         $data['active']='password';
         $this->load->view('common/header',$data);
         $this->load->view('common/leftmenu',$data);
-        $this->load->view('password/view_password');
+        // $this->load->view('password/view_password');
+        $this->load->view('password/password_change');
         $this->load->view('common/footer');
     }
 

@@ -8,7 +8,7 @@
      <section class="breadcamp">
             <div class="container">
                 <ul>
-                <li><a href="{{url('/')}}">Home</a></li>
+                <li><a href="{{ config('path.iipars_base_url') }}">Home</a></li>
                     <li>Registration</li>
                 </ul>
             </div>
@@ -110,14 +110,14 @@
                                             <input type="password" class="form-control" id="reset_password" name="reset_password" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    {{-- <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="ReCaptcha">Recaptcha:</label>
                                                 <span id="errNm1"></span>
                                                 {!! NoCaptcha::renderJs() !!}
                                                 {!! NoCaptcha::display() !!}
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             <p style="margin-top:15px;">By creating an account you agree to our <a href="{{url('/terms-condition')}}" target="blank">Terms & Conditions.</a></p>
                                 <button type="submit" class="submitbut">Sign Up</button>

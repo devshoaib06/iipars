@@ -85,7 +85,7 @@ class RegisterController extends Controller
             
             'email' => 'required|email|max:255|unique:users',
             //'password' => 'required|min:6',
-            'g-recaptcha-response' => 'required|captcha'
+            //'g-recaptcha-response' => 'required|captcha'
         ];
 
         return Validator::make($data, $validate);
@@ -225,12 +225,96 @@ class RegisterController extends Controller
     {
         //return  \Session::get('buy_course_id');
         $DataBag = $meta_array = array();
-        $meta_array['meta_title']='Sign Up | Teachinns';
+        $meta_array['meta_title']='Sign Up | '.env('APP_NAME','IIPARS');
         $meta_array['meta_desc']='Register with us and make the most of our valuable study materials for your CSIR UGC NET/SET/JRF exam preparation.';
-        $meta_array['meta_keyword']='Teachinns  - Sign Up';
+        $meta_array['meta_keyword']=env('APP_NAME','IIPARS').' - Sign Up';
         $meta_array['meta_robots']='noindex';
         
         $DataBag['page_metadata'] = (object)$meta_array;
         return view('frontend.auth.register',$DataBag);
+    }
+    public function login($value='')
+    {
+        //return  \Session::get('buy_course_id');
+        $DataBag = $meta_array = array();
+        $meta_array['meta_title']='Sign In | '.env('APP_NAME','IIPARS');
+        $meta_array['meta_desc']='Register with us and make the most of our valuable study materials for your CSIR UGC NET/SET/JRF exam preparation.';
+        $meta_array['meta_keyword']=env('APP_NAME','IIPARS').' - Sign In';
+        $meta_array['meta_robots']='noindex';
+        
+        $DataBag['page_metadata'] = (object)$meta_array;
+        return view('frontend.auth.login',$DataBag);
+    }
+
+    public function loginAction(Request $request)
+    {
+        $data = $request->all();
+        //dd($data);
+        $this->validate($request, ['email' => 'required', 'password' => 'required']);
+
+        $user = User::where('email', '=', $data['email'])
+            ->where('password', '=', md5($data['password']))
+            ->whereIn('user_type_id',['2'])
+            ->first();
+        if($user){
+                //return $user;
+            if($user->user_type_id!=1){
+
+                if ($user->status==1) {
+                    
+                    Auth::login($user);
+                    $redirecturl='';
+                    if($user->user_type_id==2){
+                        if($request->session()->has('buy_course_id')){
+                        
+                            $redirecturl=route('billing');
+                        }else if($request->session()->has('mock_test_login')){
+                            $redirecturl=route('showInstruction');
+                        }
+                        else{
+
+                            $redirecturl=$request->header('referer');
+                        }
+                    }
+                    
+                    if ($request->has('remberme')) {
+                        setcookie("techinns_web_username", $data['email'], time() + (86400 * 30));
+                        setcookie("techinns_web_password", $data['password'], time() + (86400 * 30));
+                    } else {
+                        unset($_COOKIE['techinns_web_username']);
+                        unset($_COOKIE['techinns_web_password']);
+                        setcookie("techinns_web_username", '', time() - 3600);
+                        setcookie("techinns_web_password", '', time() - 3600);
+                    }
+                    return redirect()->intended(route('home'))->with('messageClass', 'alert alert-success')
+                        ->with('message', 'Student successfully added');
+                    //return redirect()->back();
+                   
+                } 
+                elseif ($user->status==0) {
+                    $error=[
+                        'status' => false,
+                        'msg'    => 'Your Account has been blocked.',
+                    ];
+                    return back()->withErrors($error)->withInput();
+                    
+                }
+            }else {
+                $error=[
+                    'status' => false,
+                    'msg'    => 'Invalid username or password',
+                ];
+                return back()->withErrors($error)->withInput();
+                
+            }
+            
+        }else {
+            $error=[
+                'status' => false,
+                'msg'    => 'Invalid username or password',
+            ];
+            return back()->withErrors($error)->withInput();
+            
+        }
     }
 }

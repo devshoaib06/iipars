@@ -9,9 +9,8 @@
 ?>
 
 
-<section class="innerbanner">
-        <img src="<?php echo e(asset('public/frontend/images/shortbanner.jpg')); ?>" alt="">
-    </section>
+
+<?php echo $__env->make('frontend.includes.inner_page_banner', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 
 <section class="bodycont">

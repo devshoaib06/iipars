@@ -56,6 +56,8 @@ Route::get('/current-affair/{slug}', 'ArticleController@articleDetails')->name('
 
 
 Route::get('/sign-up', 'Auth\RegisterController@signUp')->name('sign-up');
+Route::get('/log-in', 'Auth\RegisterController@login')->name('student.login');
+Route::post('/log-in', 'Auth\RegisterController@loginAction')->name('student.loginAction');
 Route::post('/sign-up', 'Auth\RegisterController@signupAction')->name('signupAction');
 Route::post('userlogin', 'Auth\LoginController@login')->name('loginAction');
 Route::get('/logout', 'Auth\LoginController@logout')->name('frontendlogout');

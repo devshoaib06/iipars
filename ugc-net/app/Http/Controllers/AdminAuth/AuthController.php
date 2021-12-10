@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use DB;
 
 class AuthController extends Controller
 {
@@ -18,12 +19,15 @@ class AuthController extends Controller
         // (Auth::loginUsingId([1]))
         // $user=Auth::loginUsingId([1]);
         // Auth::guard('admins')->login($user);
+        $url=config('path.iipars_admin_base_url');
+        return redirect()->intended($url);
         if (Auth::guard('admins')->check()) {
             return redirect()->intended('admin');
         } else {
             return view('admin/auth/login');
             //return view('web.pages.provider.profile_setup', $data_msg);
         }
+
     }
     public function adminloginIIPARS(Request $request)
     {
@@ -46,7 +50,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        //dd('asa');
+        // $iipars_admin=DB::connection('mysql2')->table('tbl_user')->where('user_type_id',1)->first();
+        // $iipars_admin_email=$iipars_admin->login_email;
         
+
         if ($request->isMethod('post')) {
             $username = $request->input('username');
             $cookie_pwd = trim($request->input('password'));

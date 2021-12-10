@@ -310,11 +310,18 @@ class SubjectController extends Controller {
             $allExams = ExamMaster::where('status', '<>', '3')
                             ->orderBy('exam_name', 'desc')->get()->toArray();
             $data_msg["allExams"] = $allExams;
-            
+            $data_msg['allPapers'] = DB::table('paper_masters AS pm')
+                    ->select('pm.id as paper_id', 'E.exam_name', 'pm.paper_name')
+                    ->join('exam_masters as E', 'E.id', 'pm.exam_id')
+                    //->join('paper_masters as pm','epmr.paper_id','pm.id')
+                    ->where('pm.exam_id', 1)
+                    ->where('pm.status', 1)
+                    ->get();
+
             $data_msg["subject"] = $subject;
             $data_msg['menu_parent'] = 'products';
             $data_msg['menu_child'] = 'list_subject';
-			
+			// dd($data_msg);
             return view('admin.courses.subject.edit', $data_msg);
 			
         } else {

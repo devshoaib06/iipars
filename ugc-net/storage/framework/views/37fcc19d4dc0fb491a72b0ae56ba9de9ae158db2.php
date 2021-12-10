@@ -41,12 +41,10 @@
                 <?php $__currentLoopData = $papers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paper): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-sm-6 col-md-4">
                         <div class="course-details"><img alt=""
-                                src="https://teachinns.com/storage/uploads/banner/5fc9d6e685862.jpg"
+                                src="<?php echo e(url('public/frontend/images')); ?>/ugc_net_images/<?php echo e($paper->paper_name); ?>.jpg"
                                 style="height:220px; width:100%">
                             <div class="details-overlay">
                                 <h3 class="text-white"><?php echo e($paper->paper_name); ?></h3>
-
-                                
                             </div>
                         </div>
                         <div class="unit">

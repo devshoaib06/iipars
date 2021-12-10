@@ -118,10 +118,10 @@ class UserController extends Controller {
 
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Teachinns-Dashboard';
-             $meta_array['meta_desc']='Teachinns';
-             $meta_array['meta_keyword']='Teachinns';
-             $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']=env('APP_Name', 'IIPARS').'-Dashboard';
+             $meta_array['meta_desc']=env('APP_Name', 'IIPARS').'';
+             $meta_array['meta_keyword']=env('APP_Name', 'IIPARS').'';
+             $meta_array['meta_robots']=env('APP_Name', 'IIPARS').'';
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $userArr = User::find(Auth::id());
@@ -144,7 +144,7 @@ class UserController extends Controller {
                             'orders.payment_status'=>'success',
                             
                         ])
-                        ->where('products.end_date','>=',date('Y-m-d'))
+                        //->where('products.end_date','>=',date('Y-m-d'))
                         //->where('products.is_mock_test','=',0)      
                         ->orderBy('orders.created_at','desc')        
                         ->get(); 

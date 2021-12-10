@@ -231,21 +231,21 @@ Exams Paper
                                                                                                         
                                         </div>
                                         @if(count($allContributors)>0)
-                                        <div class="contibutor-section">
+                                        {{-- <div class="contibutor-section">
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Contributor(s)</label>
                                                 
                                             </div>
                                             <div class="form-group contributor-list">
                                                 @foreach ($allContributors as $contributor)
-                                                <?php $myfunction=new \App\library\myFunctions();
+                                                @php $myfunction=new \App\library\myFunctions();
                                                    
                                                         if(in_array($contributor->contributor_id,$relatedcontributors)){
                                                             $contributor_info=$myfunction->checkRelatedContentContributor($relatedexam->id,$contributor->contributor_id);
 
                                                         }
                                                     
-                                                ?>
+                                                @php
                                                     <div class="appendedContributor">
                                                         <label class="control-label col-md-3"></label>
                                                         <div class="col-md-3">
@@ -269,7 +269,7 @@ Exams Paper
                                                     </div>
                                                 @endforeach
                                             </div> 
-                                        </div>  
+                                        </div>   --}}
                                         @endif
                                         
 

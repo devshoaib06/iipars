@@ -20,7 +20,7 @@ class StudentAuthenticate
         //dd(auth()->user());
         if(auth()->user()){
 
-            if(auth()->user()->user_type_id == 2){
+            if(auth()->user()->user_type_id == 2 || auth()->user()->user_type_id == 1){
                 return $next($request);
             }
         }

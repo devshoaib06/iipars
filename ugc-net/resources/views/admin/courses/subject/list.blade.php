@@ -168,7 +168,9 @@
 												<th width="5%"> # </th>
 												<th width="20%"> Unit </th>
 												<th width="20%"> Exam Name </th>
+												<th width="20%"> Paper  </th>
                                                 <th width="15%"> Added Date </th>
+                                                <th width="5%"> Order By </th>
                                                 <th width="10%"> Status </th>
                                                 <th width="5%"> Action </th>
 
@@ -183,6 +185,14 @@
                                                         <option value="" >Select Exam Name</option>
                                                         @foreach($allExams as $v)
                                                         <option value="{{ $v->id }}" >{{ $v->exam_name }}</option>
+                                                        @endforeach
+                                                    </select>
+												</td>
+												<td>
+													<select name="paper_id" id="paper_id" class="form-control form-filter input-sm" > 
+                                                        <option value="" >Select Paper</option>
+                                                        @foreach($allPapers as $v)
+                                                        <option value="{{ $v->id }}" >{{ $v->paper_name }}</option>
                                                         @endforeach
                                                     </select>
 												</td>
@@ -205,7 +215,7 @@
                                                     </div>
                                                 </td>
                                                 <!--td--> 
-                                                           
+                                                <td style="width: 100px;text-align: center;"></td>            
 												<td>
                                                     <select name="status" class="form-control form-filter input-sm">
                                                         <option value="">Select...</option>
@@ -288,10 +298,11 @@
                         },
                         "columnDefs": [{// define columns sorting options(by default all columns are sortable extept the first checkbox column)
                                 'orderable': false,
-                                'targets': [0,4]
+                                'targets': [0,6]
                             }],
+                            
                         "order": [
-                            [1, "asc"]
+                            [5, "asc"],[3,"asc"]
                         ] // set first column as a default sort by asc
                     }
                 });
@@ -356,6 +367,22 @@
 
         jQuery(document).ready(function () {
             EcommerceOrdersView.init();
+
+            $(document).on('change','.sequence_update',function(){
+                debugger
+                let unit_id=$(this).data('id');
+                let sequence=$(this).val();
+                let url= "{{ route('saveSequence') }}"
+
+                let data={
+                    unit_id:unit_id, 
+                    sequence:sequence
+                }
+                $.post(url,data,function(response){
+
+                })
+            })
+
         });
 
     </script>

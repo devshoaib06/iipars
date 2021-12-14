@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\library\myFunctions;
 use App\ExamMaster;
+use App\PaperMaster;
 
 class SubjectController extends Controller {
 
@@ -84,9 +85,12 @@ class SubjectController extends Controller {
 
             $allExams = ExamMaster::where('status', '<>', '3')
                             ->orderBy('exam_name', 'desc')->get();
+            $allPapers = PaperMaster::where('status', '<>', '3')
+                            //->orderBy('paper_name', 'asc')
+                            ->get();
            
 			
-            return view('admin.courses.subject.list', compact('menu_parent', 'menu_child','allExams'));
+            return view('admin.courses.subject.list', compact('menu_parent', 'menu_child','allExams','allPapers'));
 			if($permission || Auth::guard('admins')->user()->user_type == 1){
 
 			
@@ -105,6 +109,7 @@ class SubjectController extends Controller {
 
             $subject_name = $request->input('subject_name');
             $exam_id = $request->input('exam_id');
+            $paper_id = $request->input('paper_id');
 
             $date_from = $request->input('date_from');
             $date_to = $request->input('date_to');
@@ -117,6 +122,9 @@ class SubjectController extends Controller {
             }
             if ($exam_id != '') {
                 $arrSearch[] = ['S.exam_id', 'like', '%' . $exam_id . '%'];
+            }
+            if ($paper_id != '') {
+                $arrSearch[] = ['S.paper_id', 'like', '%' . $paper_id . '%'];
             }
 
             if ($date_from != '') {
@@ -146,8 +154,9 @@ class SubjectController extends Controller {
                 $arrSearch[] = ['testimonial_type', $testimonial_type];
             }*/
             $subjects = DB::table('subject_masters AS S')
-                    ->select('S.id','E.exam_name', 'S.subject_name', 'S.created_at', 'S.status')
+                    ->select('S.id','E.exam_name', 'S.subject_name','P.paper_name' ,'S.created_at','sequence', 'S.status')
                     ->join('exam_masters as E','E.id','S.exam_id')
+                    ->leftjoin('paper_masters as P','P.id','S.paper_id')
                     ->where($arrSearch);
 
             //$coupons = $coupons->get();
@@ -170,7 +179,7 @@ class SubjectController extends Controller {
 
             $order = $request->input('order');
             
-            $column = array('#', 'subject_name', 'exam_name','created_at', 'S.status', 'action');
+            $column = array('#', 'subject_name', 'exam_name','paper_name','created_at', 'sequence','S.status', 'action');
 
 
             if ($order[0]['column'] != '') {
@@ -178,7 +187,7 @@ class SubjectController extends Controller {
             } else {
                 $column_name = $column[4];
             }
-
+            
             if ($order[0]['dir'] != '') {
                 $asc_desc = $order[0]['dir'];
             } else {
@@ -209,7 +218,9 @@ class SubjectController extends Controller {
                     $sl,
                     $t->subject_name,
                     $t->exam_name,
+                    $t->paper_name,
                     \Carbon\Carbon::parse($t->created_at)->format('d/m/Y'),
+                    '<input type="number" value="'.$t->sequence.'" style="width: 50px;" data-id="'.$t->id.'" class="sequence_update">',
                     $status,
                     '<a href="' .route('editSubject',['id'=>Hasher::encode($t->id)]) . '" class="btn btn-sm btn-default"><i class="fa fa-edit"></i> Edit </a>'
                         
@@ -258,19 +269,39 @@ class SubjectController extends Controller {
             $allExams = ExamMaster::where('status', '<>', '3')
                             ->orderBy('exam_name', 'desc')->get()->toArray();
             $data_msg["allExams"] = $allExams;
+            $data_msg['allPapers'] = DB::table('paper_masters AS pm')
+            ->select('pm.id as paper_id', 'E.exam_name', 'pm.paper_name')
+            ->join('exam_masters as E', 'E.id', 'pm.exam_id')
+            //->join('paper_masters as pm','epmr.paper_id','pm.id')
+            ->where('pm.exam_id', 1)
+            ->where('pm.status', 1)
+            ->get();
             if ($request->method() === "POST") {
             //return  $request->ip();
+            $subject_name = $request->input('subject_name');
+            $exam_id = $request->input('exam_id');
+            $paper_id = $request->input('paper_id');
+            
+            $status = $request->input('status');
+            $subject_slug=strtolower($subject_name);
 
-                $subject_name = $request->input('subject_name');
-                $exam_id = $request->input('exam_id');
+            if($request->paper_id!=1){
+                $data_to_format=$subject_name;
+                $slug_format=str_replace(' ','',preg_replace('/[^ \w-]/', '-', $data_to_format));
+                $subject_slug=strtolower($slug_format);
+            }
+            
+            
 
-                $status = $request->input('status');
-
-                $data_subject_details = array(					
-                    'subject_name' => $subject_name,
-                    'exam_id' => $exam_id,
-                    'status' => $status
-                );
+            
+            $data_subject_details = array(					
+                'subject_name' => $subject_name,
+                'exam_id' => $exam_id,
+                'paper_id' => $paper_id,
+                'subject_slug' => $subject_slug,
+                'status' => $status
+            );
+            //dd($request->all(),$data_subject_details);
 
                				
                 $validator = $this->validatorRegisterGeneral($data_subject_details);
@@ -287,10 +318,10 @@ class SubjectController extends Controller {
 				$user_id=SubjectMaster::create($data_subject_details)->id;
                              
                 $request->session()->flash('messageClass', 'alert alert-success');
-                $request->session()->flash('message', 'Subjects successfully added');
+                $request->session()->flash('message', 'Units successfully added');
                 
                 return redirect()->intended(route('subjects'))->with('messageClass', 'alert alert-success')
-                                ->with('message', 'Subjects successfully added');
+                                ->with('message', 'Units successfully added');
             }
 			
             return view('admin.courses.subject.create', $data_msg);
@@ -333,25 +364,37 @@ class SubjectController extends Controller {
     public function editSubjectAction(Request $request, $id) {
 
         $data = $request->all();
-        
+        //preg_replace('/[^ \w-]/', '', $data['subject_name']);
+        if($request->paper_id!=1){
+            $data_to_format=$data['subject_name'];
+            $slug_format=str_replace(' ','',preg_replace('/[^ \w-]/', '-', $data_to_format));
+            $data['subject_slug']=strtolower($slug_format);
+        }
         $validator = $this->validatorRegisterGeneral($data);
-        
         if ($validator->fails()) {
             $val = $validator->errors();
             return redirect()->intended(config("constants.admin_prefix") . '/' . 'subjects/edit/'.Hasher::encode($id))->withErrors($val)->withInput();
         }
         
-         $subject =  SubjectMaster::where('status','<>',3)->where(['id'=> $id])->first();
+        $subject =  SubjectMaster::where('status','<>',3)->where(['id'=> $id])->first();
+        // dd($data,$slug_format);
 
 
 
-     
+        
          $subject->update($data);
 
        	
         return redirect()->intended(config("constants.admin_prefix") . '/subjects')->with('messageClass', 'alert alert-success')
         ->with('message', 'Updated successfully');
 	        
+    }
+
+    public function ajaxSaveSequence(Request $request){
+        $subject_id=$request->unit_id;
+        $subject =  SubjectMaster::where('status','<>',3)->where(['id'=> $subject_id])->first();
+        $subject->sequence=$request->sequence;
+        $subject->save();
     }
 
 }

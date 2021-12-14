@@ -168,6 +168,7 @@ class ProductController extends Controller
                 $is_reseller_charge = $request->input('is_reseller_charge');
                 $slug = $request->input('slug') != "" ? Str::slug($request->input('slug')) : Str::slug($name, '-');
                 $is_preview = $request->input('is_preview');
+                $preview_main_course = isset($request->preview_main_course)?$request->preview_main_course:'';
 
                 $slug_count = Product::where('slug', $slug)->count();
                 if ($slug_count > 0) {
@@ -206,6 +207,7 @@ class ProductController extends Controller
                     'meta_robots' => $meta_robots,
                     'slug' => $slug,
                     'is_preview' => $is_preview,
+                    'preview_main_course' => $preview_main_course,
                     'image' => $filename,
                 );
                 DB::beginTransaction();
@@ -798,7 +800,7 @@ class ProductController extends Controller
                 $paper_allmaterial = json_decode($course_infos->paper_allmaterial);
                 
                 $data_msg['relatedexam'] = key($course_data);
-                $data_msg['allSubjects'] = SubjectMaster::where('status', 1)->where('exam_id', key($course_data))->get();
+                $data_msg['allSubjects'] = SubjectMaster::where('status', 1)->where('exam_id', key($course_data))->orderBy('sequence','asc')->get();
 
                 $paperlist = DB::table('paper_masters AS pm')
                     ->select('pm.id as paper_id', 'E.exam_name', 'pm.paper_name')
@@ -818,8 +820,7 @@ class ProductController extends Controller
                     $material_lists = ExamPaperMaterialMaster::where([
                         'exam_id' => $exam_id,
                         'paper_id' => $paper->paper_id,
-                    ])
-                        ->first();
+                    ])->first();
                     if ($material_lists) {
                         $materials = explode(",", $material_lists->material_list);
                         foreach ($materials as $material) {
@@ -852,6 +853,7 @@ class ProductController extends Controller
                         @$relatedSubjects[$key] = $val[1];
                     }
                 }
+                // dd($relatedSubjects);
                 $paper_allmaterial = (array)$paper_allmaterial;
                 $paper_allmaterial = array_filter($paper_allmaterial);
                 foreach ($paper_allmaterial as $paper => $allmaterial) {
@@ -925,6 +927,7 @@ class ProductController extends Controller
                 $meta_robots = $request->input('meta_robots');
                 $slug = $request->input('slug') != "" ? $request->input('slug') : Str::slug($name, '-');
                 $is_preview = $request->input('is_preview');
+                $preview_main_course = isset($request->preview_main_course)?$request->preview_main_course:'';
                 $status = $request->input('status');
 
                 //echo "<pre>";
@@ -979,6 +982,7 @@ class ProductController extends Controller
                     'status' => $status,
                     'slug' => $slug,
                     'is_preview' => $is_preview,
+                    'preview_main_course' => $preview_main_course,
                     'image' => $filename,
                 );
 
@@ -1130,7 +1134,11 @@ class ProductController extends Controller
                 }
             }
             $data['material_array'] = $material_array;
-            $data['allSubjects'] = SubjectMaster::where('status', 1)->where('exam_id', $request->exam_id)->get();
+            $data['allSubjects'] = SubjectMaster::where('status', 1)->where([
+                    'exam_id'=>$request->exam_id,
+                    'paper_id'=>$request->paper_id
+
+                ])->orderBy('sequence','asc')->get();
             // $data['allSubjects']= SubjectMaster::where('status',1)->get();//
 
             $data['paper_id'] = $paper_id;
@@ -1240,5 +1248,28 @@ class ProductController extends Controller
             ];
             return json_encode($response);
         }
+    }
+
+    public function ajaxPreviewMainCourse(Request $request)
+    {
+        $myFunction= new \App\library\myFunctions();
+        $exam_id=$request->exam_id;
+        $paper_id=$request->paper_id;
+        $allCourses=$myFunction->getCourses($exam_id,$paper_id);
+
+        $html='<label class="control-label">Preview Main Course <span class="required"> * </span></label>
+        <select name="preview_main_course" id="preview_main_course"
+        class="form-control">';
+        $html.='<option value="">Select Main Course</option>';
+        foreach ($allCourses as $course) {
+            if(!empty($course->product)){
+                $html.='<option value="'.$course->product->product_id.'">';
+                $html.= $course->product->name;
+                $html.='</option>';
+            }
+        }
+        $html.='</select>';
+
+        return $html;
     }
 }

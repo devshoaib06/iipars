@@ -168,6 +168,20 @@ Unit
                                         </div>
 
                                     </div>
+                                    <div class="form-group" id="paper-section">
+                                        <label class="control-label col-md-3">Paper <span class="required"> * </span></label>
+                                        <div class="col-md-6">
+
+                                            <select name="paper_id" id="paper_id" class="form-control">
+                                                <option value="">Select Paper</option>
+                                                @foreach($allPapers as $paper)   
+                                                    <option value="{{$paper->paper_id}}"
+                                                        {{($paper->paper_id==$subject->paper_id)?"selected":""}}
+                                                        >{{$paper->paper_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>  
 
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Unit</label>
@@ -181,7 +195,7 @@ Unit
                                         <label class="control-label col-md-3">Slug</label>
                                         <div class="col-md-6">
                                             <input type="text" name="subject_slug" class="form-control"
-                                                value="{{ $subject->subject_slug }}"/ autocomplete="off"> </div>
+                                                value="{{ $subject->subject_slug }}"/ autocomplete="off" > </div>
 
                                     </div>
 

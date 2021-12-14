@@ -133,9 +133,9 @@
                                         {{-- <li>
                                             <a href="#tab_2" data-toggle="tab">Materials</a>
                                         </li> --}}
-                                        {{-- <li>
+                                        <li>
                                             <a href="#tab_3" data-toggle="tab">Videos</a>
-                                        </li> --}}
+                                        </li>
                                         
 										
                                     </ul>
@@ -167,7 +167,37 @@
                                                             <div class="form-group" id="paper-section">
                                                                 
                                                             </div>  
-                                                            
+                                                            {{-- <div class="form-group">
+                                                                <label class="control-label subject-info">Subject <span class="required"> * </span></label>
+                                                                <div class="radio-list subject-list">
+                                                                   @foreach ($allSubjects as $subject)
+                                                                    <label class="radio-inline" for="example-inline-radio{{$subject->id}}">
+                                                                        <input id="example-inline-radio{{$subject->id}}" 
+                                                                               type="checkbox" 
+                                                                               value="{{$subject->id}}" 
+                                                                               name="subject_list[]"
+                                                                        >
+                                                                        {{$subject->subject_name}}
+                                                                    </label>
+                                                                   @endforeach
+                                                                   
+                                                                </div>
+                                                            </div>   --}}
+                                                            {{-- <div class="form-group">
+                                                                <label class="control-label">Material <span class="required"> * </span></label>
+                                                                <div class="radio-list subject-list">
+                                                                    @foreach ($allMaterials as $material)
+                                                                     <label class="radio-inline" for="example-inline-radio{{$material->id}}">
+                                                                         <input id="example-inline-radio{{$material->id}}" 
+                                                                                type="checkbox" 
+                                                                                value="{{$material->id}}" 
+                                                                                name="subject_list[]"
+                                                                         >
+                                                                         {{$material->material_name}}
+                                                                     </label>
+                                                                    @endforeach
+                                                                 </div>
+                                                            </div> --}}
                                                            
                                                                 <div class="form-group">
                                                                     <label class="control-label">Name <span class="required"> * </span></label>
@@ -219,7 +249,7 @@
                                                                     @endif
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Price (Per unit) <span class="required"> * </span></label>
+                                                                    <label class="control-label">Price <span class="required"> * </span></label>
                                                                     <input type="text"  name="course_price" id="course_price" class="form-control" value="{{ old('course_price') }}"/> 
                                                                     @if ($errors->has('course_price'))
                                                                     <span class="help-block">
@@ -228,7 +258,7 @@
                                                                     @endif
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Revised Percentage(%)(Per unit) </label>
+                                                                    <label class="control-label">Revised Percentage(%) </label>
                                                                     <input type="text"  name="revised_percent" class="form-control" id="revised_percent" value="{{ old('revised_percent') }}"/> 
                                                                     @if ($errors->has('revised_percent'))
                                                                     <span class="help-block">
@@ -237,7 +267,7 @@
                                                                     @endif
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Revised Price(Per unit) </label>
+                                                                    <label class="control-label">Revised Price </label>
                                                                     <input type="text"  name="revised_price" id="revised_price" class="form-control" value="{{ old('revised_price') }}"/> 
                                                                     @if ($errors->has('revised_price'))
                                                                     <span class="help-block">
@@ -352,10 +382,10 @@
                                                                         <label class="radio-inline" for="featured-inline-radio1">
                                                                             <input id="featured-inline-radio1" type="radio" value="1" name="is_popular" checked="checked"> Yes</label>
                                                                         <label class="radio-inline" for="featured-inline-radio2">
-                                                                            <input id="featured-inline-radio2" type="radio" value="0" name="is_popular" checked> No</label>
+                                                                            <input id="featured-inline-radio2" type="radio" value="0" name="is_popular"> No</label>
                                                                     </div>
                                                                 </div> 
-																<div class="form-group hide">
+																<div class="form-group">
                                                                     <label class="ccontrol-label">Is Combo Course <span class="required"> * </span></label>
                                                                     <div class="radio-list">
                                                                         <label class="radio-inline" for="combo-course-inline-radio1">
@@ -364,7 +394,7 @@
                                                                             <input id="combo-course-inline-radio2" type="radio" value="0" name="is_combo" checked="checked" > No</label>
                                                                     </div>
                                                                 </div> 
-                                                                <div class="form-group ">
+                                                                <div class="form-group">
                                                                     <label class="ccontrol-label">Is Preview  <span class="required"> * </span></label>
                                                                     <div class="radio-list">
                                                                         <label class="radio-inline" for="preview-inline-radio1">
@@ -372,6 +402,10 @@
                                                                         <label class="radio-inline" for="preview-inline-radio2">
                                                                             <input id="preview-inline-radio2" type="radio" value="0" name="is_preview" checked > No</label>
                                                                     </div>
+                                                                </div>
+                                                                <div class="form-group preview_main_section">
+                                                
+                                                                    
                                                                 </div>
                                                                 <div class="form-group hide">
                                                                     <label class="ccontrol-label">Show on Home slider <span class="required"> * </span></label>
@@ -749,30 +783,20 @@
                     let paperhtml='<label class="control-label">Paper</label>';
                         paperhtml+='<span class="required" aria-required="true"> * </span>';
                         paperhtml+='<div class="check-list ">';
+                    $.each(response,function(key,res){
                         paperhtml+='<div class="paper-sub-section">';
-                        paperhtml+='<select name="paper_list[]" id="paper_id" class="form-control">';
-                        paperhtml+='<option value="">Select Paper</option>';
-                        $.each(response,function(key,res){
-                            paperhtml+='<option value="'+res.paper_id+'">'+res.paper_name+'</option>';
-                        })
-                        paperhtml+='</select>';
-                        
-                        // $.each(response,function(key,res){
-                        //     paperhtml+='<div class="paper-sub-section">';
-                        //     paperhtml+='<label class="check-inline" for="example-inline-check-'+key+'-'+res.paper_id+'">';
-                        //     //paperhtml+='<div class="checker" id="example-inline-check-'+key+'"><span>';
-                        //     paperhtml+='<input id="example-inline-check-'+key+'-'+res.paper_id+'" class="paper_check" type="checkbox" value="'+res.paper_id+'" name="paper_list[]">';
-                        //     //paperhtml+='</span></div>';
-                        //     paperhtml+=' '+res.paper_name;
-                        //     paperhtml+='</label>';
-                        //     //paperhtml+='<label class="control-label">Subject</label>';
-                        //     paperhtml+='<div class="material-section"></div>';
-                        //     paperhtml+='<div class="subject-section"></div>';
-                        //     paperhtml+='</div>';
-                            
-                        // })
-                        paperhtml+='<div class="subject-section"></div>';
+                        paperhtml+='<label class="check-inline" for="example-inline-check-'+key+'-'+res.paper_id+'">';
+                        //paperhtml+='<div class="checker" id="example-inline-check-'+key+'"><span>';
+                        paperhtml+='<input id="example-inline-check-'+key+'-'+res.paper_id+'" class="paper_check" type="checkbox" value="'+res.paper_id+'" name="paper_list[]">';
+                        //paperhtml+='</span></div>';
+                        paperhtml+=' '+res.paper_name;
+                        paperhtml+='</label>';
                         paperhtml+='<div class="material-section"></div>';
+                        //paperhtml+='<label class="control-label">Subject</label>';
+                        paperhtml+='<div class="subject-section"></div>';
+                        paperhtml+='</div>';
+                        
+                    })
                         paperhtml+='</div>';
                                                                     
                     $("#paper-section").html(paperhtml);                                      
@@ -781,28 +805,29 @@
 
       
         })
-        $(document).on('change','#paper_id',function(){
+
+        var selected_paper='';
+        $(document).on('click','.paper_check',function(){
             var $this=$(this);
             let exam_id=$("#exam_id").val();
             let paper_id=$(this).val();
+            selected_paper=paper_id;
             let data={
                 exam_id:exam_id,
                 paper_id:paper_id
             }
-            debugger
             let url="{{route('ajaxAddCourseExamPaperMaterial')}}"
             $this.parents('.paper-sub-section').find('.material-section').html('');
             $this.parents('.paper-sub-section').find('.subject-section').html('');
 
-            //if($(this).is(":checked")){
+            if($(this).is(":checked")){
                 $.post(url,data,function(response){
                     
 
                     if ( response.length != 0 ){
                         let paperhtml='';
-                            
-                            paperhtml+='<div class="check-list paper-material-list">';
-                            paperhtml+='<label class="control-label subject-info">Materials <span class="required"> * </span></label>';
+                            paperhtml='<div class="check-list paper-material-list">';
+                            paperhtml='<div class="check-list paper-material-list">';
                             paperhtml+='<label class="check col-sm-12" for="example-check-all-'+paper_id+'">';
                             paperhtml+='<input id="example-check-all-'+paper_id+'" class="material-list-all-check" type="checkbox" value="1" name="all_material'+paper_id+'[]">';
                             paperhtml+=' All '
@@ -816,23 +841,24 @@
                         })
                             paperhtml+='</div>';
 
+                            
+
                         let subjecthtml=  ' <div class="form-group">';
-                            subjecthtml+= '<label class="control-label subject-info">Unit <span class="required"> * </span></label>'
+                            subjecthtml+= '<label class="control-label subject-info">Units <span class="required"> * </span></label>'
                             subjecthtml+= '<div class="radio-list subject-list">'
-                            subjecthtml+='<label class="check col-sm-12" for="subject-check-all-'+paper_id+'">';
-                            subjecthtml+='<input id="subject-check-all-'+paper_id+'" class="subject-list-all-check" type="checkbox" value="1" name="all_subject'+paper_id+'[]">';
-                            subjecthtml+=' All '
-                            subjecthtml+='</label>';
+                            subjecthtml+= '<label class="check " for="subject-check-all-0">'
+                            subjecthtml+= '<input id="subject-check-all-0" class="subject-list-all-check" type="checkbox" value="1" name="all_subject0[]">  All'
+                            subjecthtml+= '</label>'
                         $.each(response.allSubjects,function(key,subject){
                             subjecthtml+= '<label class="radio-inline" for="example-inline-radio'+key+'-'+subject.id+'">'
-                            subjecthtml+='<input id="example-inline-radio'+key+'-'+subject.id+'" class="subject-list-check" type="checkbox" value="'+subject.id+'" name="subject_list'+response.paper_id+'[]">'
+                            subjecthtml+='<input id="example-inline-radio'+key+'-'+subject.id+'" type="checkbox" class="subject-list-check" value="'+subject.id+'" name="subject_list'+response.paper_id+'[]">'
                             subjecthtml+=' '+subject.subject_name;                                                                       
                             subjecthtml+='</label>'
                         });                                           
                                                                    
                             subjecthtml+= '</div>'
-                            
-
+                            subjecthtml+= '</div>'; 
+                                                                        
                             $this.parents('.paper-sub-section').find('.material-section').html(paperhtml);   
                             $this.parents('.paper-sub-section').find('.subject-section').html(subjecthtml);   
                             $this.parents('.paper-sub-section').find('.material-section').find('input.material-list-check').prop('checked',true);                                   
@@ -840,8 +866,27 @@
                     }
                     
                 })  
-            //}    
+            }    
       
+        })
+
+        $(document).on('change','input[name="is_preview"]',function(){
+            let is_preview_val=$(this).val();
+            let exam_id=$("#exam_id").val();
+            let url="{{ route('ajaxPreviewMainCourse') }}";
+            paper_id=selected_paper;
+
+            let data={
+                exam_id:exam_id,
+                paper_id:paper_id,
+            };
+            $('.preview_main_section').html('')
+            if(is_preview_val==1){
+                $.post(url,data,function(response){
+                    $('.preview_main_section').html(response);
+                }) 
+            }
+
         })
 
         $(document).on('click','.material-list-all-check',function(){
@@ -854,13 +899,14 @@
             }
             
         });
+
         $(document).on('click','.subject-list-all-check',function(){
-            //debugger;
-            $(this).parents('.subject-section').find('.subject-list-check').prop('checked',false);
-            $(this).parents('.subject-section').find('.checker').find('span').removeClass('checked');
+            debugger;
+            $(this).parents('.subject-list').find('.subject-list-check').prop('checked',false);
+            $(this).parents('.subject-list').find('.checker').find('span').removeClass('checked');
             if($(this).is(":checked")){
-                $(this).parents('.subject-section').find('.checker').find('span').addClass('checked');
-                $(this).parents('.subject-section').find('.subject-list-check').prop('checked',true);
+                $(this).parents('.subject-list').find('.checker').find('span').addClass('checked');
+                $(this).parents('.subject-list').find('.subject-list-check').prop('checked',true);
             }
             
         });

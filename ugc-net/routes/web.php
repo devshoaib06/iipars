@@ -320,6 +320,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/ajax-addcourse-exam-paper-material', 'ProductController@ajaxAddCourseExamPaperMaterial')->name('ajaxAddCourseExamPaperMaterial');    
     Route::post('/ajax-product-delete', 'ProductController@ajaxProductDelete')->name('ajaxProductDelete');
     Route::post('/ajax-course-exam-paper', 'ProductController@ajaxCourseExamPaper')->name('ajaxCourseExamPaper'); 
+    Route::post('/ajax-preview-main-course', 'ProductController@ajaxPreviewMainCourse')->name('ajaxPreviewMainCourse'); 
 
     //Courses/Combo Course
     Route::get('combo-course', 'ComboCourseController@listComboCourse')->name('combo-course');
@@ -360,6 +361,7 @@ Route::prefix('admin')->group(function () {
     Route::any('subjects/create', 'SubjectController@createSubjects')->name('createSubjects');
     Route::get('subjects/edit/{id}', 'SubjectController@editSubject')->name('editSubject');
     Route::post('subjects/update/{id}', 'SubjectController@editSubjectAction')->name('subjectUpdate');
+    Route::post('/ajax-post-sequence', 'SubjectController@ajaxSaveSequence')->name('saveSequence');
 
      //Material
     Route::get('materials', 'MaterialController@showMaterialList')->name('materials');

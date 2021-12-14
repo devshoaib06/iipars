@@ -15,4 +15,9 @@ class CourseExamPaperRelation extends Model
         
     ];
 
+    public function product()
+    {
+        return $this->belongsTo(\App\Product::class,'product_id','product_id')->where('is_preview',0);
+    }
+
 }

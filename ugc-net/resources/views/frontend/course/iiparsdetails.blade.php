@@ -133,7 +133,7 @@
                             //     print_r($materials);
                             // echo "</pre>";
                             ?>
-                        <h4>{{ $paper_name }} {{ $units->subject_name }}</h4>
+                        <h4>{{ $paper_name }}</h4>
                         @if (count($materials) > 0)
                         <ul>
                             @foreach ($materials as $material)

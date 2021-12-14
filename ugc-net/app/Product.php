@@ -23,6 +23,7 @@ class Product extends Model
     	'end_date',
     	'is_popular',
     	'is_preview',
+    	'preview_main_course',
     	'is_reseller_charge',
     	'slug',
     	'is_combo',

@@ -1486,12 +1486,13 @@ class myFunctions {
 	public function getPaperUnits($exam_id = 1, $paper_id)
 	{
 		$results = DB::table('course_exam_paper_subject_relations as cepsr')
-            ->select('cepsr.product_id','subject_masters.subject_slug','products.is_preview','cepsr.exam_id','cepsr.paper_id','products.name','products.slug','subject_masters.subject_name','cepsr.subject_id')
+            ->select('cepsr.product_id','subject_masters.subject_slug','products.is_preview','subject_masters.sequence','cepsr.exam_id','cepsr.paper_id','products.name','products.slug','subject_masters.subject_name','cepsr.subject_id')
 		    ->join('products','cepsr.product_id','products.product_id')
 		    ->join('subject_masters','cepsr.subject_id','subject_masters.id')
 		    ->where('cepsr.exam_id', $exam_id)
 		    ->where('cepsr.paper_id', $paper_id)
             ->groupBy('cepsr.subject_id')
+            ->orderBy('subject_masters.sequence')
             ->get();
 		
 		return $results;
@@ -1516,6 +1517,28 @@ class myFunctions {
 		// echo "</pre>";
 		return $results;
 	}
+
+    public function getPaperAdminUnits($exam_id = 1, $paper_id)
+	{
+		$results = \App\SubjectMaster::where('paper_id',$paper_id)->get();
+		// dd($results);
+		return $results;
+	}
+
+    function getCourses($exam_id = 1, $paper_id){
+        $courses= \App\CourseExamPaperRelation::where([
+            'exam_id' => $exam_id, 
+            'paper_id'=>$paper_id
+        ])->get();
+        //dd($courses[0]->product->name);
+
+        return $courses;
+    }
+    function getCoursePreview($product_id){
+        $course= \App\Product::where('preview_main_course',$product_id)->first();
+
+        return $course;
+    }
 
 
 }

@@ -76,7 +76,7 @@ class FrontEndController extends Controller
 
         
 
-        $meta_array['meta_title'] = 'UGC & CSIR NTA NET/SET/JRF Study Material 2020 | ' . env('APP_NAME');
+        $meta_array['meta_title'] = 'UGC  NET/SET/JRF Study Material 2020 | ' . env('APP_NAME');
         $meta_array['meta_desc'] = 'Teachinns-the #1 online exam preparation site to get success in the UGC CSIR/ NET/SET/JRF exam 2020. 100% syllabus covering study material, mock tests, & more.';
         $meta_array['meta_keyword'] = 'ugc net study material, ugc net paper 1 study material pdf, csir net study material, ugc net preparation material';
         $meta_array['meta_robots'] = 'Teachinns';
@@ -85,8 +85,10 @@ class FrontEndController extends Controller
 
         $DataBag['papers'] = \App\PaperMaster::where('status', 1)->get();
 
-
-        return view('frontend.ugc-net.home', $DataBag);
+        $DataBag['homepage'] =DB::connection('mysql2')->table('tbl_page_manage')->where('menu_id',44)->first();
+               
+        
+        return view('frontend.ugc-net.ugc-net', $DataBag);
         return view('frontend.home', $DataBag);
     }
 
@@ -102,6 +104,8 @@ class FrontEndController extends Controller
             ->where('slug', '=', $slug)
             ->where('status', '=', '1')
             ->first();
+           
+
         // return $slug;
         if ($product) {
             $meta_array['meta_title'] = $product->meta_title . ' | ' . env('APP_NAME', 'IIPARS');
@@ -143,12 +147,10 @@ class FrontEndController extends Controller
 
 
             $DataBag['related_materials'] = $relatedmaterials;
+            $DataBag['related_units']= $product->productUnits;
 
-
-
-            //return $DataBag['related_materials'];
             $DataBag['page_metadata'] = (object)$meta_array;
-            //dd($DataBag);
+            // dd($product->productUnits);
             return view('frontend.course.iiparsdetails', $DataBag);
             return view('frontend.course.details', $DataBag);
         } else {

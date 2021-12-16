@@ -187,9 +187,45 @@ class teachinns_home_model extends CI_Model
 		$this->db2->where('cepsr.exam_id', $exam_id);
 		$this->db2->where('cepsr.paper_id', $paper_id);
 		$this->db2->order_by('subject_masters.id', 'asc');
-		// $this->db2->group_by('cepsr.subject_id');
+		//$this->db2->group_by('cepsr.subject_id');
 		$query = $this->db2->get();
 		
 		return $query->result();
 	}
+
+	function getCourses($exam_id = 1, $paper_id){
+        // $courses= \App\CourseExamPaperRelation::where([
+        //     'exam_id' => $exam_id, 
+        //     'paper_id'=>$paper_id
+        // ])->get();
+	
+		$this->db2->select('cepsr.product_id,products.is_preview,cepsr.exam_id,cepsr.paper_id,products.name,products.slug');
+		$this->db2->join('products','cepsr.product_id=products.product_id');
+		$this->db2->from('course_exam_paper_relations as cepsr');
+		$this->db2->where('cepsr.exam_id', $exam_id);
+		$this->db2->where('cepsr.paper_id', $paper_id);
+		$this->db2->where('products.is_preview', 0);
+		$query = $this->db2->get();
+		
+        $result= $query->result();
+		if(count( $result)>0){
+			return $result;
+		}
+		
+		return [];
+    }
+    function getCoursePreview($product_id){
+		$course=$this->db2->select('*');
+		$this->db2->from('products');
+		$this->db2->where('preview_main_course', $product_id);
+		$query = $this->db2->get();
+
+		$result= $query->result();
+		if(count( $result)>0){
+			return $result[0];
+		}
+		
+		return [];
+       
+    }
 }

@@ -121,6 +121,8 @@
 
 
                     {!! html_entity_decode($course_details_page->intro_text) !!}
+
+                    
                     <hr>
 
                     <h3>What you'll Get</h3>
@@ -128,23 +130,32 @@
 
                         @foreach ($related_materials as $paper => $materials)
                         <?php $myFuntion = new \App\library\myFunctions();
-                            $paper_name = @$myFuntion->getPaperName($paper);
-                            // echo "<pre>";
-                            //     print_r($materials);
-                            // echo "</pre>";
+                            $paper_info = @$myFuntion->getPaperName($paper);
+                           
                             ?>
-                        <h4>{{ $paper_name }}</h4>
+                        <h4>{{ $paper_info->paper_name }} </h4>
+                       
                         @if (count($materials) > 0)
+                        @php
+                            $exam_paper_units=@$myFuntion->getPaperSubject($course_details_page->product_id,$paper_info->id);
+                        @endphp
                         <ul>
+                            @foreach ($exam_paper_units as $exam_paper_unit)
+                                
+                                <li>{{$exam_paper_unit->subject->subject_name}} </li>
+                            @endforeach
+                        </ul>    
+                       
                             @foreach ($materials as $material)
                             <?php
                                         $material_name = @$myFuntion->getMaterialName($material);
                                         ?>
-                            <li>{{ $material_name }}</li>
+                            <p>{{ $material_name }}</p>
                             @endforeach
 
-                        </ul>
+                        
                         @endif
+                       
                         @endforeach
                     </div>
                     {!! html_entity_decode($course_details_page->description) !!}

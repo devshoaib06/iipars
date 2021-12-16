@@ -15,4 +15,9 @@ class CourseExamPaperSubjectRelation extends Model
         'paper_id'
     ];
 
+    public function subject()
+    {
+        return $this->belongsTo(\App\SubjectMaster::class,'subject_id','id');
+    }
+
 }

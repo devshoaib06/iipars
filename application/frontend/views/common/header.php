@@ -278,14 +278,14 @@
 
           <div class="row">
 
-            <div class="col-xs-12 col-sm-12 col-md-3">
+            <div class="col-xs-12 col-sm-3 col-md-3">
 
               <a class="menuzord-brand pull-left flip sm-pull-center" href="<?php echo base_url(); ?>"><img
                   src="<?php echo base_url(); ?>assets/images/new-aeducation-logo.png" alt=""></a>
 
             </div>
 
-            <div class="col-xs-12 col-sm-4 col-md-9 text-ali-rt text-ce-res">
+            <div class="col-xs-12 col-sm-9 col-md-9 text-ali-rt text-ce-res">
 
               <div class="hed-cont widget mt-10 mb-10 m-0 res-none">
                 <a class="btn mt-10 trans-btn"
@@ -341,7 +341,7 @@
 
               <div class="hed-cont widget mt-10 mb-10 m-0 login_p_cus_mobile">
 
-                <a class="btn mt-10 btn-success" href="<?php echo base_url(); ?>/ugc-net/log-in"><i class="fa fa-sign-in"
+                <a class="btn mt-10 btn-success" href="<?php echo base_url(); ?>ugc-net/log-in"><i class="fa fa-sign-in"
                     aria-hidden="true"></i> Login</a>
 
                 <!-- <i class="fa fa-user-o text-theme-colored2 font-25 mt-5 mr-sm-0 sm-display-block pull-left flip sm-pull-none" aria-hidden="true"></i>
@@ -375,9 +375,9 @@
 
                   <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-					Dropdown button
+          Dropdown button
 
-				  </button> -->
+          </button> -->
 
                   <div class="dropdown-menu nw-drop-menu" aria-labelledby="dropdownMenuButton">
 
@@ -439,23 +439,28 @@
 
             <nav id="menuzord" class="menuzord red">
 
+              <?php  $seg1= $this->uri->segment(1); ?>
+
               <ul class="menuzord-menu">
 
-                <li><a href="<?php echo $this->url->link(1); ?>">Home</a></li>
+                <li <?php if(empty($seg1) || $seg1 == 'home' ){?> class="active" <?php } ?>><a
+                    href="<?php echo $this->url->link(1); ?>">Home</a></li>
 
-                <li><a href="<?php echo base_url(); ?>cms/page/about">About Us</a></li>
+                <li <?php if(!empty($seg1) && ($seg1 == 'about') ){?> class="active" <?php } ?>><a
+                    href="<?php echo base_url(); ?>about">About Us</a></li>
 
 
-                <li><a href="#">UGC - NET</a>
+                <li <?php if(!empty($seg1) && ($seg1 == 'ugc-net') ){?> class="active" <?php } ?>><a
+                    href="<?php echo base_url(); ?>ugc-net">UGC - NET</a>
 
                   <ul class="dropdown">
                     <?php
-                      foreach ($subjects as $subject) {
+                    foreach ($subjects as $subject) {
                     ?>
 
                     <li><a href="#">
                         <?php
-                            echo $subject->paper_name=='PAPER - I'?'<h4 class="m-0">Paper – I</h4>':$subject->paper_name;
+                          echo $subject->paper_name == 'PAPER - I' ? '<h4 class="m-0">Paper – I</h4>' : $subject->paper_name;
                           ?>
 
                         <span class="indicator"><i class="fa fa-angle-right"></i></span>
@@ -463,352 +468,200 @@
 
                       <ul class="dropdown" aria-labelledby="dropdownSubMenu1" style="">
                         <li>
-                          <h4 style="padding-left: 22px;">Units</h4>
+                          <h4 style="padding-left: 22px;">Courses</h4>
                         </li>
                         <li role="separator" class="divider bg-dark" style="height: 1px; background: #ccc;"></li>
                         <?php
-                            $units=$this->teachinns_home_model->getPaperUnits(1,$subject->id);
-                            
-                            foreach ($units as $unit) {
+                          $allCourses = $this->teachinns_home_model->getCourses(1, $subject->id);
+                          foreach ($allCourses as $course) {
+
                           ?>
-
-
                         <li>
                           <a href="#">
-                            <?= $unit->subject_name;?>
+                            <?= $course->name; ?>
                           </a>
                           <ul class="dropdown" aria-labelledby="dropdownSubMenu2" style="">
-                            <?php 
-                                $courses=$this->teachinns_home_model->getCourseInfo(1,$subject->id,$unit->subject_id);
-                                
-                                //print_r($courses);
-                                foreach ($courses as $course) {
-                                  $slug=$course->slug;
-                                  if($course->is_preview==1){?>
-                                    <li><a
-                                        href="<?= base_url()?>ugc-net/course/<?= $slug.'/'.$unit->subject_slug;?>">Preview</a>
-                                    </li>
-                                  <?php } if($course->is_preview==0){?>
-                                    <li><a href="<?= base_url()?>ugc-net/course/<?= $slug.'/'.$unit->subject_slug ;?>">Order
-                                        Now</a>
-                                    </li>
-                                  
-                                  <?php }?>
-
-                                <?php }?>
-                            
+                            <?php
+                                $preview_course = $this->teachinns_home_model->getCoursePreview($course->product_id);
+                                // echo "<pre>";
+                                // print_r($preview_course);
+                                // echo "</pre>";
+                                ?>
+                            <?php if (@count($preview_course) > 0) { ?>
+                            <li>
+                              <a href="<?= base_url() ?>ugc-net/course/<?= $preview_course->slug; ?>">Preview</a>
+                            </li>
+                            <?php } ?>
+                            <li>
+                              <a href="<?= base_url() ?>ugc-net/course/<?= $course->slug; ?>">Order Now</a>
+                            </li>
                           </ul>
+
                         </li>
-                        <?php }?>
-                        
+
+                        <?php } ?>
                       </ul>
 
                     </li>
-                    <?php }?>
-
-                  </ul>
-                </li>
-
-                <li><a href="<?php echo base_url(); ?>cms/page/economics">Economics</a></li>
-
-                <li><a href="<?php echo base_url(); ?>cms/writing_consultancy_all">Writing Consultancy</a>
-
-                  <ul class="dropdown">
-
-                    <?php 
-					    if(!empty($writing_consultancy_page_detl)){
-					        //echo '<pre>';print_r($writing_consultancy_page_detl); exit;
-					        foreach($writing_consultancy_page_detl as $wcpd){
-					        ?>
-					        <li><a href="<?php echo base_url();?>cms/writing_consultancy/<?php echo $wcpd->slug; ?>"><?php echo $wcpd->title; ?></a></li>
-					        
-					       
-					        <?php
-					        }
-					    }?>
-
-
-    
-
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/writing_consultancy">Research Paper-->
-                    <!--    Writing-->
-                    <!--    Consultancy</a></li>-->
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/paper_publication">Research Paper-->
-                    <!--    Publication-->
-                    <!--    Consultancy</a></li>-->
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/Manage_phd">Ph. D. Thesis writing-->
-                    <!--    Consultancy</a></li>-->
-
-
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/mphil_dissertation">M.Phil.-->
-                    <!--    Dissertation-->
-                    <!--    writing Consultancy</a></li>-->
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/project_work">Project Work Writing-->
-                    <!--    Consultancy</a></li>-->
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/writing_consultancy/data_analysis">Data Analysis &-->
-                    <!--    Research-->
-                    <!--    Methodology</a></li>-->
-                  </ul>
-                </li>
-
-
-                <li><a href="<?php echo base_url(); ?>cms/book_publication_all">Book Publication</a>
-
-                  <ul class="dropdown">
-                      
-                      <?php 
-					    if(!empty($book_publication_page_detl)){
-					        foreach($book_publication_page_detl as $bppd){
-					        ?>
-					        <li><a href="<?php echo base_url();?>cms/book_publication/<?php echo $bppd->slug; ?>"><?php echo $bppd->title; ?> </a></li>
-					        <?php
-					        }
-					    }?>
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/book_publication/book_writing_consultancy">Book Writing-->
-                    <!--    Consultancy</a></li>-->
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/book_publication/book_publication_consultacy">Book-->
-                    <!--    Publication Consultancy</a></li>-->
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/book_publication/thesis_publication">Thesis to Book-->
-                    <!--    Publication</a></li>-->
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/book_publication/dissertation_publication">M.Phil.-->
-                    <!--    Dissertation to Book Publication</a></li>-->
-
-                    <!--<li><a href="<?php echo base_url(); ?>cms/book_publication/project_work_book">Project Work to-->
-                    <!--    Book Publication</a></li>-->
-
-                  </ul>
-
-
-
-                </li>
-
-
-
-                <!-- <li><a href="<?php echo base_url(); ?>Manage_ebook/book_list">Our Books</a></li> -->
-
-
-
-
-
-
-
-                <!--   <li ><a href="#">API Score Related Information</a>
-
-                <ul class="dropdown">
-
-
-
-  <?php
-
-
-
-  $service_type =  $this->common_model->common($table_name = 'tbl_examination_type', $field = array(), $where = array('status' => 'active'), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
-
-
-
-  foreach ($service_type as $ser) {
-
-
-
-  ?>
-
-
-
-                  <li ><a href="#"><?php echo $ser->examination_type; ?></a>
-
-                    <ul class="dropdown">
-
-                      <?php
-
-
-
-                      $service =  $this->common_model->common($table_name = 'tbl_examination', $field = array(), $where = array('examination_type_id' => $ser->examination_type_id, 'status' => 'active'), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
-
-
-
-                      foreach ($service as $row) {
-
-                      ?>
-
-                      <li><a href="<?php echo $row->slug; ?>"><?php echo $row->examination_name; ?></a></li>
-
                     <?php } ?>
 
-					  
-
-                    </ul>
-
-                  </li>
-
-                <?php } ?>
-
-
-
-
-
-                
-
-                </ul>
-
-
-
-
-
-
-
-              </li> -->
-
-
-
-                <!--  <li><a href="#">List of Subjects</a>
-
-                <ul class="dropdown p_header_verfloww_sec_p_cus">
-
-
-
-                  <?php
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  $user_id = @$this->session->userdata('user_session_id');
-
-                  if ($user_id != '') {
-
-                    $user_sub =  $this->common_model->common($table_name = 'tbl_user', $field = array(), $where = array('user_id' => $user_id), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
-
-
-
-                    $sub_id = @$user_sub[0]->subject_id;
-
-
-
-                    $kpo_list =  $this->common_model->common($table_name = 'tbl_kpo', $field = array(), $where = array('kpo_id' => $sub_id), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
-                  } else {
-
-                    $kpo_list =  $this->common_model->common($table_name = 'tbl_kpo', $field = array(), $where = array(), $where_or = array(), $like = array(), $like_or = array(), $order = array(), $start = '', $end = '');
-                  }
-
-
-
-
-
-
-
-                  foreach ($kpo_list as $sub) {
-
-
-
-
-
-
-
-                  ?>
-
-
-
-                  <li><a href="<?php echo $sub->slug; ?>"><?php echo $sub->kpo_name; ?></a></li>
-
-                  
-
-
-
-                <?php } ?>
-
-                </ul>
-
-              </li> -->
-
-
-
-
-
-                <!--  <li><a href="#">E-Book & Short Notes</a>
-
-                <ul class="dropdown">
-
-                  <li><a href="<?php echo base_url(); ?>Manage_ebook">Invitation for E-Book/ Short Notes</a></li>
-
-                  <li><a href="<?php echo base_url(); ?>Manage_ebook/purchase_your_ebook">Purchase your E-Book/ Short Notes</a></li>
-
-                </ul>
-
-              </li> -->
-
-
-
-                <!--  <li><a href="#">Research Paper Consultancy</a>
-
-                <ul class="dropdown">
-
-                  <li><a href="<?php echo base_url(); ?>Manage_research">General Guideline</a>
-
-                  <li><a href="<?php echo base_url(); ?>Manage_research/apply_form">Form(Online Submission)</a>
-
-                  </li>
-
-                </ul>
-
-              </li> -->
-
-
-
-                <!-- <li><a href="#">Dissertation/ Thesis Consultancy</a>
-
-                <ul class="dropdown">
-
-                  <li><a href="<?php echo base_url(); ?>Manage_thesis">General Guideline</a>
-
-                  <li><a href="<?php echo base_url(); ?>Manage_thesis/apply_form">Form(Online Submission)</a>
-
-                  </li>
-
-                </ul>
-
-              </li> -->
-
-
-
-                <!--  <li><a href="#">PHD Thesis To Book Conversion</a>
-
-                <ul class="dropdown">
-
-                  <li><a href="<?php echo base_url(); ?>Manage_phd">General Guideline</a>
-
-                  <li><a href="<?php echo base_url(); ?>Manage_phd/apply_form">Form(Online Submission)</a>
-
-                  </li>
-
-                </ul>
-
-              </li> -->
-
-
-
-                <!-- <li><a href="<?php echo base_url(); ?>Marketing">Marketing</a></li> -->
-
-
-
-                <li><a href="#">Gallery</a>
+                  </ul>
+                </li>
+
+                <li <?php if(!empty($seg1) && ($seg1 == 'economics') ){?> class="active" <?php } ?>><a
+                    href="<?php echo base_url(); ?>economics">Economics</a></li>
+
+                <li <?php if(!empty($seg1) && ($seg1 == 'writing_consultancy') ){?> class="active" <?php } ?>><a
+                    href="<?php echo base_url(); ?>writing_consultancy">Research Paper Publication</a>
+
+                  <ul class="dropdown">
+
+                    <?php
+                    if (!empty($writing_consultancy_page_detl)) {
+                      foreach ($writing_consultancy_page_detl as $wcpd) {
+                    ?>
+                    <li><a
+                        href="<?php echo base_url(); ?>writing_consultancy/<?php echo $wcpd->slug; ?>"><?php echo $wcpd->title; ?></a>
+                    </li>
+
+
+                    <?php
+                      }
+                    } ?>
+
+
+                  </ul>
+                </li>
+
+
+                <li <?php if(!empty($seg1) && ($seg1 == 'book_publication') ){?> class="active" <?php } ?>><a
+                    href="<?php echo base_url(); ?>book_publications">Book Publication</a>
+
+                  <ul class="dropdown">
+
+                    <?php
+                    if (!empty($book_publication_page_detl)) {
+                      foreach ($book_publication_page_detl as $bppd) {
+                    ?>
+                    <li><a
+                        href="<?php echo base_url(); ?>book_publication/<?php echo $bppd->slug; ?>"><?php echo $bppd->title; ?>
+                      </a></li>
+                    <?php
+                      }
+                    } ?>
+                  </ul>
+
+
+
+                </li>
+
+                <li <?php if(!empty($seg1) && ($seg1 == 'acadamic') ){?> class="active" <?php } ?>><a href="#">Academic
+                    Information</a>
+
+                  <ul class="dropdown">
+
+                    <?php
+                    if (!empty($subjects)) {
+                        $i=1; 
+                        
+                      foreach ($subjects as $sl) {
+                          if($i<9){
+                    ?>
+                    <li><a href="#"><?php echo $sl->paper_name; ?> </a>
+
+                      <ul class="dropdown">
+                        <li><a
+                            href="<?php echo base_url(); ?>acadamic/<?php echo lcfirst($sl->paper_name); ?>/paper-call">Paper
+                            Call </a></li>
+                        <li><a
+                            href="<?php echo base_url(); ?>acadamic/<?php echo lcfirst($sl->paper_name); ?>/refresher">Refresher
+                            Course </a></li>
+                        <li><a
+                            href="<?php echo base_url(); ?>acadamic/<?php echo lcfirst($sl->paper_name); ?>/orientation">Orientation
+                            Program </a></li>
+                        <li><a
+                            href="<?php echo base_url(); ?>acadamic/<?php echo lcfirst($sl->paper_name); ?>/seminar">Seminar</a>
+                        </li>
+                        <li><a
+                            href="<?php echo base_url(); ?>acadamic/<?php echo lcfirst($sl->paper_name); ?>/conference">Conference</a>
+                        </li>
+                        <li><a
+                            href="<?php echo base_url(); ?>acadamic/<?php echo lcfirst($sl->paper_name); ?>/phd">Ph.D.
+                            Entrance Test</a></li>
+                        <li><a
+                            href="<?php echo base_url(); ?>acadamic/<?php echo lcfirst($sl->paper_name); ?>/workshop">Workshop</a>
+                        </li>
+                        <li><a href="<?php echo base_url(); ?>acadamic/<?php echo lcfirst($sl->paper_name); ?>/mphil">M.
+                            Phil. Admission</a></li>
+                      </ul>
+                    </li>
+                    <?php
+                    $i++;
+                          }
+                      }
+                    } ?>
+                  </ul>
+
+
+
+                </li>
+
+                <li <?php if(!empty($seg1) && ($seg1 == 'current_affairs') ){?> class="active" <?php } ?>><a
+                    href="#">Current Affairs </a>
+
+                  <ul class="dropdown">
+
+                    <?php
+                    if (!empty($current_affairs_cat)) {
+                      foreach ($current_affairs_cat as $cac) {
+                    ?>
+                    <li><a
+                        href="<?php echo base_url(); ?>current_affairs/<?php echo $cac->slug; ?>"><?php echo $cac->cat_name; ?></a>
+                    </li>
+                    <?php
+                      }
+                    }
+                    ?>
+
+                  </ul>
+                </li>
+
+                <li <?php if(!empty($seg1) && ($seg1 == 'ugc-net-update') ){?> class="active" <?php } ?>><a
+                    href="#">UGC-NET UPDATE</a>
+
+                  <ul class="dropdown">
+
+                    <?php
+                    if (!empty($subjects)) {
+                        $j=1;
+                      foreach ($subjects as $sl) {
+                          if($j<9){
+                    ?>
+                    <li><a href="#"><?php echo $sl->paper_name; ?> </a>
+
+                      <ul class="dropdown">
+                        <li><a
+                            href="<?php echo base_url(); ?>ugc-net-update/<?php echo lcfirst($sl->paper_name); ?>/video-links">Video
+                            Link </a></li>
+                        <li><a
+                            href="<?php echo base_url(); ?>ugc-net-update/<?php echo lcfirst($sl->paper_name); ?>/others">Others
+                          </a></li>
+
+                      </ul>
+                    </li>
+                    <?php
+                          }
+                          $j++;
+                      }
+                    } ?>
+                  </ul>
+
+
+
+                </li>
+
+                <li <?php if(!empty($seg1) && ($seg1 == 'Manage_image' || $seg1 == 'Manage_video' ) ){?> class="active"
+                  <?php } ?>><a href="#">Gallery</a>
 
                   <ul class="dropdown">
 
@@ -824,19 +677,12 @@
 
 
 
-                <!-- <li><a href="#">Blogs</a></li> -->
-
-
-
-                <!--  <li <?php if (@$active == 'video') { ?> class="active" <?php } ?>><a href="<?php echo $this->url->link(11); ?>">Video Gallery</a></li> -->
 
 
 
 
-
-
-
-                <li><a href="<?php echo $this->url->link(10); ?>">Contact Us</a></li>
+                <li <?php if(!empty($seg1) && ($seg1 == 'contact-us') ){?> class="active" <?php } ?>><a
+                    href="<?php echo $this->url->link(10); ?>">Contact Us</a></li>
 
 
 

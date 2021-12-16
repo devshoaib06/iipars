@@ -1,6 +1,7 @@
 <?php
-
 namespace App\library;
+
+
 
 //use App\User;
 use App\Models\Admin;
@@ -28,6 +29,7 @@ use Illuminate\Support\Facades\DB;
 use Storage;
 use Str;
 use Auth;
+
 class myFunctions {
 
     public function is_ok() {
@@ -956,7 +958,7 @@ class myFunctions {
     {
         $paper=\App\PaperMaster::find($paper_id);
 
-        return $paper->paper_name;
+        return $paper;
     }
 
     public function getExamPaper($exam_id)
@@ -964,6 +966,15 @@ class myFunctions {
         $paper=\App\PaperMaster::where('exam_id',$exam_id)->where('status',1)->get();
 
         return $paper;
+    }
+    public function getPaperSubject($product_id,$paper_id)
+    {   
+        $paperUnits=\App\CourseExamPaperSubjectRelation::where(['product_id'=>$product_id,'paper_id'=>$paper_id])->get();
+        if($paperUnits){
+
+            return $paperUnits;
+        }
+        return [];
     }
 
     public static function checkRelatedProduct($product_id,$combo_id){
@@ -1461,6 +1472,12 @@ class myFunctions {
         return $papers;
 
     }
+    public function getPapersExceptPaperI()
+    {
+        $papers=\App\PaperMaster::where('status',1)->where('id','!=',19)->get();
+        return $papers;
+
+    }
 
 
     
@@ -1539,6 +1556,106 @@ class myFunctions {
 
         return $course;
     }
+
+    function book_publication_detl_all()
+	{
+        $result=DB::connection('mysql2')->table('tbl_book_publication')
+        // ->where('slug',$slug)
+        ->where('status','1')
+        ->get();
+
+
+		// DB::connection('mysql2')->select('*');
+		// DB::connection('mysql2')->from('tbl_book_publication');
+		// DB::connection('mysql2')->where('status','1');
+
+		// $result=DB::connection('mysql2')->get();
+		
+		return $result;
+	}
+
+	function writing_consultancy_detl($slug)
+	{
+
+        $result=DB::connection('mysql2')->table('tbl_writing_consultancy')
+        ->where('slug',$slug)
+        ->where('status','1')
+        ->get();
+
+		
+
+		return $result;
+	}
+	
+	
+	function writing_consultancy_detl_all()
+	{
+
+        $result=DB::connection('mysql2')->table('tbl_writing_consultancy')
+        // ->where('slug',$slug)
+        ->where('status','1')
+        ->get();
+
+		// DB::connection('mysql2')->select('*');
+		// DB::connection('mysql2')->from('tbl_writing_consultancy');
+		// //DB::connection('mysql2')->where('slug',$slug);
+		// DB::connection('mysql2')->where('status','1');
+		// $result=DB::connection('mysql2')->get();
+
+		return $result;
+	}
+
+    function current_affairs_cat(){
+        $result=DB::connection('mysql2')->table('tbl_current_affairs_category')
+        // ->where('slug',$slug)
+        ->where('status','1')
+        ->get();
+
+        return $result;
+    }
+	
+	
+	function acadamic($tbl,$seg3){
+	   
+
+        DB::connection('mysql2')->select();
+        DB::connection('mysql2')->from($tbl);
+        DB::connection('mysql2')->where('find_in_set("'.$seg3.'", subject_list_ids)');
+        $result = DB::connection('mysql2')->get();
+        
+        return $result;
+	}
+	
+	function ugc($seg3){
+	    DB::connection('mysql2')->select();
+        DB::connection('mysql2')->from('tbl_ugc_video');
+        DB::connection('mysql2')->where('find_in_set("'.$seg3.'", subject_list_ids)');
+        $result = DB::connection('mysql2')->get();
+        
+        return $result;
+	    
+	}
+	
+	function ugc_other($seg3){
+	    DB::connection('mysql2')->select();
+        DB::connection('mysql2')->from('tbl_ugc_net_other');
+        DB::connection('mysql2')->where('find_in_set("'.$seg3.'", subject_list_ids)');
+        $result = DB::connection('mysql2')->get();
+        
+        return $result;
+	    
+	}
+	
+	function ugc_other_detl($seg3){
+	    DB::connection('mysql2')->select();
+        DB::connection('mysql2')->from('tbl_ugc_net_other');
+        DB::connection('mysql2')->where('slug',$seg3);
+        $result = DB::connection('mysql2')->get();
+        
+        return $result;
+	    
+	}
+    
 
 
 }

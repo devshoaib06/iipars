@@ -350,30 +350,30 @@ class ProductController extends Controller
         $paper_list = $request->input('paper_list');
         $exam_id = $request->input('exam_id');
         
-        $course_data = $paper = $papermaterial = [];
-        foreach ($paper_list as $key => $val) {
-            $material_list[] = $request->input('material_list' . $val);
-            $subject_list = $request->input('subject_list' . $val);
-        }
-        //dd($request->all(),$subject_list);
-
+       $product_item_data = $subject_list=[];
+        
+       
         try {
             $checkdataExist = CourseExamPaperSubjectRelation::where('product_id', $product_id)->count();
             if ($checkdataExist > 0) {
                 CourseExamPaperSubjectRelation::where('product_id', $product_id)->delete();
             }
 
-            for ($count = 0; $count < count($subject_list); $count++) {
-                $product_item_data = array(
-                    'product_id' => $product_id,
-                    'exam_id' => $exam_id,
-                    'paper_id' => $paper_list[0],
-                    'subject_id' => $subject_list[$count],
-                );
-                //dd($product_item_data);
+            foreach ($paper_list as $key => $val) {
+                $sl = $request->input('subject_list' . $val);
+                $subject_list = array_merge($subject_list, $sl);
+                for($i=0;$i<count($sl);$i++){
 
-                CourseExamPaperSubjectRelation::updateOrCreate($product_item_data, $product_item_data);
+                    $product_item_data = array(
+                        'product_id' => $product_id,
+                        'exam_id' => $exam_id,
+                        'paper_id' => $val,
+                        'subject_id' => $sl[$i],
+                    );
+                    CourseExamPaperSubjectRelation::create($product_item_data, $product_item_data);
+                }
             }
+                //dd($product_item_data);
             return;
         } catch (\Exception $e) {
 

@@ -7,7 +7,7 @@
 ?>
 
 @section('page_content')
-    <section class="inner-header divider parallax layer-overlay1 overlay-white-8"
+    <section class="inner-header divider parallax1 layer-overlay1 overlay-white-8"
         style="background-image: url({{ asset('public/frontend/images/shortbanner.jpg') }}); background-repeat: no-repeat; background-size: 100%; background-position: 0 0; height:200px">
 
         <div class="container pt-30 pb-30">
@@ -38,34 +38,38 @@
 
             <h1>UGC NET</h1>
 
-            <div class="row">
+            <div class="row d-flex flex-wrap">
                 @foreach ($papers as $paper)
-                    <div class="col-sm-6 col-md-4">
+                    <div class="col-sm-6 col-md-4 ">
                         <div class="course-details"><img alt=""
                                 src="{{ url('public/frontend/images') }}/ugc_net_images/{{ $paper->paper_name }}.jpg"
                                 style="height:220px; width:100%">
                             <div class="details-overlay">
                                 <h3 class="text-white">{{ $paper->paper_name }}</h3>
+
+                                {{-- <div class="call-action" role="button" aria-hidden="true">
+                        <a
+                        href="https://teachinns.com/course/ugc-nta-netsetjrf/bengali-study-material"
+                        class=" btn btn-success">Only Paper-II</a>&nbsp;
+                    </div> --}}
                             </div>
                         </div>
-                        <div class="unit">
+                        <div class="papper-unit">
                             <ul>
                                 @php
                                     $units = $myfunction->getPaperUnits(1, $paper->id);
-                                    
+                                    $allCourses=$myfunction->getCourses(1,$paper->id);
                                 @endphp
-                                @foreach ($units as $unit)
-                                    @php
-                                        $courses=$myfunction->getOnlyPaidCourseInfo(1,$paper->id,$unit->subject_id);
-                                        $slug=$courses->slug;
-
-                                    @endphp
-                                    <li>
-                                        <a href="<?= url('/')?>/course/<?= $slug.'/'.$unit->subject_slug;?>">
-                                            {{ $unit->subject_name }}
-                                        </a>
-                                    </li>
+                                @foreach ($allCourses as $course)
+                                @if (!empty($course->product))
+                                <li>
+                                    <a href="<?= url('/') ?>/course/<?= $course->product->slug ?>">
+                                        {{ $course->product->name }}
+                                    </a>
+                                </li>
+                                @endif
                                 @endforeach
+                               
                             </ul>
                         </div>
                     </div>

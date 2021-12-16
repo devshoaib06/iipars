@@ -13,4 +13,10 @@ class SubjectMaster extends Model
     {
         return $this->belongsTo(\App\PaperMaster::class,'paper_id','id');
     }
+
+    public function subject()
+    {
+        return $this->hasMany(\App\CourseExamPaperSubjectRelation::class,'subject_id','id');
+    }
+
 }

@@ -14,18 +14,15 @@ $subjects = $myfunction->getPapers();
 
         <ul class="dropdown" aria-labelledby="dropdownSubMenu1">
             <li>
-                <h4 style="padding-left: 22px;">Units</h4>
+                <h4 style="padding-left: 22px;">Courses</h4>
             </li>
             <li role="separator" class="divider bg-dark" style="height: 1px; background: #ccc;">
             </li>
             @php
-                $units = $myfunction->getPaperUnits(1, $subject->id);
                 $allCourses=[];
                 $allCourses=$myfunction->getCourses(1,$subject->id);
 
-                // echo "<pre>";
-                //     print_r($allCourses[0]->product->name);
-                // echo "</pre>";
+               
             @endphp
             @foreach ($allCourses as $course)
                 @if (!empty($course->product))

@@ -124,7 +124,7 @@ class SubjectController extends Controller {
                 $arrSearch[] = ['S.exam_id', 'like', '%' . $exam_id . '%'];
             }
             if ($paper_id != '') {
-                $arrSearch[] = ['S.paper_id', 'like', '%' . $paper_id . '%'];
+                $arrSearch[] = ['S.paper_id', '=', '' . $paper_id . ''];
             }
 
             if ($date_from != '') {

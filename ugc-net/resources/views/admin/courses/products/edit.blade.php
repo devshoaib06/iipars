@@ -352,7 +352,7 @@ Course - Edit
                                                 @endif
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label">Price (Per Unit) <span class="required"> *
+                                                <label class="control-label">Price  <span class="required"> *
                                                     </span></label>
                                                 <input type="text" name="course_price" id="course_price"
                                                     class="form-control" value="{{$product->price}}" />
@@ -364,7 +364,7 @@ Course - Edit
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">Revised Percent (%)
-                                                    (Per Unit) </label>
+                                                     </label>
                                                 <input type="text" name="revised_percent" id="revised_percent"
                                                     class="form-control" value="{{$product->revised_percent}}" />
                                                 @if ($errors->has('revised_percent'))
@@ -374,8 +374,7 @@ Course - Edit
                                                 @endif
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label">Revised Price (Per
-                                                    Unit) </label>
+                                                <label class="control-label">Revised Price  </label>
                                                 <input type="text" name="revised_price" id="revised_price"
                                                     class="form-control" value="{{$product->revised_price}}" />
                                                 @if ($errors->has('revised_price'))
@@ -569,25 +568,28 @@ Course - Edit
                                                         No</label>
                                                 </div>
                                             </div>
-                                            @php
-                                                $allCourses=$myFunction->getCourses(1,$relatedPapers[0]);
-                                            @endphp
-                                            <div class="form-group ">
+                                            @if ($product->is_preview==1)
                                                 
-                                                <label class="control-label">Preview Main Course <span class="required"> * </span></label>
-                                                <select name="preview_main_course" id="preview_main_course"
-                                                    class="form-control">
-                                                    <option value="">Select Main Course</option>
-                                                    @foreach($allCourses as $course)
-                                                        @if (!empty($course->product))
-                                                            <option value="{{$course->product->product_id}}"
-                                                                {{$product->preview_main_course==$course->product->product_id?'selected':''}}>
-                                                                {{$course->product->name}}
-                                                            </option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                                <div class="form-group ">
+                                                    @php
+                                                        $allCourses=$myFunction->getCourses(1,$relatedPapers[0]);
+                                                    @endphp
+                                                    
+                                                    <label class="control-label">Preview Main Course <span class="required"> * </span></label>
+                                                    <select name="preview_main_course" id="preview_main_course"
+                                                        class="form-control">
+                                                        <option value="">Select Main Course</option>
+                                                        @foreach($allCourses as $course)
+                                                            @if (!empty($course->product))
+                                                                <option value="{{$course->product->product_id}}"
+                                                                    {{$product->preview_main_course==$course->product->product_id?'selected':''}}>
+                                                                    {{$course->product->name}}
+                                                                </option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endif
                                             <div class="form-group hide">
                                                 <label class="ccontrol-label">Show on Home slider
                                                     <span class="required"> * </span></label>

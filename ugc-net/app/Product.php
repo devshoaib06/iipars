@@ -37,4 +37,8 @@ class Product extends Model
         'meta_robots',
     ];
 
+	public function productUnits(){
+        return $this->hasMany(\App\CourseExamPaperSubjectRelation::class,'product_id','product_id');
+	}
+
 }

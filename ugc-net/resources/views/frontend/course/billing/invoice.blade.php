@@ -42,7 +42,8 @@
 
             <td width="66%" valign="top">
 
-                <p><img src="{{ asset('public/frontend/images/logo.png') }}"></p>
+                <p><img src="{{ asset('public/frontend/images/logo-iipars.png') }}"></p>
+                {{-- <p><img src="{{ config('path.iipars_base_url') }}assets/images/new-aeducation-logo.png"></p> --}}
 
             </td>
 
@@ -62,16 +63,16 @@
 
                 <span class="headstyle" style=" font-size:12px;">TO<br />
 
-   <strong>{{$order_info->fullname}}</strong></span>
+                <strong>{{$order_info->fullname}}</strong></span>
                 <br />
                 @if($billing_info->street_address_1)    
                 <span class="normalstyle" style="padding:0px;">{{$billing_info->street_address_1}}, {{$billing_info->street_address_2}}<br>
                 @endif    
-      {{-- {{$billing_info->city}} {{$billing_info->zip}} <br>
-      {{$state->state_name}}<br> --}}
-      {{$country->country_name}}<br>
-      {{$billing_info->phone}}<br>
-      {{$billing_info->email}}<br></span></td>
+                {{-- {{$billing_info->city}} {{$billing_info->zip}} <br>
+                {{$state->state_name}}<br> --}}
+                {{$country->country_name}}<br>
+                {{$billing_info->phone}}<br>
+                {{$billing_info->email}}<br></span></td>
 
             <td valign="top">
 

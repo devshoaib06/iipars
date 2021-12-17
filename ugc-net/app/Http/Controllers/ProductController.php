@@ -141,6 +141,7 @@ class ProductController extends Controller
                 $important_notice = $request->input('important_notice');
                 $course_price = $request->input('course_price');
                 $revised_price = $request->input('revised_price');
+                $extra_discount = $request->input('extra_discount');
                 $no_of_students = $request->input('no_of_students');
 
                 $revised_percent = $request->input('revised_percent');
@@ -190,6 +191,7 @@ class ProductController extends Controller
                     'description' => $description,
                     'price' => $course_price,
                     'revised_price' => $revised_price,
+                    'extra_discount' => $extra_discount,
                     'no_of_students' => $no_of_students,
 
                     'revised_percent' => $revised_percent,
@@ -900,6 +902,7 @@ class ProductController extends Controller
                 $description = $request->input('description');
                 $course_price = $request->input('course_price');
                 $revised_price = $request->input('revised_price');
+                $extra_discount = $request->input('extra_discount');
                 $no_of_students = $request->input('no_of_students');
 
                 $revised_percent = $request->input('revised_percent');
@@ -950,7 +953,8 @@ class ProductController extends Controller
 
                 $filename = $product->image;
                 $exist_filename = $product->image;
-                if ($exist_filename) {
+                // dd($exist_filename);
+                if ($request->hasFile('image') && $exist_filename) {
                     ImageHelper::createThumbnail($exist_filename, config('disk.get_course'));
                 }
                 if ($request->hasFile('image')) {
@@ -965,6 +969,7 @@ class ProductController extends Controller
                     'price' => $course_price,
                     'revised_percent' => $revised_percent,
                     'revised_price' => $revised_price,
+                    'extra_discount' => $extra_discount,
                     'no_of_students' => $no_of_students,
 
                     'start_date' => $start_date,

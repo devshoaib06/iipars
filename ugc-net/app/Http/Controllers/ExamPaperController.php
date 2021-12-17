@@ -410,6 +410,24 @@ class ExamPaperController extends Controller {
         return $paperlist;
     }
 
+    public function ajaxExamPaperUnits(Request $request){
+        $exam_id=$request->exam_id;
+        $paper_id=$request->paper_id;
+
+        $units=\App\SubjectMaster::where('exam_id',$exam_id)
+                ->where('paper_id',$paper_id)
+                ->where('status',1)
+                ->orderBy('sequence','asc')
+                ->get();
+
+        $html="<option value=''>Select</option>";        
+        foreach ($units as $unit) {
+            $html.="<option value='".$unit->id."'>".$unit->subject_name."</option>";  
+        }
+
+        return $html;
+    }
+
     public function showExamPaperMaterialContentList() {
 
         if (Auth::guard('admins')->check()) {
@@ -601,7 +619,7 @@ class ExamPaperController extends Controller {
             
             
             if ($request->method() === "POST") {
-                
+                // dd($request->all());
                 $exam_id = $request->input('exam_id');
                 $paper_id = $request->input('paper_id');
                 $material_id = $request->input('material_id');

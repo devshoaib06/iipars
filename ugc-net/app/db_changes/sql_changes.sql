@@ -11,4 +11,9 @@ ALTER TABLE `paper_masters`  ADD `paper` INT NOT NULL DEFAULT '0' COMMENT '0=>P-
 ALTER TABLE `products` ADD `preview_main_course` INT NULL AFTER `is_preview`;
 
 
+/**17-12-2021*/
+ALTER TABLE `products` ADD `extra_discount` DECIMAL(8,2) NOT NULL DEFAULT '0.00' AFTER `revised_percent`;
+ALTER TABLE `orders` ADD `extra_discount` DECIMAL(8,2) NOT NULL DEFAULT '0.00' AFTER `grand_total`;
+
+
 

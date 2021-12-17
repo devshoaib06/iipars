@@ -127,11 +127,31 @@
                                                 </tr>
                                                 
                                             </tbody>
+                                            
                                             <tfoot>
-
+                                            @if ($price!=$revised_price)
+                                                @if ($discount_amount!=0)
+                                                <tr>
+                                                    <td>
+                                                        Discount&nbsp; <strong>({{ $discount_percentage }}%)</strong> </td>
+                
+                                                    <td>  ₹<span>{{number_format((float)$discount_amount, 2, '.', '')}}</span>
+                                                    </td>
+                                                </tr>
+                                                @endif
+                                                @if ($extra_discount!=0)
+                                                <tr>
+                                                    <td>
+                                                        <strong>Extra Discount</strong> </td>
+                
+                                                    <td>  ₹<span>{{number_format((float)$extra_discount, 2, '.', '')}}</span>
+                                                    </td>
+                                                </tr>
+                                                @endif
+                                            @endif
                                                 <tr>
                                                     <th>Subtotal</th>
-                                                    <td>  ₹<span class="subtotal">{{number_format((float)$price, 2, '.', '')}}</span>
+                                                    <td>  ₹<span class="subtotal">{{number_format((float)$revised_price, 2, '.', '')}}</span>
                                                     </td>
                                                 </tr>
                                                 @if (isset($cb_amount) && $cb_amount!="" )
@@ -154,9 +174,10 @@
                                             </tfoot>
                                         </table>
                                     <input type="hidden" name="product_id" value="{{$products->product_id}}">
-                                    <input type="hidden" name="subtotal"  value="{{$total_after_cashback}}">
-                                    <input type="hidden" name="discount_amount" id="discount_amount"  value="">
-                                    <input type="hidden" name="grand_total" id="grand_total"  value="{{$total_after_cashback}}">
+                                    <input type="hidden" name="subtotal"  value="{{number_format((float)$revised_price, 2, '.', '')}}">
+                                    <input type="hidden" name="discount_amount" id="discount_amount"  value="{{number_format((float)$discount_amount, 2, '.', '')}}">
+                                    <input type="hidden" name="extra_discount" id="extra_discount"  value="{{number_format((float)$extra_discount, 2, '.', '')}}">
+                                    <input type="hidden" name="grand_total" id="grand_total"  value="{{number_format((float)$revised_price, 2, '.', '')}}">
                                     <input type="hidden" name="cb_amount" id="cb_amount"  value="{{$cb_amount}}">
                                     </div>
                                     {{-- <div class="coupancode">
@@ -205,7 +226,7 @@
                                 <p class="shorttext">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="{{ url('/privacy-policy') }}">privacy policy.</a></p>
                                    <button type="submit" class="paybut" >Place Order</button>
                                     {{-- <input type="submit" class="paybut" value="Place Order"> --}}
-                                    <div class="alert alert-danger display-hide">
+                                    <div class="alert alert-danger hide">
                                         <button class="close" data-close="alert"></button> 
                                         <span class="error-class"></span>
                                     </div>
@@ -432,9 +453,9 @@
                                         "key": response.api_key, // Enter the Key ID generated from the Dashboard
                                         "amount": response.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
                                         "currency": "INR",
-                                        "name": "Teachinns",
+                                        "name": "{{ env('APP_NAME','IIPARS') }}",
                                         //"description": "A simple test script",
-                                        "image": "https://teachinns.com/public/frontend/images/logo.png",
+                                        "image": "{{ asset('public/frontend/images/logo-iipars.png') }}",
                                         "order_id": response.order_id,//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
                                         "handler": paymentSuccessHandler,
                                         "prefill": {

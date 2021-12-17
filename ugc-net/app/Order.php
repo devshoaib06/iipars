@@ -22,6 +22,7 @@ class Order extends Model
         'p_gateway_payment_id',
         'course_price',
         'discount_amount',
+        'extra_discount',
         'reseller_code_applied',
         'student_cb_percent',
         'student_cb_amount',

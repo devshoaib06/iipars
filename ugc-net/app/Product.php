@@ -18,6 +18,7 @@ class Product extends Model
 		'price',
 		'revised_percent',
 		'revised_price',
+		'extra_discount',
 		'no_of_students',
     	'start_date',
     	'end_date',

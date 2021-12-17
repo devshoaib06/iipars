@@ -146,7 +146,7 @@
                                                                          $mocktestcount=0;
                                                                      @endphp   
                                                                     @if ($related_material['material_id']==14 && $mocktestcount==0)
-                                                                    <div class="pdf-section stest">
+                                                                    {{-- <div class="pdf-section stest">
 
                                                                         <div class="content_exists">
                                                                             <div class="row">
@@ -165,7 +165,7 @@
                                                                         </div>
             
                                                                         </div>
-                                                                    </div>
+                                                                    </div> --}}
                                                                     @php
                                                                         $mocktestcount++;
                                                                     @endphp

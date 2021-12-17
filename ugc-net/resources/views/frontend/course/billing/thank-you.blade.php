@@ -57,12 +57,18 @@
                                     </tr>
                                     <tr>
                                         <td>{{$product->name}} × 1</td>
-                                        <td> &nbsp; ₹ {{$amount}}</td>
+                                        <td> &nbsp; ₹ {{$order->course_price}}</td>
                                     </tr>
                                     @if($order->discount_amount!=0  )
                                     <tr>
                                         <td>Discount:</td>
                                         <td>- ₹ {{$order->discount_amount}}</td>
+                                    </tr>
+                                    @endif 
+                                    @if($order->extra_discount!=0  )
+                                    <tr>
+                                        <td>Extra Discount:</td>
+                                        <td>- ₹ {{$order->extra_discount}}</td>
                                     </tr>
                                     @endif 
                                     @if($order->student_cb_amount!=""  )
@@ -92,12 +98,16 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <strong>{{$billing_info->first_name}}  {{$billing_info->last_name}}</strong><br>
-
+                                        @if ($billing_info->street_address_1)
+                                            {{$billing_info->street_address_1}} {{$billing_info->street_address_2}},<br>
+                                        @endif
+                                        @if ($billing_info->city)
+                                            {{$billing_info->city}}<br>
+                                        @endif
+                                        @if (isset($state->state_name))
+                                            {{@$state->state_name}} -  {{$billing_info->zip}}, {{$country->country_name}} <br>
+                                        @endif
                                         
-                                        {{$billing_info->street_address_1}} {{$billing_info->street_address_2}},<br>
-                                        {{$billing_info->city}}<br>
-                                        
-                                        {{$state->state_name}} -  {{$billing_info->zip}}, {{$country->country_name}} <br>
                                         <strong>Phone Number: </strong>{{$billing_info->phone}}<br>
                                         <strong>Email: </strong>{{$billing_info->email}}<br>
                                     

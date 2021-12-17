@@ -391,6 +391,9 @@ Route::prefix('admin')->group(function () {
     Route::any('exam-paper/create', 'ExamPaperController@createExamPaper')->name('createExamPaper');
     Route::get('exam-paper/edit/{id}', 'ExamPaperController@editExamPaper')->name('editExamPaper');
     Route::post('exam-paper/update/{id}', 'ExamPaperController@editExamPaperAction')->name('examPaperUpdate');
+
+    //Exam Paper Units
+    Route::post('/ajax-exam-paper-unit-list', 'ExamPaperController@ajaxExamPaperUnits')->name('ajaxExamPaperUnits');
     
     //Exam Paper Material Content
     Route::get('exam-paper-material-content', 'ExamPaperController@showExamPaperMaterialContentList')->name('exam-paper-material-content');

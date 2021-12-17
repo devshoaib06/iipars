@@ -183,7 +183,7 @@
                                                     <select name="exam_id" id="exam_id" class="form-control form-filter input-sm" > 
                                                         <option value="" >Select Exam</option>
                                                         @foreach($allExams as $v)
-                                                        <option value="{{ $v->id }}" >{{ $v->exam_name }}</option>
+                                                        <option value="{{ $v->id }}" {{ $v->id==1?'selected':'' }} >{{ $v->exam_name }}</option>
                                                         @endforeach
                                                     </select>
 												</td>
@@ -197,10 +197,10 @@
                                                 </td>
                                                 <td>
                                                     <select name="subject_id" id="subject_id" class="form-control form-filter input-sm" > 
-                                                        <option value="" >Select Unit</option>
-                                                        @foreach($allSubjects as $v)
+                                                        <option value="" >Select Paper First</option>
+                                                        {{-- @foreach($allSubjects as $v)
                                                         <option value="{{ $v->id }}" >{{ $v->subject_name }}</option>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                     </select>
                                                 </td>
                                                 <td>
@@ -397,6 +397,22 @@
 
       
             })  
+
+            $('#paper_id').on('change',function(){
+                    let exam_id=$('#exam_id').val();
+                    let paper_id=$(this).val();
+                    let data={
+                        exam_id:exam_id,
+                        paper_id:paper_id,
+                    }
+                    let url="{{route('ajaxExamPaperUnits')}}"
+                    $.post(url,data,function(response){
+                    
+                        $("#subject_id").html(response);                                      
+                    })  
+
+                
+            }) 
         });
 
     </script>

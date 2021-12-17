@@ -325,7 +325,20 @@
             </li>
         </ul>
     </li>
-
+    <li class="nav-item  @if ($menu_parent == 'orders')  active open @endif">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-book"></i>
+            <span class="title">Orders</span>
+            <span class="arrow @if ($menu_parent == 'orders')  open @endif"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  @if ($menu_child == 'order-list')  active open @endif">
+                <a href="{{ route('orderList') }}" class="nav-link ">
+                    <span class="title">List</span>
+                </a>
+            </li>
+        </ul>
+    </li>
 
 
 
@@ -531,6 +544,35 @@
                     <span class="title">Manage Writing Consultancy</span>
                 </a>
             </li>
+        </ul>
+    </li>
+    <li class="nav-item  @if ($menu_parent == 'settings')  active open @endif">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="icon-settings"></i>
+            <span class="title">Settings</span>
+            <span class="selected"></span>
+            <span class="arrow @if ($menu_parent == 'settings')  open @endif "></span>
+        </a>
+        <ul class="sub-menu">
+            
+            
+            <li class="nav-item  @if ($menu_child == 'list_testimonial')  active open @endif">
+                <a href="{{ url(config("constants.admin_prefix").'/testimonials') }}" class="nav-link ">
+                    <span class="title">Testimonials</span>
+                </a>
+            </li>
+            
+            
+           
+            <li class="nav-item  @if ($menu_child == 'pgnrl')  active open @endif ">
+                <a href="{{ url(config("constants.admin_prefix").'/payment-setting') }}" class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <span class="title">Payment Gateway Settings</span>
+                </a>
+            </li>
+           
+           
+            
         </ul>
     </li>
     

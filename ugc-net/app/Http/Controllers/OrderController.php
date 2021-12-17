@@ -37,6 +37,7 @@ class OrderController extends Controller {
     public function __construct() {
         $razorpay_used=PaymentGatewaySettings::where('setting_id','razorpay_used')->first();
         $razorpay_used=$razorpay_used->content;
+        // dd($razorpay_used);
         if($razorpay_used==1){
 
             $razorpay_api_key=PaymentGatewaySettings::where('setting_id','razorpay_test_api_key')->first();
@@ -68,6 +69,15 @@ class OrderController extends Controller {
         $shareData['newsfeed'] = $newsfeed;                
         $floatersignup=\App\FloaterSignUpMaster::where('status',1)->first();   
         $shareData['floatersignup'] = $floatersignup;
+
+        $newsfeed = DB::connection('mysql2')->table('tbl_news_feed')->where('status', 1)->get();
+        $social = DB::connection('mysql2')->table('tbl_social_link')->get();
+        $contact = DB::connection('mysql2')->table('tbl_contact')->get();
+        $counter = DB::connection('mysql2')->table('tbl_no_of_visitor')->get();
+        $shareData['newsfeed'] = $newsfeed;
+        $shareData['social'] = $social;
+        $shareData['contact'] = $contact;
+        $shareData['counter'] = $counter;
         
         $shareData['combo_pack_products'] = $combo_pack_products;
         $shareData['mainMenu'] = $mainMenu;
@@ -93,7 +103,7 @@ class OrderController extends Controller {
             }
 
             //dd($product_id); 
-            $products=Product::select('product_id','name','price','revised_price','is_reseller_charge')->find($product_id);
+            $products=Product::select('product_id','name','price','revised_price','is_reseller_charge','revised_percent','extra_discount')->find($product_id);
             $data_msg['products']=$products;
             
             $data_msg['states']=StateMaster::where('status','<>',3)->get();
@@ -104,16 +114,32 @@ class OrderController extends Controller {
                 $data_msg['lastbillinfo']=BillingDetail::where('order_id',$lastOrder->id)->first();
                 
             }
-            $price=$products->revised_price!=""?$products->revised_price:$products->price;
-            $data_msg['price']=$price;
             
+            $revised_price=$products->revised_price!=""?$products->revised_price:$products->price;
+            $discount_percentage=$products->revised_percent;
+            $discount_amount=0;
+            $extra_discount=$products->extra_discount;
+            // dd($products);
+            if($discount_percentage){
+                $discount_amount= ($products->price * $discount_percentage)/100;
+                $revised_price=$products->price - $discount_amount;
+            }
+            if($products->extra_discount){
+                $revised_price=$revised_price-$products->extra_discount;
+            }
+            $data_msg['revised_price']=$revised_price;
+            $data_msg['discount_percentage']=$discount_percentage;
+            $data_msg['discount_amount']=$discount_amount;
+            $data_msg['extra_discount']=$extra_discount;
             
+            $data_msg['price']=$products->price;
+            // dd($data_msg);
             $reseller_code= \Session::get('reseller_code');
             
             $reseller_info=Distributor::whereNotNull('reseller_code')->where('reseller_code',$reseller_code)->first();
             // dd($reseller_info);
 
-            $data_msg['total_after_cashback']=$price;
+            $data_msg['total_after_cashback']=$revised_price;
             $data_msg['cb_amount']="";
             $data_msg['reseller_code']="";
 
@@ -147,12 +173,12 @@ class OrderController extends Controller {
             //     dd($data_msg['userinfo']);
             if(floor($data_msg['products']->price)=="0"){
                 $latestOrder=0;
-                $order_nr='TEC'.str_pad($latestOrder + 1, 5, "0", STR_PAD_LEFT);
+                $order_nr='IIP'.str_pad($latestOrder + 1, 5, "0", STR_PAD_LEFT);
                 $latestOrder = Order::orderBy('created_at','DESC')->first();
 
                 if($latestOrder){
                     
-                    $order_nr = 'TEC'.str_pad($latestOrder->id + 1, 5, "0", STR_PAD_LEFT);
+                    $order_nr = 'IIP'.str_pad($latestOrder->id + 1, 5, "0", STR_PAD_LEFT);
                     
                 }
                 $order_data=array(
@@ -378,11 +404,11 @@ class OrderController extends Controller {
         try {
             $api = new Api($this->api_key, $this->api_secret);
             $latestOrder=0;
-            $order_nr='TEC'.str_pad($latestOrder + 1, 5, "0", STR_PAD_LEFT);
+            $order_nr='IIP'.str_pad($latestOrder + 1, 5, "0", STR_PAD_LEFT);
             $latestOrder = Order::orderBy('created_at','DESC')->first();
             if($latestOrder){
                 
-                $order_nr = 'TEC'.str_pad($latestOrder->id + 1, 5, "0", STR_PAD_LEFT);
+                $order_nr = 'IIP'.str_pad($latestOrder->id + 1, 5, "0", STR_PAD_LEFT);
             }
             
             
@@ -393,9 +419,10 @@ class OrderController extends Controller {
                 'payment_capture' => 1,
                 'currency' => 'INR'
             );
+            // dd($data);
             $order = $api->order->create($data);
-            
             $insertedorder=$this->saveOrder($request,$order); 
+            
             if($insertedorder){
                 PaymentResponse::create([
                     'order_id'=>$insertedorder->id,
@@ -694,7 +721,9 @@ class OrderController extends Controller {
     private function saveOrder($request,$order){
         // DB::beginTransaction();
         $products=Product::select('product_id','name','price','revised_price','is_reseller_charge')->find($request->product_id);
-        $price=$products->revised_price!=""?$products->revised_price:$products->price;
+        // $price=$products->revised_price!=""?$products->revised_price:$products->price;
+        $price=$products->price;
+
 
         $reseller_code=isset($request->reseller_code)?$request->reseller_code:'';
         $reseller_id='';
@@ -714,6 +743,7 @@ class OrderController extends Controller {
                 'payment_order_id'=>$order['id'],
                 'subtotal'=>$request->subtotal,
                 'discount_amount'=>$request->discount_amount,
+                'extra_discount'=>$request->extra_discount,
                 'grand_total'=>$request->grand_total,
                 'reseller_code_applied'=>$reseller_code,
                 'reseller_id'=>$reseller_id,
@@ -894,6 +924,9 @@ class OrderController extends Controller {
 
                 ->orderBy('orders.id','DESC')
                 ->get();
+                
+              
+
             return view('frontend.orders', $data_msg);
         } else {
             return redirect()->intended(config("constants.admin_prefix") . '/login');
@@ -1150,11 +1183,14 @@ class OrderController extends Controller {
 
             $data_msg['billing_info']=BillingDetail::where('order_id',$id)->first();
             $data_msg['card_info']=CardDetail::where('order_id',$id)->first();
-            @$data_msg['state']=StateMaster::where('state_id',$data_msg['billing_info']->state)->first();
-            @$data_msg['country']=Country::where('id',$data_msg['billing_info']->country)->first();
+            
             $data_msg['invoice_url']=route('downloadInvoicePDF',$data_msg['order_info']->id);
             $data_msg['payment_details']=PaymentDetail::where('order_id',$id)->first();
-                
+            // dd($data_msg['payment_details']);
+            // return view('frontend.orders.order_details',$data_msg);
+            $returnHTML = view('frontend.orders.order_details',$data_msg)->render();
+            return response()->json(array('success' => true, 'html'=>$returnHTML));  
+            
             return response()->json($data_msg);
 			
         
@@ -1189,7 +1225,7 @@ class OrderController extends Controller {
         $order_id=Hasher::decode($order_id);
         $purchased_courses=$data_msg['order_info']=DB::table('orders')
                         ->join('products','products.product_id','orders.course_id')
-                        ->select('orders.order_id','orders.id as tech_order_id','orders.user_id',
+                        ->select('orders.order_id','orders.id as IIPh_order_id','orders.user_id',
                                 'products.name as product_name',
                                 'products.product_id','products.end_date')
                         ->where([

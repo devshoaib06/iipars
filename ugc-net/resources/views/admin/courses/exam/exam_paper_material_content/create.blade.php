@@ -136,10 +136,10 @@ Exams Paper
                                             <label class="control-label col-sm-3">Unit <span class="required"> * </span></label>
                                             <div class="col-sm-6">
                                                 <select name="subject_id" id="subject" class="form-control">
-                                                    <option value="">Select Subject</option>
-                                                @foreach($subjects as $subject)   
-                                                    <option value="{{$subject->id}}">{{$subject->subject_name}}</option>
-                                                @endforeach
+                                                    <option value="">Select Unit</option>
+                                                    {{-- @foreach($subjects as $subject)   
+                                                        <option value="{{$subject->id}}">{{$subject->subject_name}}</option>
+                                                    @endforeach --}}
                                                 </select>
                                             </div>
                                         </div>
@@ -385,6 +385,21 @@ FormValidation.init();
                 paperhtml+='<option value="'+res.id+'" >'+res.paper_name+'</option>';
             })
              $("#paper").html(paperhtml);                                      
+        })  
+
+      
+  })  
+  $('#paper').on('change',function(){
+        let exam_id=$('#exam').val();
+        let paper_id=$(this).val();
+        let data={
+            exam_id:exam_id,
+            paper_id:paper_id,
+        }
+        let url="{{route('ajaxExamPaperUnits')}}"
+        $.post(url,data,function(response){
+           
+             $("#subject").html(response);                                      
         })  
 
       

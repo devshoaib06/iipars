@@ -267,6 +267,15 @@
                                                                     @endif
                                                                 </div>
                                                                 <div class="form-group">
+                                                                    <label class="control-label">Extra Discount </label>
+                                                                    <input type="text"  name="extra_discount" id="extra_discount" class="form-control" value="{{ old('extra_discount') }}"/> 
+                                                                    @if ($errors->has('extra_discount'))
+                                                                    <span class="help-block">
+                                                                        <strong>{{ $errors->first('extra_discount') }}</strong>
+                                                                    </span>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="form-group">
                                                                     <label class="control-label">Revised Price </label>
                                                                     <input type="text"  name="revised_price" id="revised_price" class="form-control" value="{{ old('revised_price') }}"/> 
                                                                     @if ($errors->has('revised_price'))

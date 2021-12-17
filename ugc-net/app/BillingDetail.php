@@ -26,5 +26,10 @@ class BillingDetail extends Model
 
     ];
 
-   
+   public function states(){
+       return $this->belongsTo(\App\StateMaster::class,'state','state_id');
+   }
+   public function countries(){
+       return $this->belongsTo(\App\Country::class,'country','id');
+   }
 }

@@ -48,9 +48,9 @@
         "key": "<?php echo $api_key; ?>", // Enter the Key ID generated from the Dashboard
         "amount": "<?php echo $api_key; ?>", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
         "currency": "<?php echo $details['currency']?>",
-        "name": "Karmick",
+        "name": "IIPARS",
         "description": "A simple test script",
-        "image": "http://teachinns.karmickdev.com/public/frontend/images/logo.png",
+        "image": "{{ asset('public/frontend/images/logo-iipars.png') }}",
         "order_id": "<?php echo $order['id']?>",//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
         "handler": function (response){
             alert(response.razorpay_payment_id);

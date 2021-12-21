@@ -29,6 +29,11 @@ use App\ExamMaster;
 use App\OrderResellerPaymentDetails;
 use App\PaymentGatewaySettings;
 use View;
+use MPDF;
+use Spipu\Html2Pdf\Html2Pdf;
+use Spipu\Html2Pdf\Exception\Html2PdfException;
+use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+
 
 class OrderController extends Controller {
     public $api_key;
@@ -847,14 +852,14 @@ class OrderController extends Controller {
                 'first_name'=>$request->first_name,
                 'last_name'=>$request->last_name,
                 //'company_name'=>$request->company_name,
-                'country'=>$result->country_id?$result->country_id:100,
+                'country'=>isset($result->country_id)?$result->country_id:100,
                 'street_address_1'=>@$request->street_address_1,
                 'street_address_2'=>@$request->street_address_2,
-                'city'=>$request->city,
-                'state'=>$request->state,
-                'zip'=>$request->zip,
-                'phone'=>$request->phone,
-                'email'=>$request->email,
+                'city'=>isset($result->city)?$request->city:'',
+                'state'=>isset($result->state)?$request->state:'',
+                'zip'=>isset($result->zip)?$request->zip:'',
+                'phone'=>isset($result->phone)?$request->phone:'',
+                'email'=>isset($result->email)?$request->email:'',
                 //'order_notes'=>$request->order_notes,
            );
            $billinfo=BillingDetail::create($billing_data);
@@ -1139,7 +1144,7 @@ class OrderController extends Controller {
                     ->join('users','users.id','orders.user_id')
                     ->join('products','products.product_id','orders.course_id')
                     ->select('orders.*','users.name as fullname','orders.user_id','products.name as product_name',
-                            'products.product_id','users.email','products.price','products.revised_price')
+                            'products.product_id','users.email','products.price','products.revised_price','products.revised_percent')
                     ->where('orders.id',$id)
                     ->first();
 
@@ -1176,7 +1181,7 @@ class OrderController extends Controller {
                     ->join('users','users.id','orders.user_id')
                     ->join('products','products.product_id','orders.course_id')
                     ->select('orders.*','users.name as fullname','orders.user_id','products.name as product_name',
-                            'products.product_id','users.email','products.price','products.revised_price')
+                            'products.product_id','users.email','products.price','products.revised_price','products.revised_percent')
                     ->where('orders.id',$id)
                     ->first();
             $data_msg['order_date']=\Carbon\Carbon::parse($data_msg['order_info']->created_at)->format('d/m/Y');
@@ -1203,21 +1208,35 @@ class OrderController extends Controller {
                     ->join('users','users.id','orders.user_id')
                     ->join('products','products.product_id','orders.course_id')
                     ->select('orders.*','users.name as fullname','orders.user_id','products.name as product_name',
-                            'products.product_id','users.email','products.price','products.revised_price')
+                            'products.product_id','users.email','products.price','products.revised_price','products.revised_percent')
                     ->where('orders.id',$id)
                     ->first();
         $data_msg['order_info']= $order_info;           
         @$data_msg['state']=StateMaster::where('state_id',$data_msg['billing_info']->state)->first();
         @$data_msg['country']=Country::where('id',$data_msg['billing_info']->country)->first();
         $data_msg['amount_in_words']=Terbilang::make($data_msg['order_info']->grand_total);
-        
-        $pdf = PDF::loadView('frontend.course.billing.invoice',$data_msg);
+        $pdf = MPDF::loadView('frontend.course.billing.invoice', $data_msg, [], [
+            'default_font_size'=>12,
+            'default_font'=>'nikosh'
+        ]);
+        return $pdf->stream('document.pdf','D');
+        // $mpdf=new \Mpdf\Mpdf([
+        //     'default_font_size'=>12,
+        //     'default_font'=>'nikosh'
+        // ]);
+        // $mpdf = $mpdf::loadView('pdf.document', $data_msg);
+        // return $mpdf->stream('document.pdf');
+        // $mpdf->writeHTML($order_info->product_name);
+        // $mpdf->Output();
+        // return;
+        // $pdf = PDF::loadView('frontend.course.billing.invoice',$data_msg);
         
 
-        $filename="Order_".$order_info->order_id.'.pdf';
+        // $filename="Order_".$order_info->order_id.'.pdf';
         
 
-        return $pdf->download($filename);
+        // return $pdf->download($filename);
+        return ;
     }
 
     public function contributorShareCalculation($order_id)

@@ -6,7 +6,7 @@
 ?>
 
 <?php $__env->startSection('page_content'); ?>
-    <section class="inner-header divider parallax layer-overlay1 overlay-white-8"
+    <section class="inner-header divider parallax1 layer-overlay1 overlay-white-8"
         style="background-image: url(<?php echo e(asset('public/frontend/images/shortbanner.jpg')); ?>); background-repeat: no-repeat; background-size: 100%; background-position: 0 0; height:200px">
 
         <div class="container pt-30 pb-30">
@@ -37,35 +37,35 @@
 
             <h1>UGC NET</h1>
 
-            <div class="row">
+            <div class="row d-flex flex-wrap">
                 <?php $__currentLoopData = $papers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paper): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="col-sm-6 col-md-4">
+                    <div class="col-sm-6 col-md-4 ">
                         <div class="course-details"><img alt=""
                                 src="<?php echo e(url('public/frontend/images')); ?>/ugc_net_images/<?php echo e($paper->paper_name); ?>.jpg"
                                 style="height:220px; width:100%">
                             <div class="details-overlay">
                                 <h3 class="text-white"><?php echo e($paper->paper_name); ?></h3>
+
+                                
                             </div>
                         </div>
-                        <div class="unit">
+                        <div class="papper-unit">
                             <ul>
                                 <?php
                                     $units = $myfunction->getPaperUnits(1, $paper->id);
-                                    
+                                    $allCourses=$myfunction->getCourses(1,$paper->id);
                                 ?>
-                                <?php $__currentLoopData = $units; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $unit): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php
-                                        $courses=$myfunction->getOnlyPaidCourseInfo(1,$paper->id,$unit->subject_id);
-                                        $slug=$courses->slug;
+                                <?php $__currentLoopData = $allCourses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $course): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if(!empty($course->product)): ?>
+                                <li>
+                                    <a href="<?= url('/') ?>/course/<?= $course->product->slug ?>">
+                                        <?php echo e($course->product->name); ?>
 
-                                    ?>
-                                    <li>
-                                        <a href="<?= url('/')?>/course/<?= $slug.'/'.$unit->subject_slug;?>">
-                                            <?php echo e($unit->subject_name); ?>
-
-                                        </a>
-                                    </li>
+                                    </a>
+                                </li>
+                                <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                               
                             </ul>
                         </div>
                     </div>

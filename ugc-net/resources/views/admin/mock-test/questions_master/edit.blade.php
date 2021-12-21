@@ -100,7 +100,7 @@
                                             </div>
                                             <div class="col-md-2">Exam</div>
                                             <div class="col-md-2">Paper</div>
-                                            <div class="col-md-2">Subject</div>
+                                            <div class="col-md-2">Unit</div>
                                             <div class="col-md-2">Level</div>
                                         </div>
                                         @php
@@ -111,7 +111,7 @@
                                                 $myFunction=new  \App\library\myFunctions;
                                                 $papers=$myFunction->getExamPaper($question_detail->exam_id);
                                             @endphp
-                                            <div class="form-group" id="clonerow">
+                                            <div class="form-group exampaperrow" id="clonerow">
                                                 <div class="control-label col-md-3">
                                                     
                                                 </div>
@@ -152,9 +152,13 @@
                                                 @endif
                                                 </div>
                                                 <div class="col-md-2">
+                                                    @php
+                                                        $allSubjects=$myFunction->getPaperAdminUnits($exam_id = 1, $question_detail->paper_id);
+
+                                                    @endphp
                                                     <select name="subject_id[]" id="subject_id" class="form-control subject-section" >
                                                         <option value="">Select Subject</option>
-                                                        @foreach ($subjects as $subject)
+                                                        @foreach ($allSubjects as $subject)
                                                         <option value="{{$subject['id']}}" 
                                                         @if ($question_detail->subject_id==$subject['id'])
                                                             selected
@@ -760,19 +764,27 @@ $(document).ready(function(){
         var txt = $( this ).attr('id');
         
         CKEDITOR.replace(txt , {
-            // toolbarGroups: [                
-            //         {"name":"basicstyles","groups":["basicstyles"]},
-            //         {"name":"links","groups":["links"]},
-            //         {"name":"paragraph","groups":["list","blocks"]},
-            //         {"name":"document","groups":["mode"]},
-            //         {"name":"insert","groups":["image","table","horizontalrule","spcialchar"]},             
-            //         {"name":"styles","groups":["styles","undo","redo"]},
-                    
-            //     ],
+            
 
                 filebrowserUploadUrl: '{{route('uploadImageCKeditor',['_token' => csrf_token() ])}}',
                 removeButtons: 'Subscript,Superscript,Anchor,Styles,Specialchar,Smiley,Save,Flash,IFrame',
         });
+    });
+
+    $('body').on('change','.paper-section',function(){
+        let exam_id=$('#exam_id').val();
+        let paper_id=$(this).val();
+        let data={
+            exam_id:exam_id,
+            paper_id:paper_id,
+        }
+        let url="{{route('ajaxExamPaperUnits')}}";
+        var $this=$(this);
+        $.post(url,data,function(response){
+            $this.parents('.exampaperrow').find('.subject-section').html(response);
+        })
+
+
     });
 })
         

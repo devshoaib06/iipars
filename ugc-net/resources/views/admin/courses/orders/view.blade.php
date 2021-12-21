@@ -238,13 +238,13 @@
 																			
 																			<th> Original Price </th>
 																			<th> Revised Price (On {{\Carbon\Carbon::parse($order_info->created_at)->format('F j, Y')}}) </th>
-																			@if ($order_info->student_cb_amount)
-																			<th> Cashback </th>
+																			<th> Discount Amount <br /> ({{ $order_info->revised_percent?$order_info->revised_percent:0 }}%) </th>
+																			@if ($order_info->extra_discount)
+																			<th> Extra Discount </th>
 																				
 																			@endif
 																			{{-- <th> CGST -@ 9% </th>
 																			<th> SGST -@ 9% </th> --}}
-																			<th> Discount Amount </th>
 																			<th> Total </th>
 																		</tr>
 																	</thead>
@@ -255,14 +255,14 @@
 																			</td>
 																			<td> ₹ {{$order_info->price}} </td>
 																			{{-- <td> ₹ {{$order_info->revised_price!=""?$order_info->revised_price:$order_info->price}} </td> --}}
-																			<td> ₹ {{$order_info->course_price?$order_info->course_price:$order_info->subtotal}}</td>
-																			@if ($order_info->student_cb_amount)
+																			<td> ₹ {{$order_info->revised_price?$order_info->revised_price:0.00}}</td>
+																			<td> ₹ {{$order_info->discount_amount!=""?$order_info->discount_amount:'0.00'}}  </td>
+																			@if ($order_info->extra_discount)
 																				
-																			<td> ₹ {{$order_info->student_cb_amount}}</td>
+																			<td> ₹ {{$order_info->extra_discount}}</td>
 																			@endif
 																			{{-- <td> ₹ 0.00 </td>
 																			<td> ₹ 0.00 </td> --}}
-																			<td> ₹ {{$order_info->discount_amount!=""?$order_info->discount_amount:'0.00'}}  </td>
 																			<td> ₹ {{$order_info->grand_total}} </td>
 																		</tr>
 																		

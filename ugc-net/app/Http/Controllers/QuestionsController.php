@@ -806,8 +806,8 @@ class QuestionsController extends Controller
                    // @$t->questionDetails[0]->subject->subject_name,
                     //$t->subject->subject_name,
                     $opt_types[$t->option_type],
-                    '<a href="'.route('editMockQuestion',['id'=>Hasher::encode($t->id)]).'" class="btn btn-sm btn-default margin-bottom-5"><i class="fa fa-eye"></i> Edit </a>
-                    <a href="javascript:void(0)"  class="btn btn-sm btn-default remove-order confirmation" data-value="'.$t->id.'" ><i class="fa fa-trash"></i> Delete </a>'
+                    '<a href="'.route('editMockQuestion',['id'=>Hasher::encode($t->id)]).'" class="btn btn-sm btn-default edit-btn margin-bottom-5"><i class="fa fa-eye"></i> Edit </a>
+                    <a href="javascript:void(0)"  class="btn btn-sm btn-default remove-order edit-btn confirmation" data-value="'.$t->id.'" ><i class="fa fa-trash"></i> Delete </a>'
                     
                 );
 
@@ -837,14 +837,14 @@ class QuestionsController extends Controller
 
            
             $question =MockQuestionMaster::with('questionOptions')->with('questionAnswers')->with('questionDetails')->find($id); 
-            //return $question->questionDetails; 
+            // dd($question->questionDetails); 
             $exam=$paper=$subject=$level=[];
             $data_msg['question_details']=$question->questionDetails;
             if(!empty($question_details)){
                 foreach ($question_details as $question_detail) {
                    $exam[]=$question_detail->exam_id;
                    $paper[]=$question_detail->paper_id;
-                   $subject[]=$question_detail->subject_id;
+                   //$subject[]=$question_detail->subject_id;
                    $level[]=$question_detail->level_id;
                 }
 

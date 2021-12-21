@@ -95,7 +95,9 @@
                                     <input type="submit" class="buynow btn btn-success enrollbtn"
                                         value="Preview Now">
                                 <?php else: ?>
-                                    <a href="#" class="btn btn-success ">Enroll Now</a>
+                                    <input type="submit" class="buynow btn btn-success enrollbtn"
+                                    value="Enroll Now">
+                                    
                                 <?php endif; ?>
 
                             <?php endif; ?>
@@ -106,7 +108,9 @@
                                     data-productid="<?php echo e($course_details_page->product_id); ?>"
                                     data-target=".login-modal">Preview Now</a>
                                 <?php else: ?>
-                                    <a href="#" class="btn btn-success ">Enroll Now</a>
+                                    <a ref="#" class="buynow btn btn-success buy-now-login" data-toggle="modal"
+                                    data-productid="<?php echo e($course_details_page->product_id); ?>"
+                                    data-target=".login-modal">Enroll Now</a>
                                 <?php endif; ?>
                                 
 
@@ -120,6 +124,8 @@
 
                     <?php echo html_entity_decode($course_details_page->intro_text); ?>
 
+
+                    
                     <hr>
 
                     <h3>What you'll Get</h3>
@@ -127,23 +133,34 @@
 
                         <?php $__currentLoopData = $related_materials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $paper => $materials): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php $myFuntion = new \App\library\myFunctions();
-                            $paper_name = @$myFuntion->getPaperName($paper);
-                            // echo "<pre>";
-                            //     print_r($materials);
-                            // echo "</pre>";
+                            $paper_info = @$myFuntion->getPaperName($paper);
+                           
                             ?>
-                        <h4><?php echo e($paper_name); ?> <?php echo e($units->subject_name); ?></h4>
+                        <h4><?php echo e($paper_info->paper_name); ?> </h4>
+                       
                         <?php if(count($materials) > 0): ?>
+                        <?php
+                            $exam_paper_units=@$myFuntion->getPaperSubject($course_details_page->product_id,$paper_info->id);
+                            
+                        ?>
                         <ul>
+                            <?php $__currentLoopData = $exam_paper_units; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $exam_paper_unit): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if(isset($exam_paper_unit->subject)): ?>
+                                <li><?php echo e(@$exam_paper_unit->subject->subject_name); ?> </li>
+                                <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </ul>    
+                       
                             <?php $__currentLoopData = $materials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $material): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php
                                         $material_name = @$myFuntion->getMaterialName($material);
                                         ?>
-                            <li><?php echo e($material_name); ?></li>
+                            <p><?php echo e($material_name); ?></p>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                        </ul>
+                        
                         <?php endif; ?>
+                       
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <?php echo html_entity_decode($course_details_page->description); ?>
@@ -165,7 +182,7 @@
                         <div class="tabdiv">
 
                             <?php
-                            $course_image = asset('storage/uploads/courses/5f2cda75c6c65.jpg');
+                            $course_image = asset('storage/uploads/courses/61b208e45490c.jpg');
                             if ($course_details_page->image) {
                                 $course_image = asset('storage/uploads/courses/' . $course_details_page->image);
                             }
@@ -199,14 +216,30 @@
                             </div>
                             <?php endif; ?>
                             <?php if(auth()->guard()->check()): ?>
-                                <input type="submit" class="buynow enrollbtn btn btn-success"
-                                    value="<?php echo e((floor($course_details_page->price)==0)?'Preview Now':'Enroll Now'); ?>">
+                                
+                                <?php if(floor($course_details_page->price) == 0): ?>
+                                <input type="submit" class="buynow btn btn-success enrollbtn"
+                                        value="Preview Now">
+                                <?php else: ?>
+                                <input type="submit" class="buynow btn btn-success enrollbtn"
+                                value="Enroll Now">
+                                    
+                                <?php endif; ?>    
                             <?php endif; ?>
                             
                             <?php if(auth()->guard()->guest()): ?>
-                            <a href="#" class="buynow  btn btn-success buy-now-login" data-toggle="modal"
-                                data-productid="<?php echo e($course_details_page->product_id); ?>"
-                                data-target=".login-modal"><?php echo e((floor($course_details_page->price)==0)?'Preview Now':'Enroll Now'); ?></a>
+                            
+
+                                <?php if(floor($course_details_page->price) == 0): ?>
+                                    <a href="#" class="buynow btn btn-success buy-now-login" data-toggle="modal"
+                                    data-productid="<?php echo e($course_details_page->product_id); ?>"
+                                    data-target=".login-modal">Preview Now</a>
+                                <?php else: ?>
+                                    <a href="#" class="buynow btn btn-success buy-now-login" data-toggle="modal"
+                                    data-productid="<?php echo e($course_details_page->product_id); ?>"
+                                    data-target=".login-modal">Enroll Now</a>
+                                    
+                                <?php endif; ?>
                             <?php endif; ?>
                            
                             

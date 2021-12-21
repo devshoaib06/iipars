@@ -90,7 +90,10 @@
                                                         
                                                                     @php 
                                                                     $count_pdf=1;
-                                                                   // echo $material_name;
+                                                                    if(count($course_data)>0){
+
+                                                                        echo $material_name;
+                                                                    }
                                                                     @endphp
                                                                 @foreach ($course_data as $cdata) 
                                                                     @if($count_pdf && $cdata->media_type=='pdf')
@@ -117,16 +120,18 @@
                                                                             </div>
                                                                         </div>
                                                                     @endif
+                                                                    <div class="row">
                                                                     @if($countvideo)
                                                                         @if($cdata->media_type=='video')
-                                                                        <div class="col-sm-6 video-section">
+                                                                        <div class="col-sm-6">
+                                                                            <div class="video-section">
                                                                             @php $count_video=0;@endphp
                                                                                 @php  
                                                                                     
                                                                                     
                                                                                 $video_embed_link=$myLibrary->parseYouTubeUrl($cdata->value);@endphp
                                                                                 
-                                                                                <div class="content_exists">
+                                                                                <div class="video-container">
                                                                                     <iframe width="100%" height="300px" src="{{$protocol}}://www.youtube.com/embed/{{$video_embed_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                                                 
                                                                                 </div>
@@ -134,8 +139,12 @@
                                                                                 <h4 class="video_label">{{$cdata->title}}</h4>
 
                                                                         </div>
+                                                                        </div>
                                                                         @endif
+                                                                    
                                                                     @endif
+                                                                </div>
+
                                                                     @php 
                                                                         $activecount++;
                                                                     

@@ -6,7 +6,6 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
     <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
@@ -102,10 +101,10 @@
               <th width="128" align="center" bgcolor="#e1e1e1" ><font size="1" face="Georgia, Arial" color="black"><strong>AMOUNT</strong></font></th>
         </tr>
         <tr>
-            <td align="center" valign="top" class="normalstyle">{{$order_info->product_name}}</td>
+            <td align="center" valign="top" class="normalstyle" >{{$order_info->product_name }}</td>
 
-            <td align="center" valign="top" class="normalstyle">{{$order_info->currency}} {{$order_info->revised_price!=""?$order_info->revised_price:$order_info->price}}</td>
-            <td align="center" valign="top" class="normalstyle">{{$order_info->currency}} {{$order_info->revised_price!=""?$order_info->revised_price:$order_info->price}}</td>
+            <td align="center" valign="top" class="normalstyle">{{$order_info->currency}} {{$order_info->price}}</td>
+            <td align="center" valign="top" class="normalstyle">{{$order_info->currency}} {{$order_info->price}}</td>
 
         </tr>
         {{-- <tr>
@@ -122,22 +121,23 @@
             <td align="center" valign="top">{{$order_info->currency}} 0.00</td>
 
         </tr> --}}
-        @if ($order_info->student_cb_amount!="")
-            
         <tr>
-            
-            <td colspan="2" align="center" valign="top"><font size="1" face="Arial, Georgia" color="black"><strong>Cashback</strong></font></td>
-            
-            <td align="center" valign="top">{{$order_info->currency}} {{$order_info->student_cb_amount}}</td>
-            
-        </tr>
-        @endif
-        <tr>
-            <td colspan="2" align="center" valign="top"><font size="1" face="Arial, Georgia" color="black"><strong>Discount </strong></font></td>
+            <td colspan="2" align="center" valign="top"><font size="1" face="Arial, Georgia" color="black"><strong>Discount ( {{ $order_info->revised_percent }}% ) </strong></font></td>
 
             <td align="center" valign="top">{{$order_info->currency}} {{$order_info->discount_amount!=""?$order_info->discount_amount:'0.00'}}</td>
 
         </tr>
+        @if ($order_info->extra_discount!="")
+            
+        <tr>
+            
+            <td colspan="2" align="center" valign="top"><font size="1" face="Arial, Georgia" color="black"><strong>Extra Discount</strong></font></td>
+            
+            <td align="center" valign="top">{{$order_info->currency}} {{$order_info->extra_discount}}</td>
+            
+        </tr>
+        @endif
+        
         <tr>
 
             <td colspan="2" align="center" valign="top"><font size="1" face="Arial, Georgia" color="black"><strong>SUBTOTAL</strong></font></td>

@@ -11,6 +11,7 @@
         "php": "^7.2",
         "anhskohbo/no-captcha": "^3.2",
         "barryvdh/laravel-dompdf": "^0.8.5",
+        "carlos-meneses/laravel-mpdf": "^2.1",
         "fideloper/proxy": "^4.0",
         "hashids/hashids": "^4.0",
         "intervention/image": "^2.5",
@@ -20,7 +21,8 @@
         "laravel/tinker": "^2.0",
         "razorpay/razorpay": "^2.5",
         "riskihajar/terbilang": "^1.2",
-        "spatie/laravel-cookie-consent": "^2.12"
+        "spatie/laravel-cookie-consent": "^2.12",
+        "spipu/html2pdf": "^5.2"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

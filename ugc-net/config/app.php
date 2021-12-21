@@ -179,6 +179,7 @@ return [
         Riskihajar\Terbilang\TerbilangServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
 
 
     ],
@@ -234,8 +235,8 @@ return [
         'Hasher'=> App\Helpers\HasherServiceHelper::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Terbilang' => Riskihajar\Terbilang\Facades\Terbilang::class,
-        'Image' => Intervention\Image\Facades\Image::class
-
+        'Image' => Intervention\Image\Facades\Image::class,
+        'MPDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class
 
     ],
 

@@ -99,3 +99,4 @@ ugc-net/storage/framework/views/366b2472c53258e073de6d150ca5ff81562e13fb.php
 application/backend/config/config.php
 ugc-net/bootstrap/cache/config.php
 ugc-net/config/path.php
+application/backend/config/database.php

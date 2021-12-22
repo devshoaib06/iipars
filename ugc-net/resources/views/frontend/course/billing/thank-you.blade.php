@@ -83,12 +83,12 @@
                                     </tr>
                                     
                                     <tr>
-                                        <td>Payment method:</td>
-                                    <td style="text-transform:capitalize"> &nbsp;{{$payment_details->payment_method}}</td>
-                                    </tr>
-                                    <tr>
                                         <td><strong>Total:</strong></td>
                                         <td><strong> &nbsp; ₹ {{$order->grand_total}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Payment method:</td>
+                                    <td style="text-transform:capitalize"> &nbsp;{{$payment_details->payment_method}}</td>
                                     </tr>
                                 </table>
                             

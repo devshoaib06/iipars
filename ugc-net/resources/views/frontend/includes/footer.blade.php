@@ -362,7 +362,7 @@ $excluded_page = ['resellerlogin', 'resellerforgotpassword', 'reseller-sign-up',
 
 <!-- Footer Scripts -->
 <!-- JS | Custom script for all pages -->
-<script src="https://iipars.com/assets/js/custom.js"></script>
+<script src="{{ config('path.iipars_base_url') }}/assets/js/custom.js"></script>
 
 
 <script type="text/javascript"

@@ -17,7 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    <h3 class="text-center">{{strtoupper($subject->subject_name)}}</h3>
+                    <h3 class="text-center">{{strtoupper($subject->papers->paper_name)}} {{strtoupper($subject->subject_name)}}</h3>
                     </div>
                 <div class="col-12 col-sm-12">
                     <div class="outerleftsection">

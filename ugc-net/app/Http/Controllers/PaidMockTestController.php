@@ -53,7 +53,14 @@ class PaidMockTestController extends Controller
         $floatersignup=\App\FloaterSignUpMaster::where('status',1)->first();   
         $shareData['floatersignup'] = $floatersignup;          
 
-        $shareData['newsfeed'] = $newsfeed;                
+        $newsfeed = DB::connection('mysql2')->table('tbl_news_feed')->where('status', 1)->get();
+        $social = DB::connection('mysql2')->table('tbl_social_link')->get();
+        $contact = DB::connection('mysql2')->table('tbl_contact')->get();
+        $counter = DB::connection('mysql2')->table('tbl_no_of_visitor')->get();
+        $shareData['newsfeed'] = $newsfeed;
+        $shareData['social'] = $social;
+        $shareData['contact'] = $contact;
+        $shareData['counter'] = $counter;               
         
         $shareData['combo_pack_products'] = $combo_pack_products;
         $shareData['mainMenu'] = $mainMenu;
@@ -103,10 +110,10 @@ class PaidMockTestController extends Controller
             $course_id=Hasher::decode($course_id);
             
             $data_msg = array();
-            $meta_array['meta_title']='Teachinns-Mock Test';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']=env('APP_NAME','IIPARS') .'Mock Test';
+            $meta_array['meta_desc']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']='' .env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $userArr = User::find(Auth::id());
@@ -176,10 +183,10 @@ class PaidMockTestController extends Controller
         if (Auth::check()) {  
 
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test | ' .env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']='' .env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $request->session()->put([
@@ -238,7 +245,8 @@ class PaidMockTestController extends Controller
             $params=[
                 'template_info'=>$template_info,
                 'subject_id'=>$subject_id,
-                'mock_test_id'=>$mock_test_id
+                'mock_test_id'=>$mock_test_id,
+                'student_id'=>$student_info->student_id,
             ];
             $mocktestData=$this->saveStudentMockTestDetails($params);
             //dd($mocktestData['fullmarks']);
@@ -287,7 +295,16 @@ class PaidMockTestController extends Controller
         $template_info=$params['template_info'];
         $subject_id=$params['subject_id'];
         $mock_test_id=$params['mock_test_id'];
-
+        $student_id=$params['student_id'];
+        // DB::enableQueryLog();
+        $previousMockTestQuestion=StudentTestQuestionResult::
+            whereHas('mocktest',function($q) use ($student_id,$subject_id){
+                $q->where(['subject_id'=>$subject_id,'student_id'=>$student_id]);
+            })->distinct('question_id')->pluck('question_id');
+        //dd(DB::getQueryLog(),$previousMockTestQuestion,count($previousMockTestQuestion));    
+        if(count($previousMockTestQuestion)<1){
+            $previousMockTestQuestion=[0];
+        }
         $template_details=$template_info->templateDetails;
 
             $level=[];
@@ -308,11 +325,12 @@ class PaidMockTestController extends Controller
                                
             $allquestions=\App\MockQuestionDetailsMaster::with('questionMaster')->with('questionOptions')->with('subject')->with('questionAnswers')
             ->whereIn('level_id',$level)
-            ->where('subject_id',$subject_id)   
+            ->where('subject_id',$subject_id)
+            ->whereNotIn('question_id',$previousMockTestQuestion)   
             ->take($noofQuestion)           
             ->inRandomOrder()   
             ->get();
-           //dd($allquestions);
+        //    dd($allquestions);
             $fullmarks=$secured_marks=0;
 
 
@@ -353,10 +371,10 @@ class PaidMockTestController extends Controller
 
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test | ' .env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']='' .env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $mock_test_id=Hasher::decode($mock_test_id);
@@ -381,12 +399,12 @@ class PaidMockTestController extends Controller
         
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test | ' .env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']='' .env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
-
+            $data_msg['allquestions']=[];
             $mock_test_id = Hasher::decode($mock_test_id);
             $request->session()->put([
             
@@ -403,7 +421,7 @@ class PaidMockTestController extends Controller
                 
                 $data_msg['allquestions']=StudentTestQuestionResult::where('mock_test_id',$mock_test_id)->first();
             }
-            
+            //dd($data_msg['allquestions']);
             
 
             $student_mock_test=StudentMockTest::find($mock_test_id);
@@ -411,7 +429,7 @@ class PaidMockTestController extends Controller
            
             $data_msg['subject']=$subject;
             
-
+            $data_msg['paper']=@$student_mock_test->subject->papers->paper_name;
             $data_msg['noofques']=StudentTestQuestionResult::where('mock_test_id',$mock_test_id)->count();
             
             $data_msg['answeredQues']=StudentTestQuestionResult::where('mock_test_id',$mock_test_id)->where('answer_type',2)->count();
@@ -425,7 +443,7 @@ class PaidMockTestController extends Controller
 
             $data_msg['mock_test_id']=$mock_test_id;
 
-            // dd($data_msg);
+            // dd($data_msg,$student_mock_test->subject->papers);
             
             //return     $data_msg;    
             
@@ -904,10 +922,10 @@ class PaidMockTestController extends Controller
         
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test Result | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test Result | ' .env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']='' .env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $total_correct_answer=$total_incorrect_answer=$total_attempt_answer=0;
@@ -1332,9 +1350,9 @@ class PaidMockTestController extends Controller
     {
         if (Auth::check())
         {
-            $meta_array['meta_title']='Teachinns-My Mock Tests';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
+            $meta_array['meta_title']=env('APP_NAME','IIPARS').'- My Mock Tests';
+            $meta_array['meta_desc']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']='' .env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
             $data_msg['allProducts']=Product::where('status',1)->orderBy('name','Asc')->get();
             $user_id=Auth::id();
@@ -1357,10 +1375,10 @@ class PaidMockTestController extends Controller
             $course_id=Hasher::decode($course_id);
             
             $data_msg = array();
-            $meta_array['meta_title']='Teachinns-Mock Test';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']=env('APP_NAME','IIPARS').' - Mock Test';
+            $meta_array['meta_desc']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']='' .env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $userArr = User::find(Auth::id());
@@ -1435,10 +1453,10 @@ class PaidMockTestController extends Controller
        //return $request;
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test | ' .env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']='' .env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $request->session()->put([
@@ -1468,10 +1486,10 @@ class PaidMockTestController extends Controller
     {
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test | ' .env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']='' .env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $user_id=Auth::id();
@@ -1533,10 +1551,10 @@ class PaidMockTestController extends Controller
         // }
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test | ' .env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']='' .env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']='' .env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $limitquestion=trim(getMockTestSettings('mt_noofquestion'));

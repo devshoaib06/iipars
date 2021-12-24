@@ -570,8 +570,8 @@ class OrderController extends Controller {
 
 
         if($data['payment_details']->payment_method!="Free"){
-            // $this->sendOrderMail($data,$order_id);
-            // $this->sendAdminOrderMail($data,$order_id);
+            $this->sendOrderMail($data,$order_id);
+            $this->sendAdminOrderMail($data,$order_id);
         }
 
         return view('frontend.course.billing.thank-you',$data);
@@ -852,14 +852,14 @@ class OrderController extends Controller {
                 'first_name'=>$request->first_name,
                 'last_name'=>$request->last_name,
                 //'company_name'=>$request->company_name,
-                'country'=>isset($result->country_id)?$result->country_id:100,
+                'country'=>$result->country_id?$result->country_id:100,
                 'street_address_1'=>@$request->street_address_1,
                 'street_address_2'=>@$request->street_address_2,
-                'city'=>isset($result->city)?$request->city:'',
-                'state'=>isset($result->state)?$request->state:'',
-                'zip'=>isset($result->zip)?$request->zip:'',
-                'phone'=>isset($result->phone)?$request->phone:'',
-                'email'=>isset($result->email)?$request->email:'',
+                'city'=>$request->city,
+                'state'=>$request->state,
+                'zip'=>$request->zip,
+                'phone'=>$request->phone,
+                'email'=>$request->email,
                 //'order_notes'=>$request->order_notes,
            );
            $billinfo=BillingDetail::create($billing_data);

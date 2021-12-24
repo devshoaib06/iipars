@@ -98,7 +98,8 @@
                                                
                                                 <th width="20%"> Question </th>
                                                 <th width="15%"> Level </th>
-                                                <th width="15%"> Subject </th>
+                                                <th width="15%"> Paper </th>
+                                                <th width="15%"> Unit </th>
                                                 <th width="15%"> Option Type </th>
                                                 <th width="5%"> Action </th>
 
@@ -127,8 +128,19 @@
                                                     
                                                 </td>
                                                 <td>
-                                                    
+                                                    {{-- <select name="paper_id" id="paper_id" class="form-control form-filter input-sm" > 
+                                                        <option value="" >Select Paper</option>
+                                                        @foreach($allPapers as $v)
+                                                    <option value="{{ $v->id }}" >{{$v->exam_name}} - {{ $v->paper_name }} </option>
+                                                        @endforeach
+                                                    </select> --}}
 												</td>
+                                                <td>
+                                                    {{-- <select name="subject_id" id="subject_id" class="form-control form-filter input-sm" > 
+                                                        <option value="" >Select Paper First</option>
+                                                       
+                                                    </select> --}}
+                                                </td>
                                                 
 												<td>
                                                     <select name="option_type" class="form-control form-filter input-sm">
@@ -203,6 +215,22 @@
             }
                 
     });
+
+    $('#paper_id').on('change',function(){
+        let exam_id=1;
+        let paper_id=$(this).val();
+        let data={
+            exam_id:exam_id,
+            paper_id:paper_id,
+        }
+        let url="{{route('ajaxExamPaperUnits')}}"
+        $.post(url,data,function(response){
+        
+            $("#subject_id").html(response);                                      
+        })  
+
+                
+    }) 
 
         var EcommerceOrdersView = function () {
 

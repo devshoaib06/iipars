@@ -27,6 +27,10 @@ class MockQuestionMaster extends Model
     {
         return $this->belongsTo('App\SubjectMaster','subject_id','id');
     }
+    public function papers()
+    {
+        return $this->belongsTo('App\PaperMaster','paper_id','id');
+    }
 
     public function questionOptions(){
         return $this->hasMany('App\MockQuestionOptions','question_id','id');

@@ -91,10 +91,10 @@ class MockTestController extends Controller
         
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test | '.env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']=''.env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']=''.env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']=''.env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $limitquestion=trim(getMockTestSettings('mt_noofquestion'));
@@ -103,7 +103,8 @@ class MockTestController extends Controller
                     ->take($limitquestion)           
                     ->inRandomOrder()   
                     ->get();
-            $data_msg['optionsLabel']=['A','B','C','D'];        
+            $data_msg['optionsLabel']=['A','B','C','D'];    
+            dd($meta_array);    
             // echo "<pre>";
             // print_r($data_msg['allquestions']);
             // die;
@@ -120,10 +121,10 @@ class MockTestController extends Controller
         
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test | '.env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']=''.env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']=''.env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']=''.env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $user_id=Auth::id();
@@ -158,10 +159,10 @@ class MockTestController extends Controller
         }
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test | '.env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']=''.env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']=''.env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']=''.env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $limitquestion=trim(getMockTestSettings('mt_noofquestion'));
@@ -247,10 +248,10 @@ class MockTestController extends Controller
         
         if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test Result | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test Result | '.env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']=''.env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']=''.env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']=''.env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             
@@ -292,10 +293,10 @@ class MockTestController extends Controller
        
         //if (Auth::check()) {  
             $data_msg = array();
-            $meta_array['meta_title']='Mock Test | Teachinns';
-            $meta_array['meta_desc']='Teachinns';
-            $meta_array['meta_keyword']='Teachinns';
-            $meta_array['meta_robots']='Teachinns';
+            $meta_array['meta_title']='Mock Test | '.env('APP_NAME','IIPARS');
+            $meta_array['meta_desc']=''.env('APP_NAME','IIPARS');
+            $meta_array['meta_keyword']=''.env('APP_NAME','IIPARS');
+            $meta_array['meta_robots']=''.env('APP_NAME','IIPARS');
             $data_msg['page_metadata'] = (object)$meta_array;
 
             $limitquestion=trim(getMockTestSettings('mt_noofquestion'));

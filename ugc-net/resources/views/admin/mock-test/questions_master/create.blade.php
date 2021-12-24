@@ -98,10 +98,10 @@
                                             </div>
                                             <div class="col-md-2">Exam</div>
                                             <div class="col-md-2">Paper</div>
-                                            <div class="col-md-2">Subject</div>
+                                            <div class="col-md-2">Unit</div>
                                             <div class="col-md-2">Level</div>
                                         </div>
-                                        <div class="form-group" id="clonerow">
+                                        <div class="form-group exampaperrow" id="clonerow">
                                             <div class="control-label col-md-3">
                                                 
                                             </div>
@@ -123,7 +123,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <select name="paper_id[]" id="paper-section" class="form-control paper-section"  >
-                                                    <option value="">Select Paper</option>
+                                                    <option value="">Select</option>
                                                     @foreach ($papers as $paper)
                                                     <option value="{{$paper['id']}}" 
                                                     @if(isset($mocktemplate))
@@ -141,7 +141,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <select name="subject_id[]" id="subject_id" class="form-control subject-section" >
-                                                    <option value="">Select Subject</option>
+                                                    {{-- <option value="">Select Subject</option>
                                                     @foreach ($subjects as $subject)
                                                     <option value="{{$subject['id']}}" 
                                                     @if(isset($mocktemplate))
@@ -149,7 +149,7 @@
                                                     @endif
                                                     
                                                     >{{$subject['subject_name']}}</option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             @if ($errors->has('subject_id'))
                                             <span class="help-block">
@@ -375,19 +375,20 @@
                 //$("#paper-section").html('');
                 if ( response.length != 0 ){
 
-                    let paperhtml=subjecthtml='';
+                    let paperhtml='<option value="">Select Paper</option>';
+                    let subjecthtml='<option value="">Select Paper First</option>';
                        
                     $.each(response.paperlist,function(key,res){
                         paperhtml+='<option value="'+res.paper_id+'">';
                         paperhtml+=' '+res.paper_name;
                         paperhtml+='</option>';
                     })  
-                    $.each(response.allSubjects,function(key,res){
-                        subjecthtml+='<option value="'+res.id+'">';
-                        subjecthtml+=' '+res.subject_name;
-                        subjecthtml+='</option>';
-                    })  
-                    console.log(subjecthtml);
+                    // $.each(response.allSubjects,function(key,res){
+                    //     subjecthtml+='<option value="'+res.id+'">';
+                    //     subjecthtml+=' '+res.subject_name;
+                    //     subjecthtml+='</option>';
+                    // })  
+                    // console.log(subjecthtml);
                     
                     if($this==undefined){
                         $(".paper-section:first").html(paperhtml);
@@ -428,6 +429,22 @@ function removeItem($j){
 }
 
 $(document).ready(function(){
+
+    $('body').on('change','.paper-section',function(){
+        let exam_id=$('#exam_id').val();
+        var $this=$(this);
+        let paper_id=$(this).val();
+        let data={
+            exam_id:exam_id,
+            paper_id:paper_id,
+        }
+        let url="{{route('ajaxExamPaperUnits')}}";
+        $.post(url,data,function(response){
+            $this.parents('.exampaperrow').find('.subject-section').html(response);
+        })
+
+
+    });
 
     CKEDITOR.replace('quest' , {
         // toolbarGroups: [                

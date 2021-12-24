@@ -157,7 +157,7 @@
 
                                                     @endphp
                                                     <select name="subject_id[]" id="subject_id" class="form-control subject-section" >
-                                                        <option value="">Select Subject</option>
+                                                        <option value="">Select Unit</option>
                                                         @foreach ($allSubjects as $subject)
                                                         <option value="{{$subject['id']}}" 
                                                         @if ($question_detail->subject_id==$subject['id'])

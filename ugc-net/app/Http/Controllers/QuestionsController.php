@@ -688,7 +688,10 @@ class QuestionsController extends Controller
             $data_msg["subjects"] = \App\SubjectMaster::where('status',1)->orderBy('subject_name', 'asc')->get();
             $data_msg["levels"] = \App\MockQuestionLevel::where('is_active',1)->orderBy('name', 'asc')->get();
             $data_msg["option_types"] = ['None','Simple','Conjugate'];
-           
+            $data_msg['allPapers'] = DB::table('paper_masters as pm')
+            ->join('exam_masters as em', 'pm.exam_id', 'em.id')
+            ->select('pm.id', 'pm.paper_name', 'em.exam_name')
+            ->get();
             return view('admin.mock-test.questions_master.list', $data_msg);
         } else {
             return redirect()->intended(config("constants.admin_prefix") . '/login');
@@ -702,11 +705,13 @@ class QuestionsController extends Controller
         {
             $question = $request->input('question');
             $level_id = $request->input('level_id');
+            $paper_id = $request->input('paper_id');
             $subject_id = $request->input('subject_id');
             $option_type = $request->input('option_type');
             
             
-            $arrSearch[] =['id','<>',0] ;
+            $arrSearch[] =['id','<>',0];
+            $arrQDetailsSearch[] =['id','<>',0];
             
             if ($question != '') {
                 $arrSearch[] = ['question', 'like', '%' . $question . '%'];
@@ -717,16 +722,24 @@ class QuestionsController extends Controller
                 $arrSearch[] = ['level_id', $level_id];
             }
             if ($subject_id != '') {
-                $arrSearch[] = ['subject_id', $subject_id];
+                $arrQDetailsSearch[] = ['subject_id', $subject_id];
+            }
+            if ($paper_id != '') {
+                $arrQDetailsSearch[] = ['paper_id', $paper_id];
             }
             if ($option_type != '') {
                 $arrSearch[] = ['option_type',$option_type];
             }
-
-            $items = MockQuestionMaster::where($arrSearch);
+            // DB::connection()->enableQueryLog();
+            // $items = MockQuestionMaster::where($arrSearch);
+            $items = MockQuestionMaster::whereHas('questionDetails', function($q) use ($arrQDetailsSearch){ 
+                $q->where($arrQDetailsSearch);
+            })->where($arrSearch);
+            
 
             $items = $items->get();
-            //dd($items);
+            $queries = DB::getQueryLog();
+            // dd($queries);
             $iTotalRecords = count($items);
 
            
@@ -769,6 +782,7 @@ class QuestionsController extends Controller
 
             $sl = 1;
             $opt_types=['None','Simple','Conjugate'];
+            // dd($paper);
             foreach ($items_1 as $t)
             {
                
@@ -780,20 +794,24 @@ class QuestionsController extends Controller
 
                 }
                 //echo "<pre>";
-                $level=$subject=[];
+                // dd($t->questionDetails[0]->paper);
+                $level=$subject=$paper=[];
                 if(isset($t->questionDetails)){
                     $count=count($t->questionDetails);
                     for($j=0;$j<$count;$j++){
                         $level[]=@$t->questionDetails[$j]->level->name;
                         $subject[]=@$t->questionDetails[$j]->subject->subject_name;
+                        $paper[]=@$t->questionDetails[$j]->paper->paper_name;
                     }
                     $level=array_unique($level);
                 }
+                $paper=array_unique($paper);
                 @$levels=implode(', ',$level);
                 $subjects=implode(', ',$subject);
+                $papers=implode(', ',$paper);
                 //foreach($t->questionDetails as $quse);
                 //die;
-               
+                
                 $content=Str::limit($t->question, 150, $end='...'); 
 
                 $records["data"][] = array(
@@ -801,6 +819,7 @@ class QuestionsController extends Controller
                     $sl,
                     $content,
                     @$levels,
+                    @$papers,
                     @$subjects,
                    // @$t->questionDetails[0]->level->name,
                    // @$t->questionDetails[0]->subject->subject_name,

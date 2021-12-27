@@ -373,7 +373,7 @@
         </ul>
     </li>
 
-   
+
 
     <li class="nav-item  @if ($menu_parent == 'payment-request')  active open @endif">
         <a href="javascript:;" class="nav-link nav-toggle">
@@ -546,6 +546,131 @@
             </li>
         </ul>
     </li>
+
+    <li class="nav-item  @if ($menu_parent == 'payment-request')  active open @endif">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-file-text-o"></i>
+            <span class="title">Academic management</span>
+            <span class="arrow @if ($menu_parent == 'payment-request')  open @endif"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/paper"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Paper Call</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/refresher"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Refresher Course</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/orientation"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Orientation Program</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/seminar"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Seminar</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/conference"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Conference</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/workshop"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Workshop</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/phd"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Ph.D. Entrance Test</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/phd"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Ph.D. Entrance Test</span>
+                </a>
+            </li>   
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/mphil"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage M. Phil. Admission</span>
+                </a>
+            </li>    
+        
+        </ul>
+    </li>
+
+    
+    <li class="nav-item  @if ($menu_parent == 'payment-request')  active open @endif">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-file-text-o"></i>
+            <span class="title">Current affairs</span>
+            <span class="arrow @if ($menu_parent == 'payment-request')  open @endif"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/current_affairs"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage current affairs category</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/current_affairs/list"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage current affairs list</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item  @if ($menu_parent == 'payment-request')  active open @endif">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="fa fa-file-text-o"></i>
+            <span class="title">UGC-NET Update</span>
+            <span class="arrow @if ($menu_parent == 'payment-request')  open @endif"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/ugc_video"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Video</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'list-payment-request')  active open @endif">
+                <a href="{{ config('path.iipars_admin_base_url') }}/index.php/ugc_other/list"
+                    class="nav-link ">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span class="title">Manage Other</span>
+                </a>
+            </li>
+        </ul>
+    </li>        
+
+
+
     <li class="nav-item  @if ($menu_parent == 'settings')  active open @endif">
         <a href="javascript:;" class="nav-link nav-toggle">
             <i class="icon-settings"></i>
@@ -557,7 +682,7 @@
 
 
             <li class="nav-item  @if ($menu_child == 'list_testimonial')  active open @endif">
-                <a href="{{ url(config("constants.admin_prefix").'/testimonials') }}" class="nav-link ">
+                <a href="{{ url(config(" constants.admin_prefix").'/testimonials') }}" class="nav-link ">
                     <span class="title">Testimonials</span>
                 </a>
             </li>
@@ -565,9 +690,21 @@
 
 
             <li class="nav-item  @if ($menu_child == 'pgnrl')  active open @endif ">
-                <a href="{{ url(config("constants.admin_prefix").'/payment-setting') }}" class="nav-link ">
+                <a href="{{ url(config(" constants.admin_prefix").'/payment-setting') }}" class="nav-link ">
                     <!--<i class="icon-user"></i>-->
                     <span class="title">Payment Gateway Settings</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'pgnrl')  active open @endif ">
+                <a href="{{ url(config(" constants.admin_prefix").'/setting') }}" class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <span class="title">General Settings</span>
+                </a>
+            </li>
+            <li class="nav-item  @if ($menu_child == 'pgnrl')  active open @endif ">
+                <a href="{{ url(config(" constants.admin_prefix").'/email-template') }}" class="nav-link ">
+                    <!--<i class="icon-user"></i>-->
+                    <span class="title">EMAIL TEMPLATE</span>
                 </a>
             </li>
 

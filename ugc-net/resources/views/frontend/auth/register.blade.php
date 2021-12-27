@@ -120,7 +120,7 @@
                                     </div> --}}
                                 </div>
                             <p style="margin-top:15px;">By creating an account you agree to our <a href="{{url('/terms-condition')}}" target="blank">Terms & Conditions.</a></p>
-                                <button type="submit" class="submitbut">Sign Up</button>
+                                <button type="submit" class="submitbut btn-primary">Sign Up</button>
                                 <div class="clearfix"></div>
                             </form>
 

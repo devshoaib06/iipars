@@ -224,7 +224,7 @@
                                     </div>
 
                                 <p class="shorttext">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="{{ url('/privacy-policy') }}">privacy policy.</a></p>
-                                   <button type="submit" class="paybut" >Place Order</button>
+                                   <button type="submit" class="paybut btn-primary" >Place Order</button>
                                     {{-- <input type="submit" class="paybut" value="Place Order"> --}}
                                     <div class="alert alert-danger hide">
                                         <button class="close" data-close="alert"></button> 

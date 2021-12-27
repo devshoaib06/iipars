@@ -2,7 +2,7 @@
     <tr>
        
 		<td  align="left" style="padding-left: 70px; padding-right: 20px;padding-top: 20px;">
-            <a href="{{ url('/') }}"><img src="{!! asset('public/frontend/images/logo.png') !!}" style="width:100%; max-width:200px; border-radius: 5px" alt=""></a>        
+            <a href="{{ url('/') }}"><img src="{!! asset('public/frontend/images/logo-iipars.png') !!}" style="width:100%; max-width:200px; border-radius: 5px" alt=""></a>        
         </td>
 		
     </tr>

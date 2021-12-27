@@ -128,12 +128,12 @@
                                                     
                                                 </td>
                                                 <td>
-                                                    {{-- <select name="paper_id" id="paper_id" class="form-control form-filter input-sm" > 
+                                                    <select name="paper_id" id="paper_id" class="form-control form-filter input-sm" > 
                                                         <option value="" >Select Paper</option>
                                                         @foreach($allPapers as $v)
                                                     <option value="{{ $v->id }}" >{{$v->exam_name}} - {{ $v->paper_name }} </option>
                                                         @endforeach
-                                                    </select> --}}
+                                                    </select>
 												</td>
                                                 <td>
                                                     {{-- <select name="subject_id" id="subject_id" class="form-control form-filter input-sm" > 

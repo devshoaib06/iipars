@@ -64,7 +64,15 @@ class RegisterController extends Controller
         $floatersignup=\App\FloaterSignUpMaster::where('status',1)->first();   
         $shareData['floatersignup'] = $floatersignup;
 
+        $newsfeed = DB::connection('mysql2')->table('tbl_news_feed')->where('status', 1)->get();
+        $social = DB::connection('mysql2')->table('tbl_social_link')->get();
+        $contact = DB::connection('mysql2')->table('tbl_contact')->get();
+        $counter = DB::connection('mysql2')->table('tbl_no_of_visitor')->get();
         $shareData['newsfeed'] = $newsfeed;
+        $shareData['social'] = $social;
+        $shareData['contact'] = $contact;
+        $shareData['counter'] = $counter;
+        
         $shareData['combo_pack_products'] = $combo_pack_products;
         $shareData['mainMenu'] = $mainMenu;
         $shareData['exams'] = $exams;

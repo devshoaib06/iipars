@@ -175,7 +175,7 @@ $excluded_page = ['resellerlogin', 'resellerforgotpassword', 'reseller-sign-up',
                                 <input type="checkbox" name="remberme"> Remember Me
                             </label>
                         </div>
-                        <button type="submit" class="submitbut">Log In</button>
+                        <button type="submit" class="submitbut btn-success">Log In</button>
 
 
                     </form>
@@ -213,7 +213,7 @@ $excluded_page = ['resellerlogin', 'resellerforgotpassword', 'reseller-sign-up',
                             <input type="text" class="form-control" name="femail" id="femail">
                         </div>
 
-                        <button type="submit" class="submitbut" id="rset">Send</button>
+                        <button type="submit" class="submitbut btn-success" id="rset">Send</button>
                     </form>
                 </div>
             </div>

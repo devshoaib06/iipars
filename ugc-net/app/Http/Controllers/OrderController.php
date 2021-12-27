@@ -556,10 +556,9 @@ class OrderController extends Controller {
         $data['state']=StateMaster::where('state_id',$data['billing_info']->state)->first();
         $data['country']=Country::where('id',$data['billing_info']->country)->first();
         $data['product']=Product::where('product_id',$product_id)->first();
+
         if($data['order']->payment_status=="success"){
             $data['payment_details']=PaymentDetail::where('order_id',$order_id)->first();
-
-
         }
         if(floor($data['product']->price)>0){
             $this->contributorShareCalculation($order_id);
@@ -585,13 +584,15 @@ class OrderController extends Controller {
             $template_data = $temp_data;
             $product=$data['product'];
             $order=$data['order'];
-            $amount=$product->revised_price!=""?$product->revised_price:$product->price;
+            $amount=$product->price;
             $payment=$data['payment_details'];
             $subtotal=$amount;
             if($order->discount_amount){
-                $subtotal=$amount-$order->discount_amount;
+                $subtotal=$order->subtotal;
             }
-    
+
+            
+            
             $email=Auth::user()->email;
             $user_name=Auth::user()->name;
             
@@ -599,6 +600,7 @@ class OrderController extends Controller {
             $product_name=$product->name;
             $amount=$amount;
             $discount_amount=$order->discount_amount==""?'0.00':$order->discount_amount;
+            $extra_discount=$order->extra_discount?$order->extra_discount:0.00;
             $subtotal=$subtotal;
             $payment_method=$payment->payment_method;
             $grand_total=$order->grand_total;
@@ -610,6 +612,7 @@ class OrderController extends Controller {
             $content = str_replace("{{amount}}", $amount, $content);
             $content = str_replace("{{product_name}}", $product_name, $content);
             $content = str_replace("{{discount_amount}}", $discount_amount, $content);
+            $content = str_replace("{{extra_discount_amount}}", $extra_discount, $content);
             $content = str_replace("{{subtotal}}", $subtotal, $content);
             $content = str_replace("{{payment_method}}", $payment_method, $content);
             $content = str_replace("{{grand_total}}", $grand_total, $content);
@@ -649,10 +652,7 @@ class OrderController extends Controller {
                 $order=$data['order'];
                 $amount=$product->revised_price!=""?$product->revised_price:$product->price;
                 $payment=$data['payment_details'];
-                $subtotal=$amount;
-                if($order->discount_amount){
-                    $subtotal=$amount-$order->discount_amount;
-                }
+                $subtotal=$order->subtotal;
                 
                 $email=trim(getSettings('from_email'));
                 $user_name='Admin';
@@ -661,6 +661,7 @@ class OrderController extends Controller {
                 $product_name=$product->name;
                 $amount=$amount;
                 $discount_amount=$order->discount_amount==""?'0.00':$order->discount_amount;
+                $extra_discount=$order->extra_discount?$order->extra_discount:0.00;
                 $subtotal=$subtotal;
                 $payment_method=$payment->payment_method;
                 $grand_total=$order->grand_total;
@@ -672,6 +673,7 @@ class OrderController extends Controller {
                 $content = str_replace("{{amount}}", $amount, $content);
                 $content = str_replace("{{product_name}}", $product_name, $content);
                 $content = str_replace("{{discount_amount}}", $discount_amount, $content);
+                $content = str_replace("{{extra_discount_amount}}", $extra_discount, $content);
                 $content = str_replace("{{subtotal}}", $subtotal, $content);
                 $content = str_replace("{{payment_method}}", $payment_method, $content);
                 $content = str_replace("{{grand_total}}", $grand_total, $content);
@@ -682,7 +684,7 @@ class OrderController extends Controller {
                 $emailData['to_email'] = $email;
                 $emailData['from_email'] = trim(getSettings('from_email'));
                 $emailData['from_name'] = trim(getSettings('from_name'));
-                //echo "<pre>"; print_r($emailData); die;
+                // echo "<pre>"; print_r($emailData); die;
         
                 
         

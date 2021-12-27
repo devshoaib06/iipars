@@ -59,9 +59,10 @@
 							</div> -->
 						</div>
 						<div class="col-lg-6">
-							{{-- <div class="rt-forg">
-								<a href="forgot-password.html">Forgot Password</a>
-							</div> --}}
+							<div class="rt-forg">
+								<a href="{{route('sign-up')}}">Don't have an account? Sign up
+                                    now</a>
+							</div>
 						</div>
 						<div class="srv-btn">
                             <button type="submit" class="btn btn-dark btn-sm mt-15"> Login</button>

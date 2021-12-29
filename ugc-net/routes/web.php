@@ -321,6 +321,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/ajax-product-delete', 'ProductController@ajaxProductDelete')->name('ajaxProductDelete');
     Route::post('/ajax-course-exam-paper', 'ProductController@ajaxCourseExamPaper')->name('ajaxCourseExamPaper'); 
     Route::post('/ajax-preview-main-course', 'ProductController@ajaxPreviewMainCourse')->name('ajaxPreviewMainCourse'); 
+    Route::post('/ajax-post-product-sequence', 'ProductController@ajaxSaveProductSequence')->name('saveProductSequence');
 
     //Courses/Combo Course
     Route::get('combo-course', 'ComboCourseController@listComboCourse')->name('combo-course');

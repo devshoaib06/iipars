@@ -518,7 +518,8 @@ class ProductController extends Controller
                         'products.status',
                         'cepr.exam_id',
                         'csr.subject_id',
-                        'products.updated_at'
+                        'products.updated_at',
+                        'sequence'
                     )
                     ->leftJoin('course_exam_paper_relations as cepr', 'products.product_id', 'cepr.product_id')
                     ->leftJoin('course_subject_relations as csr', 'products.product_id', 'csr.product_id')
@@ -535,7 +536,8 @@ class ProductController extends Controller
                         'products.status',
                         'cepr.exam_id',
                         'cepr.paper_id',
-                        'products.updated_at'
+                        'products.updated_at',
+                        'sequence'
                     )
                     ->leftJoin('course_exam_paper_relations as cepr', 'products.product_id', 'cepr.product_id')
                     ->groupBy('products.product_id')
@@ -562,13 +564,13 @@ class ProductController extends Controller
             $order = $request->input('order');
 
             //$column = array( '#','products.product_id','name','cepr.exam_id','cepr.paper_id','csr.subject_id','products.start_date','products.end_date','status','action');
-            $column = array('products.product_id', 'name', 'cepr.exam_id', 'cepr.paper_id', 'products.start_date', 'products.end_date', 'status', 'action');
+            $column = array('products.product_id', 'name', 'cepr.exam_id', 'cepr.paper_id', 'products.start_date', 'products.end_date', 'sequence','status', 'action');
 
 
             if ($order[0]['column'] != '') {
                 $column_name = $column[$order[0]['column']];
             } else {
-                $column_name = $column[4];
+                $column_name = $column[6];
 
                 //$column_name = 'products.updated_at';
             }
@@ -591,7 +593,8 @@ class ProductController extends Controller
                         'cepr.exam_id',
                         'cepr.paper_id',
                         'csr.subject_id',
-                        'products.updated_at'
+                        'products.updated_at',
+                        'sequence'
                     )
                     ->leftJoin('course_exam_paper_relations as cepr', 'products.product_id', 'cepr.product_id')
                     ->leftJoin('course_subject_relations as csr', 'products.product_id', 'csr.product_id')
@@ -607,7 +610,8 @@ class ProductController extends Controller
                         'products.status',
                         'cepr.exam_id',
                         'cepr.paper_id',
-                        'products.updated_at'
+                        'products.updated_at',
+                        'sequence'
                     )
                     ->leftJoin('course_exam_paper_relations as cepr', 'products.product_id', 'cepr.product_id')
                     ->groupBy('products.product_id')
@@ -675,6 +679,7 @@ class ProductController extends Controller
                     //$allrelatedSubjects,
                     \Carbon\Carbon::parse($t->start_date)->format('d/m/Y'),
                     \Carbon\Carbon::parse($t->end_date)->format('d/m/Y'),
+                    '<input type="number" value="'.$t->sequence.'" style="width: 50px;" data-id="'.$t->product_id.'" class="sequence_update">',
                     $status,
                     '<a href="' . route('editCourse', ['id' => \Hasher::encode($t->product_id)]) . '" class="btn btn-sm btn-default edit-btn margin-bottom-5"><i class="fa fa-edit"></i> Edit </a>
                     <a href="javascript:void(0)"  class="btn btn-sm btn-default remove-product edit-btn  confirmation" data-value="' . $t->product_id . '" ><i class="fa fa-trash"></i> Delete </a>
@@ -1173,7 +1178,13 @@ class ProductController extends Controller
     public function saveAsDuplicate($request, $id)
     {
         $product = Product::find($id);
+        $slug_count = Product::where('slug', $product->slug)->count();
         $newProduct = $product->replicate();
+        if ($slug_count > 0) {
+                $newProduct->slug = $product->slug .'-'.$slug_count;
+            // return redirect()->intended(route('editCourse', ['id' => \Hasher::encode($id)]))->with('messageClass', 'alert alert-danger')
+            //     ->with('message', 'Course slug is duplicate.');
+        }
         $newProduct->save();
         $newProductId = $newProduct->product_id;
 
@@ -1276,5 +1287,12 @@ class ProductController extends Controller
         $html.='</select>';
 
         return $html;
+    }
+
+    public function ajaxSaveProductSequence(Request $request){
+        $product_id=$request->product_id;
+        $product =  Product::where(['product_id'=> $product_id])->first();
+        $product->sequence=$request->sequence;
+        $product->save();
     }
 }

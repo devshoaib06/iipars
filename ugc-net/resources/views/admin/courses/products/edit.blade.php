@@ -105,9 +105,9 @@ Course - Edit
                                 <button type="submit" class="btn green" id="save-button">
                                     <i class="fa fa-check"></i> Save
                                 </button>
-                                {{-- <button type="submit"  class="btn green" id="duplicate-button">
+                                <button type="submit"  class="btn green" id="duplicate-button">
                                         <i class="fa fa-check"></i> Save & Duplicate
-                                    </button> --}}
+                                    </button>
                                 <!--<button class="btn green" id="save_and_duplicate">
                                         <i class="fa fa-check"></i> Save & Duplicate
                                     </button>-->

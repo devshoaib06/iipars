@@ -205,6 +205,7 @@ class teachinns_home_model extends CI_Model
 		$this->db2->where('cepsr.exam_id', $exam_id);
 		$this->db2->where('cepsr.paper_id', $paper_id);
 		$this->db2->where('products.is_preview', 0);
+		$this->db2->order_by('products.sequence', 'asc');
 		$query = $this->db2->get();
 		
         $result= $query->result();

@@ -1543,10 +1543,10 @@ class myFunctions {
 	}
 
     function getCourses($exam_id = 1, $paper_id){
-        $courses= \App\CourseExamPaperRelation::where([
+        $courses= \App\CourseExamPaperRelation::join('products','products.product_id','course_exam_paper_relations.product_id')->where([
             'exam_id' => $exam_id, 
             'paper_id'=>$paper_id
-        ])->get();
+        ])->orderBy('products.sequence','ASC')->get();
         //dd($courses[0]->product->name);
 
         return $courses;

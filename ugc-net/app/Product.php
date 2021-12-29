@@ -36,6 +36,7 @@ class Product extends Model
 		'img_alt',
         'meta_description',
         'meta_robots',
+		'sequence'
     ];
 
 	public function productUnits(){

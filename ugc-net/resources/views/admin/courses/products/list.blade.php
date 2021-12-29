@@ -145,6 +145,7 @@
                                                 {{-- <th width="10%"> Subjects </th> --}}
 												<th width="18%"> Start Date </th>
 												<th width="20%"> End Date </th>
+												<th width="20%"> Order </th>
                                                 <th width="15%"> Status </th>
                                                 <th width="5%"> Action </th>
 
@@ -210,6 +211,9 @@
                                                     </div>
                                                     
                                                 </td>
+                                                <td>
+                                                    
+												</td>
 												<td>
                                                     <select name="status" class="form-control form-filter input-sm">
                                                         <option value="">Select...</option>
@@ -386,6 +390,20 @@
 
         jQuery(document).ready(function () {
             EcommerceOrdersView.init();
+            $(document).on('change','.sequence_update',function(){
+                debugger
+                let product_id=$(this).data('id');
+                let sequence=$(this).val();
+                let url= "{{ route('saveProductSequence') }}"
+
+                let data={
+                    product_id:product_id, 
+                    sequence:sequence
+                }
+                $.post(url,data,function(response){
+
+                })
+            })
         });
 
     </script>
